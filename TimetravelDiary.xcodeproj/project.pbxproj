@@ -7,18 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B05357D52C9412DD00FCD3A2 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357D42C9412DD00FCD3A2 /* Color+.swift */; };
+		B05357D72C94454600FCD3A2 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357D62C94454600FCD3A2 /* CalendarView.swift */; };
+		B05357DB2C945A2700FCD3A2 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357DA2C945A2700FCD3A2 /* BubbleView.swift */; };
+		B05357DD2C94680F00FCD3A2 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357DC2C94680E00FCD3A2 /* TabBarView.swift */; };
+		B05357E12C95706F00FCD3A2 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357E02C95706F00FCD3A2 /* HomeCalendarView.swift */; };
+		B0535BFB2C95A37D00C7F9CD /* PublicHolidayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535BFA2C95A37D00C7F9CD /* PublicHolidayModel.swift */; };
+		B0535BFE2C95A3B200C7F9CD /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535BFD2C95A3B200C7F9CD /* NetworkManager.swift */; };
+		B0535C002C95B51E00C7F9CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535BFF2C95B51E00C7F9CD /* ContentView.swift */; };
+		B0535C032C95C55B00C7F9CD /* DiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535C022C95C55B00C7F9CD /* DiaryModel.swift */; };
 		B0FBD51A2C940DE3009CC9FC /* TimetravelDiaryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FBD5192C940DE3009CC9FC /* TimetravelDiaryApp.swift */; };
-		B0FBD51C2C940DE3009CC9FC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FBD51B2C940DE3009CC9FC /* ContentView.swift */; };
+		B0FBD51C2C940DE3009CC9FC /* PricaticContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FBD51B2C940DE3009CC9FC /* PricaticContentView.swift */; };
 		B0FBD51E2C940DE4009CC9FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0FBD51D2C940DE4009CC9FC /* Assets.xcassets */; };
 		B0FBD5212C940DE4009CC9FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0FBD5202C940DE4009CC9FC /* Preview Assets.xcassets */; };
+		B0FBD52A2C940EC4009CC9FC /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FBD5292C940EC4009CC9FC /* GradientBackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B05357D42C9412DD00FCD3A2 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		B05357D62C94454600FCD3A2 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		B05357DA2C945A2700FCD3A2 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
+		B05357DC2C94680E00FCD3A2 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		B05357E02C95706F00FCD3A2 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
+		B0535BFA2C95A37D00C7F9CD /* PublicHolidayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicHolidayModel.swift; sourceTree = "<group>"; };
+		B0535BFD2C95A3B200C7F9CD /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		B0535BFF2C95B51E00C7F9CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B0535C022C95C55B00C7F9CD /* DiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryModel.swift; sourceTree = "<group>"; };
 		B0FBD5162C940DE3009CC9FC /* TimetravelDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimetravelDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0FBD5192C940DE3009CC9FC /* TimetravelDiaryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetravelDiaryApp.swift; sourceTree = "<group>"; };
-		B0FBD51B2C940DE3009CC9FC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B0FBD51B2C940DE3009CC9FC /* PricaticContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricaticContentView.swift; sourceTree = "<group>"; };
 		B0FBD51D2C940DE4009CC9FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0FBD5202C940DE4009CC9FC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B0FBD5292C940EC4009CC9FC /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +52,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B05357D22C940FB800FCD3A2 /* ViewModifier */ = {
+			isa = PBXGroup;
+			children = (
+				B0FBD5292C940EC4009CC9FC /* GradientBackgroundView.swift */,
+			);
+			path = ViewModifier;
+			sourceTree = "<group>";
+		};
+		B05357D32C9412D400FCD3A2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B05357D42C9412DD00FCD3A2 /* Color+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		B0535BF92C95A36400C7F9CD /* RequestModel */ = {
+			isa = PBXGroup;
+			children = (
+				B0535BFA2C95A37D00C7F9CD /* PublicHolidayModel.swift */,
+			);
+			path = RequestModel;
+			sourceTree = "<group>";
+		};
+		B0535BFC2C95A39F00C7F9CD /* NetwrokManater */ = {
+			isa = PBXGroup;
+			children = (
+				B0535BFD2C95A3B200C7F9CD /* NetworkManager.swift */,
+			);
+			path = NetwrokManater;
+			sourceTree = "<group>";
+		};
+		B0535C012C95C54F00C7F9CD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B0535C022C95C55B00C7F9CD /* DiaryModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B0FBD50D2C940DE3009CC9FC = {
 			isa = PBXGroup;
 			children = (
@@ -51,10 +111,20 @@
 		B0FBD5182C940DE3009CC9FC /* TimetravelDiary */ = {
 			isa = PBXGroup;
 			children = (
+				B0535C012C95C54F00C7F9CD /* Model */,
+				B0535BFC2C95A39F00C7F9CD /* NetwrokManater */,
+				B0535BF92C95A36400C7F9CD /* RequestModel */,
+				B05357D32C9412D400FCD3A2 /* Extension */,
+				B05357D22C940FB800FCD3A2 /* ViewModifier */,
 				B0FBD5192C940DE3009CC9FC /* TimetravelDiaryApp.swift */,
-				B0FBD51B2C940DE3009CC9FC /* ContentView.swift */,
+				B0FBD51B2C940DE3009CC9FC /* PricaticContentView.swift */,
+				B0535BFF2C95B51E00C7F9CD /* ContentView.swift */,
+				B05357E02C95706F00FCD3A2 /* HomeCalendarView.swift */,
+				B05357DC2C94680E00FCD3A2 /* TabBarView.swift */,
 				B0FBD51D2C940DE4009CC9FC /* Assets.xcassets */,
 				B0FBD51F2C940DE4009CC9FC /* Preview Content */,
+				B05357D62C94454600FCD3A2 /* CalendarView.swift */,
+				B05357DA2C945A2700FCD3A2 /* BubbleView.swift */,
 			);
 			path = TimetravelDiary;
 			sourceTree = "<group>";
@@ -137,8 +207,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0FBD51C2C940DE3009CC9FC /* ContentView.swift in Sources */,
+				B05357DB2C945A2700FCD3A2 /* BubbleView.swift in Sources */,
+				B0535C032C95C55B00C7F9CD /* DiaryModel.swift in Sources */,
+				B0535C002C95B51E00C7F9CD /* ContentView.swift in Sources */,
+				B0FBD52A2C940EC4009CC9FC /* GradientBackgroundView.swift in Sources */,
+				B0535BFE2C95A3B200C7F9CD /* NetworkManager.swift in Sources */,
+				B05357DD2C94680F00FCD3A2 /* TabBarView.swift in Sources */,
+				B05357D52C9412DD00FCD3A2 /* Color+.swift in Sources */,
+				B0FBD51C2C940DE3009CC9FC /* PricaticContentView.swift in Sources */,
+				B05357D72C94454600FCD3A2 /* CalendarView.swift in Sources */,
 				B0FBD51A2C940DE3009CC9FC /* TimetravelDiaryApp.swift in Sources */,
+				B05357E12C95706F00FCD3A2 /* HomeCalendarView.swift in Sources */,
+				B0535BFB2C95A37D00C7F9CD /* PublicHolidayModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +352,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TimetravelDiary/Preview Content\"";
+				DEVELOPMENT_TEAM = V4KT333NUG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -284,7 +365,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.miley.TimetravelDiary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mileyJump.TimetravelDiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -300,6 +381,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TimetravelDiary/Preview Content\"";
+				DEVELOPMENT_TEAM = V4KT333NUG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -312,7 +394,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.miley.TimetravelDiary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mileyJump.TimetravelDiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
