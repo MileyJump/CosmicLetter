@@ -57,14 +57,28 @@ struct CalendarView: View {
     private var headerView: some View {
         VStack {
             HStack {
-                Spacer()
+                Button {
+                    changeMonth(by: -1)
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .padding()
+                }
+//                Spacer()
                 Text(month, formatter: Self.monthOnlyFormatter)
-                    .font(.system(size: 60))
+                    .font(.system(size: 40))
                     .fontWeight(.bold)
                     .padding(.bottom, 90)
                     .padding(.trailing, 60)
                     .foregroundColor(.white)
             }
+            
+            Button {
+                changeMonth(by: 1)
+            } label: {
+                Image(systemName: "chevron.right")
+                    .padding()
+            }
+
             
             HStack {
                 ForEach(Self.weekdaySymbols, id: \.self) { symbol in
