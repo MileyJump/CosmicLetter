@@ -25,7 +25,12 @@ struct FloatingMenu: View {
                     })
                 }
                 if showMemoMenu {
-                    MenuItem(icon:"pencil.line")
+                    NavigationLink(destination: {
+                        WriteMemoView()
+                    }, label: {
+                        MenuItem(icon:"pencil.line")
+                    })
+                    
                 }
                 if showMenuItem3 {
                     MenuItem(icon:"square.and.arrow.up.fill")
