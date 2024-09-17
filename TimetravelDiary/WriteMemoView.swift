@@ -9,22 +9,30 @@ import SwiftUI
 
 struct WriteMemoView: View {
     
-    @State var text = ""
+    @State var contentText = ""
     
     var body: some View {
-        TextField("", text: $text)
-            .placeholder(when: text.isEmpty) {
-                Text("제목을 입력해주세요")
+        ZStack(alignment: .topLeading) {
+            if contentText.isEmpty {
+                Text("하고 싶은 말이 있나요?")
                     .foregroundColor(.gray)
-                    .font(.title)
+                    .font(.system(size: 14, weight: .regular))
+                    .padding(.top, 23)
+                    .padding(.leading, 15)
             }
-            .padding()
-            .background(Color.clear)
-            .foregroundColor(.white)
+            TextEditor(text: $contentText)
+                .padding()
+                .background(Color.clear)
+                .foregroundColor(.white)
+                .scrollContentBackground(.hidden)
+        }
+        .background(Color.clear)
         
-            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
+        .padding()
+        
+        .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
+        
     }
-    
     
 }
 
