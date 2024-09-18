@@ -99,7 +99,7 @@ struct ContentView: View {
         .frame(height: 72)
         .background {
             RoundedRectangle(cornerRadius: 24)
-                .fill(Color.white.opacity(0.2))
+                .fill(Color.white.opacity(0.4))
                 .shadow(color: .black.opacity(0.15), radius: 8, y: 2)
         }
         .padding(.horizontal)
