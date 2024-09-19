@@ -59,8 +59,3 @@ class AudioRecorder: NSObject, ObservableObject {
         isRecording = false
     }
 }
-
-//
-//#Preview {
-//    AudioRecorder()
-//}

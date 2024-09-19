@@ -24,7 +24,8 @@ struct ContentView: View {
                     .tag(Tab.Home)
                     
                     NavigationStack {
-                        PricaticContentView()
+//                        PricaticContentView()
+                        DiaryMemoView()
                     }
                     .tag(Tab.b)
                     

@@ -45,6 +45,8 @@ struct WriteDiaryView: View {
                 .background(Color.clear)
             }
             .padding()
+            
+            
         }
         .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
     }
