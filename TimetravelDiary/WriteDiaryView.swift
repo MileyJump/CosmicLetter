@@ -7,12 +7,14 @@
 
 import SwiftUI
 import AVFoundation
+import PhotosUI
 
 struct WriteDiaryView: View {
     
     @State var titleText = ""
-    @State var contentPlaceholderText: String = "여행 꿀팁을 입력해주세요"
     @State var contentText: String = ""
+    @State var selectedImage: UIImage? // 선택된 이미지를 저장할 상태 변수.
+    @State var showImagePicker = false
     
     var body: some View {
         
@@ -29,6 +31,15 @@ struct WriteDiaryView: View {
                         .padding()
                         .background(Color.clear)
                         .foregroundColor(.white)
+                    
+                    // 선택된 이미지가 있으면 이미지 표시
+                    if let image = selectedImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 300, height: 200)
+                            .padding()
+                    }
                     
                     ZStack(alignment: .topLeading) {
                         if contentText.isEmpty {
@@ -50,15 +61,18 @@ struct WriteDiaryView: View {
                 
                 .toolbar {
                     ToolbarItemGroup(placement: .bottomBar) {
-                        Button("First") {
-                            print("tap first button")
-                        }
-                        Button("Second") {
-                            print("tap second button")
-                        }
+                        Button(action: {
+                            print("포토 툴바 버튼 탭드")
+                        }, label: {
+                            Image(systemName: "photo")
+                                .foregroundColor(.white)
+                        })
+                       Spacer()
                     }
                 }
-                
+            }
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(selectedImage: $selectedImage)
             }
             .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
         }
@@ -80,4 +94,46 @@ extension View {
                 self
             }
         }
+}
+
+
+// 이미지 선택을 위한 PHPicker 구현
+struct ImagePicker: UIViewControllerRepresentable {
+    @Binding var selectedImage: UIImage?
+    
+    func makeUIViewController(context: Context) -> PHPickerViewController {
+        var config = PHPickerConfiguration()
+        config.filter = .images
+        config.selectionLimit = 1
+        
+        let picker = PHPickerViewController(configuration: config)
+        picker.delegate = context.coordinator
+        return picker
+    }
+    
+    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, PHPickerViewControllerDelegate {
+        let parent: ImagePicker
+        
+        init(_ parent: ImagePicker) {
+            self.parent = parent
+        }
+        
+        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+            picker.dismiss(animated: true)
+            
+            guard let provider = results.first?.itemProvider, provider.canLoadObject(ofClass: UIImage.self) else { return }
+            
+            provider.loadObject(ofClass: UIImage.self) { (image, error) in
+                DispatchQueue.main.async {
+                    self.parent.selectedImage = image as? UIImage
+                }
+            }
+        }
+    }
 }
