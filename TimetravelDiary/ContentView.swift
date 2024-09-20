@@ -54,7 +54,7 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-
+//
 //struct ContentView: View {
 //    enum Tab {
 //        case Home, b, c
@@ -63,31 +63,33 @@ struct ContentView: View {
 //    @State private var selected: Tab = .Home
 //    
 //    var body: some View {
-//        ZStack {
-//            TabView(selection: $selected) {
-//                Group {
-//                    NavigationStack {
+//        NavigationStack {
+//            ZStack {
+//                TabView(selection: $selected) {
+//                    Group {
+//                        
 //                        HomeCalendarView()
+//                        //                    }
+//                            .tag(Tab.Home)
+//                        
+//                        NavigationStack {
+//                            //                        PricaticContentView()
+//                            DiaryMemoView()
+//                        }
+//                        .tag(Tab.b)
+//                        
+//                        NavigationStack {
+//                            CView()
+//                        }
+//                        .tag(Tab.c)
 //                    }
-//                    .tag(Tab.Home)
-//                    
-//                    NavigationStack {
-////                        PricaticContentView()
-//                        DiaryMemoView()
-//                    }
-//                    .tag(Tab.b)
-//                    
-//                    NavigationStack {
-//                        CView()
-//                    }
-//                    .tag(Tab.c)
+//                    .toolbar(.hidden, for: .tabBar)
 //                }
-//                .toolbar(.hidden, for: .tabBar)
-//            }
-//            
-//            VStack {
-//                Spacer()
-//                tabBar
+//                
+//                VStack {
+//                    Spacer()
+//                    tabBar
+//                }
 //            }
 //        }
 //    }
@@ -166,7 +168,7 @@ struct ContentView: View {
 //        Text("View C")
 //    }
 //}
-
-#Preview {
-    ContentView()
-}
+//
+//#Preview {
+//    ContentView()
+//}

@@ -13,13 +13,28 @@ struct WriteDiaryView: View {
     
     @State var titleText = ""
     @State var contentText: String = ""
-    @State var selectedImage: UIImage? // 선택된 이미지를 저장할 상태 변수.
-    @State var showImagePicker = false
+    //    @State var selectedImage: UIImage? // 선택된 이미지를 저장할 상태 변수.
+    @State private var selectedPhotos: [PhotosPickerItem] = []
+    @State private var images: [UIImage] = []
+    @State private var errorMessage: String?
+    @State private var showImagePicker = false
     
     var body: some View {
         
         NavigationView {
             ZStack {
+                VStack {
+                    Form {
+                        //                        photoPickerSection
+                        imagesSection
+                    }
+                    if let errorMessage = errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding()
+                    }
+                }
+                
                 VStack {
                     // Title TextField
                     TextField("", text: $titleText)
@@ -32,14 +47,8 @@ struct WriteDiaryView: View {
                         .background(Color.clear)
                         .foregroundColor(.white)
                     
-                    // 선택된 이미지가 있으면 이미지 표시
-                    if let image = selectedImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 300, height: 200)
-                            .padding()
-                    }
+                    
+                    
                     
                     ZStack(alignment: .topLeading) {
                         if contentText.isEmpty {
@@ -63,21 +72,86 @@ struct WriteDiaryView: View {
                     ToolbarItemGroup(placement: .bottomBar) {
                         Button(action: {
                             print("포토 툴바 버튼 탭드")
+                            showImagePicker = true
                         }, label: {
                             Image(systemName: "photo")
                                 .foregroundColor(.white)
                         })
-                       Spacer()
+                        Spacer()
                     }
                 }
             }
-            .sheet(isPresented: $showImagePicker) {
-                ImagePicker(selectedImage: $selectedImage)
-            }
             .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
+            
+            // isPresented가 사진 선택 창(PhotosPicker) 가 화면에 표시 될지 여부를 나타냄
+            .photosPicker(isPresented: $showImagePicker, selection: $selectedPhotos, maxSelectionCount: 3, matching: .images)
+            .onChange(of: selectedPhotos) { _ in
+                loadSelectedPhotos()
+            }
+        }
+    }
+    
+    //    private var photoPickerSection: some View {
+    //        Section {
+    //            PhotosPicker(selection: $selectedPhotos,
+    //                         maxSelectionCount: 3,
+    //                         matching: .images) {
+    //                Label("Select a photo", systemImage: "photo")
+    //            }
+    //                         .onChange(of: selectedPhotos) { _ in
+    //                             loadSelectedPhotos()
+    //                         }
+    //        }
+    //    }
+    
+    private var imagesSection: some View {
+        Section {
+            ForEach(images, id: \.self) { image in
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                    .padding(.vertical, 10)
+            }
+        }
+    }
+    
+    private func loadSelectedPhotos() {
+        images.removeAll()
+        errorMessage = nil
+        
+        Task {
+            await withTaskGroup(of: (UIImage?, Error?).self) { taskGroup in
+                for photoItem in selectedPhotos {
+                    taskGroup.addTask {
+                        do {
+                            if let imageData = try await photoItem.loadTransferable(type: Data.self),
+                               let image = UIImage(data: imageData) {
+                                return (image, nil)
+                            }
+                            return (nil, nil)
+                        } catch {
+                            return (nil, error)
+                        }
+                    }
+                }
+                
+                for await result in taskGroup {
+                    if let error = result.1 {
+                        errorMessage = "Failed to load one or more images."
+                        break
+                    } else if let image = result.0 {
+                        images.append(image)
+                    }
+                }
+            }
         }
     }
 }
+
+
+
 
 #Preview {
     WriteDiaryView()
@@ -96,44 +170,3 @@ extension View {
         }
 }
 
-
-// 이미지 선택을 위한 PHPicker 구현
-struct ImagePicker: UIViewControllerRepresentable {
-    @Binding var selectedImage: UIImage?
-    
-    func makeUIViewController(context: Context) -> PHPickerViewController {
-        var config = PHPickerConfiguration()
-        config.filter = .images
-        config.selectionLimit = 1
-        
-        let picker = PHPickerViewController(configuration: config)
-        picker.delegate = context.coordinator
-        return picker
-    }
-    
-    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    class Coordinator: NSObject, PHPickerViewControllerDelegate {
-        let parent: ImagePicker
-        
-        init(_ parent: ImagePicker) {
-            self.parent = parent
-        }
-        
-        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            picker.dismiss(animated: true)
-            
-            guard let provider = results.first?.itemProvider, provider.canLoadObject(ofClass: UIImage.self) else { return }
-            
-            provider.loadObject(ofClass: UIImage.self) { (image, error) in
-                DispatchQueue.main.async {
-                    self.parent.selectedImage = image as? UIImage
-                }
-            }
-        }
-    }
-}
