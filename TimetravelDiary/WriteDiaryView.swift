@@ -15,40 +15,53 @@ struct WriteDiaryView: View {
     @State var contentText: String = ""
     
     var body: some View {
-        ZStack {
-            VStack {
-                // Title TextField
-                TextField("", text: $titleText)
-                    .placeholder(when: titleText.isEmpty) {
-                        Text("제목을 입력해주세요")
-                            .foregroundColor(.gray)
-                            .font(.title)
-                    }
-                    .padding()
-                    .background(Color.clear)
-                    .foregroundColor(.white)
-                
-                ZStack(alignment: .topLeading) {
-                    if contentText.isEmpty {
-                        Text("하고 싶은 말이 있나요?")
-                            .foregroundColor(.gray)
-                            .font(.system(size: 14, weight: .regular))
-                            .padding(.top, 23)
-                            .padding(.leading, 15)
-                    }
-                    TextEditor(text: $contentText)
+        
+        NavigationView {
+            ZStack {
+                VStack {
+                    // Title TextField
+                    TextField("", text: $titleText)
+                        .placeholder(when: titleText.isEmpty) {
+                            Text("제목을 입력해주세요")
+                                .foregroundColor(.gray)
+                                .font(.title)
+                        }
                         .padding()
                         .background(Color.clear)
                         .foregroundColor(.white)
-                        .scrollContentBackground(.hidden)
+                    
+                    ZStack(alignment: .topLeading) {
+                        if contentText.isEmpty {
+                            Text("하고 싶은 말이 있나요?")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 14, weight: .regular))
+                                .padding(.top, 23)
+                                .padding(.leading, 15)
+                        }
+                        TextEditor(text: $contentText)
+                            .padding()
+                            .background(Color.clear)
+                            .foregroundColor(.white)
+                            .scrollContentBackground(.hidden)
+                    }
+                    .background(Color.clear)
                 }
-                .background(Color.clear)
+                .padding()
+                
+                .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button("First") {
+                            print("tap first button")
+                        }
+                        Button("Second") {
+                            print("tap second button")
+                        }
+                    }
+                }
+                
             }
-            .padding()
-            
-            
+            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
         }
-        .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
     }
 }
 
