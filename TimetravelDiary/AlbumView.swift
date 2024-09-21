@@ -1,5 +1,5 @@
 //
-//  CollectPhotosView.swift
+//  AlbumView.swift
 //  TimetravelDiary
 //
 //  Created by 최민경 on 9/21/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CollectPhotosView: View {
+struct AlbumView: View {
     
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     let colors: [Color] = [.white, .blue, .brown, .cyan, .gray, .indigo, .mint, .yellow, .orange, .purple]
@@ -28,8 +28,9 @@ struct CollectPhotosView: View {
 }
 
 #Preview {
-    CollectPhotosView()
+    AlbumView()
 }
+
 
 
 

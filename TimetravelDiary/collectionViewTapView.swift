@@ -8,15 +8,17 @@
 import SwiftUI
 
 enum tapInfo : String, CaseIterable {
-    case info = "앨범"
-    case size = "일기"
-    case review = "메모"
-    case call = "문의"
+    case album = "앨범"
+    case diary = "일기"
+    case memo = "메모"
 }
 
+// 탭 선택과 선택된 탭에 맞는 내용을 표시하는 메인 뷰입니다.
 struct InfoView: View {
 
-    @State private var selectedPicker: tapInfo = .info
+    @State private var selectedPicker: tapInfo = .album
+    
+    // matchedGeometryEffect의 in:에 들어간 같은 @namespace들끼리 같은 애니메이션을 만든다.
     @Namespace private var animation
     
     var body: some View {
@@ -45,10 +47,11 @@ struct InfoView: View {
                     
                 }
                 .onTapGesture {
-                    withAnimation(.easeInOut) {
+                    withAnimation(.easeInOut) { // 이 애니메이션이 화면이 닫히는 느낌임
                         self.selectedPicker = item
                     }
                 }
+                
             }
         }
     }
@@ -56,13 +59,17 @@ struct InfoView: View {
 
 struct testView : View {
     
-    var tests : tapInfo
+    var tests: tapInfo
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             switch tests {
-            case .info:
-                CollectPhotosView()
+            case .album:
+                AlbumView()
+//                TestTopTapView()
+                    .frame(width: UIScreen.main.bounds.width,  height: UIScreen.main.bounds.height - 500, alignment: .center)
+                            
+                
 //                ForEach(0..<5) { _ in
 //                    Text("블랙컬러")
 //                        .padding()
@@ -70,17 +77,19 @@ struct testView : View {
 //                        .resizable()
 //                        .frame(maxWidth: 350, minHeight: 500)
 //                }
-            case .size:
-               DiaryMemoView()
+            case .diary:
+               DiaryCollectionView()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
+                
 //                    .padding()
-            case .review:
+            case .memo:
                 ScrollView(.horizontal, showsIndicators: false) {
                     ForEach(0..<10) { _ in
                         LazyHStack {
                             ForEach(0..<2) { _ in
                                 NavigationLink(destination: WriteMemoView()){
                                     VStack(spacing: 5) {
-                                        Image("shoes")
+                                        Image("Star")
                                             .resizable()
                                             .frame(width: 160, height: 200, alignment: .center)
                                         Text("실착용 솔직 한달 후기 입니다")
@@ -102,13 +111,6 @@ struct testView : View {
                         }
                     }
                 }
-            case .call:
-                VStack {
-                    Text("별도의 커뮤니티를 운영하지 않습니다.")
-                    Text("자세한 문의는 여기로 부탁드립니다")
-                    Text("02-xxx-xxxx")
-                        .padding()
-                }.padding()
             }
         }
     }

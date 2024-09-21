@@ -24,7 +24,7 @@ struct ContentView: View {
     
     
     var body: some View {
-        NavigationView {
+//        NavigationView {
             TabView {
                 HomeCalendarView()
                     .tabItem {
@@ -32,7 +32,8 @@ struct ContentView: View {
                         Text("캘린더")
                     }
         
-                CollectPhotosView()
+//                CollectPhotosView()
+                InfoView()
                     .tabItem {
                         Image(systemName: "note.text")
                         Text("메모")
@@ -45,7 +46,7 @@ struct ContentView: View {
                         Text("설정")
                     }
             }
-        }
+//        }
             .font(.headline)   //탭 바 텍스트 스타일
             .accentColor(.white)
     }
