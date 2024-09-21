@@ -18,7 +18,7 @@ struct FloatingMenu: View {
             Spacer()
             if showDiaryMenu {
                 NavigationLink(destination: {
-//                    WriteDiaryView()
+                    WriteDiaryView()
                 }, label: {
                     MenuItem(icon:"book.fill")
                 })

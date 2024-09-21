@@ -12,9 +12,8 @@ struct HomeCalendarView: View {
     
     @Query var diaryModels: [DiaryModel]
     
-    
     var body: some View {
-//        NavigationStack { // 네비게이션 스택 추가
+        NavigationStack { // 네비게이션 스택 추가
             ZStack {
                     CalendarView(month: Date())
                         .frame(width: 380, height: 200)
@@ -24,9 +23,9 @@ struct HomeCalendarView: View {
                         .padding(.bottom, 100)
                         .padding(.leading, 260)
                 }
-                .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 120)
+                .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 200)
 //            }
-//        }
+        }
     }
 }
 

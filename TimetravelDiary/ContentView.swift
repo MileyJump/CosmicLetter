@@ -32,7 +32,7 @@ struct ContentView: View {
                         Text("캘린더")
                     }
         
-                DiaryMemoView()
+                CollectPhotosView()
                     .tabItem {
                         Image(systemName: "note.text")
                         Text("메모")
