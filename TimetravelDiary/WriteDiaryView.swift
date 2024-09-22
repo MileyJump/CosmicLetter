@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import AVFoundation
 import PhotosUI
 
 struct WriteDiaryView: View {
@@ -18,86 +17,87 @@ struct WriteDiaryView: View {
     @State private var errorMessage: String?
     @State private var showImagePicker = false
     
+    @StateObject private var audioRecorderManager = AudioRecorderManager()
+    
     var body: some View {
         ZStack {
-            NavigationView {
-                ZStack {
-                    VStack {
-                        Form {
-                            imagesSection
-                        }
-                        if let errorMessage = errorMessage {
-                            Text(errorMessage)
-                                .foregroundColor(.red)
-                                .padding()
-                        }
-                    }
-                    
-                    VStack {
-                        // Title TextField
-                        TextField("", text: $titleText)
-                            .placeholder(when: titleText.isEmpty) {
-                                Text("제목을 입력해주세요")
-                                    .foregroundColor(.gray)
-                                    .font(.title)
-                            }
-                            .padding()
-                            .background(Color.clear)
-                            .foregroundColor(.white)
-                        
-                        ZStack(alignment: .topLeading) {
-                            if contentText.isEmpty {
-                                Text("하고 싶은 말이 있나요?")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 14, weight: .regular))
-                                    .padding(.top, 23)
-                                    .padding(.leading, 15)
-                            }
-                            TextEditor(text: $contentText)
-                                .padding()
-                                .background(Color.clear)
-                                .foregroundColor(.white)
-                                .scrollContentBackground(.hidden)
-                        }
-                        .background(Color.clear)
+            VStack {
+                if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                }
+                
+                // Title TextField
+                TextField("", text: $titleText)
+                    .placeholder(when: titleText.isEmpty) {
+                        Text("제목을 입력해주세요")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 18))
                     }
                     .padding()
-                    .toolbar {
-                        ToolbarItemGroup(placement: .bottomBar) {
-                            Button(action: {
-                                print("포토 툴바 버튼 탭드")
-                                showImagePicker = true
-                                print("showImagePicker: \(showImagePicker)")
-                            }, label: {
-                                Image(systemName: "photo")
-                                    .foregroundColor(.white)
-                            })
-                            Spacer()
-                        }
-                    }
+                    .background(Color.clear)
+                    .foregroundColor(.black)
+                
+                // 선택된 이미지가 있을 때 이미지 그리드 섹션을 표시
+                if !images.isEmpty {
+                    imagesGridSection
                 }
-                .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
+                
+                ZStack(alignment: .topLeading) {
+                    if contentText.isEmpty {
+                        Text("하고 싶은 말이 있나요?")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 14, weight: .regular))
+                            .padding(.top, 23)
+                            .padding(.leading, 15)
+                    }
+                    TextEditor(text: $contentText)
+                        .padding()
+                        .background(Color.clear)
+                        .foregroundColor(.black)
+                        .scrollContentBackground(.hidden)
+                }
+                .background(Color.clear)
+                
+                // RecordingView 통합
+                RecordingView(audioRecorderManager: audioRecorderManager)
+                
             }
-            
-            // isPresented는 NavigationView 밖에서 처리
-            .photosPicker(isPresented: $showImagePicker, selection: $selectedPhotos, maxSelectionCount: 3, matching: .images)
-            .onChange(of: selectedPhotos) { _ in
-                loadSelectedPhotos()
+            .padding()
+            .toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button(action: {
+                        showImagePicker = true
+                    }) {
+                        Image(systemName: "photo")
+                            .foregroundColor(.black)
+                    }
+                    Spacer()
+                }
             }
+            .navigationTitle("2024.09.22")
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        .photosPicker(isPresented: $showImagePicker, selection: $selectedPhotos, maxSelectionCount: 3, matching: .images)
+        .onChange(of: selectedPhotos) { _ in
+            loadSelectedPhotos()
         }
     }
     
-    private var imagesSection: some View {
-        Section {
+    // 이미지들을 3개씩 한 행에 나란히 배치
+    private var imagesGridSection: some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 3), spacing: 10) {
             ForEach(images, id: \.self) { image in
                 Image(uiImage: image)
                     .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: .infinity)
+                    .scaledToFill()
+                    .frame(width: 100, height: 100)
                     .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                    .padding(.vertical, 10)
+                    .clipped()
             }
         }
+        .padding(.bottom, 10)
     }
     
     private func loadSelectedPhotos() {
@@ -133,7 +133,6 @@ struct WriteDiaryView: View {
     }
 }
 
-
 #Preview {
     WriteDiaryView()
 }
@@ -151,3 +150,77 @@ extension View {
         }
 }
 
+// 수정된 RecordingView
+struct RecordingView: View {
+    
+    @ObservedObject var audioRecorderManager: AudioRecorderManager
+    @State private var audioLevels: [CGFloat] = [0, 0, 0] // 초기 오디오 레벨
+    
+    var body: some View {
+        VStack {
+            Text(audioRecorderManager.timerString)
+                .font(.largeTitle)
+                .padding()
+
+            Button(action: {
+                if audioRecorderManager.isRecording {
+                    audioRecorderManager.stopRecording()
+                } else {
+                    audioRecorderManager.startRecording()
+                    updateAudioLevels() // 녹음 시작 시 오디오 레벨 업데이트 시작
+                }
+            }) {
+                Text(audioRecorderManager.isRecording ? "Stop Recording" : "Start Recording")
+                    .font(.title)
+                    .padding()
+                    .background(audioRecorderManager.isRecording ? Color.red : Color.green)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+
+            // 녹음 중일 때 상태 표시
+            if audioRecorderManager.isRecording {
+                Text("녹음 중...")
+                    .foregroundColor(.red)
+                    .font(.headline)
+
+                // 오디오 레벨 그래프 표시
+                AudioLevelGraph(audioLevels: audioLevels)
+                    .frame(height: 100) // 그래프 높이 조절
+            }
+        }
+        .padding()
+        .onChange(of: audioRecorderManager.isRecording) { isRecording in
+            if !isRecording {
+                audioLevels = [0, 0, 0] // 녹음 중지 시 오디오 레벨 초기화
+            }
+        }
+    }
+    
+    private func updateAudioLevels() {
+        // 타이머를 설정하여 주기적으로 오디오 레벨 업데이트
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            if audioRecorderManager.isRecording {
+                audioRecorderManager.updateAudioLevels()
+                audioLevels = audioRecorderManager.audioLevels // 오디오 레벨 업데이트
+            } else {
+                timer.invalidate() // 녹음이 중지되면 타이머 중지
+            }
+        }
+    }
+}
+
+struct AudioLevelGraph: View {
+    var audioLevels: [CGFloat]
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(audioLevels, id: \.self) { level in
+                Rectangle()
+                    .fill(Color.green)
+                    .frame(width: 5, height: CGFloat(level) * 200) // 높이를 오디오 레벨에 따라 조절
+            }
+        }
+        .padding(.horizontal)
+    }
+}

@@ -12,7 +12,8 @@ struct DiaryCollectionView: View {
         ZStack {
             // 그라데이션 배경
             Color.clear
-                .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 460)
+//                .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 460)
+//            GradientBackgroundView(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
                 .ignoresSafeArea()
 
             List {

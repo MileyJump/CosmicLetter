@@ -12,26 +12,24 @@ struct WriteMemoView: View {
     @State var contentText = ""
     
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            if contentText.isEmpty {
-                Text("하고 싶은 말이 있나요?")
-                    .foregroundColor(.gray)
-                    .font(.system(size: 14, weight: .regular))
-                    .padding(.top, 23)
-                    .padding(.leading, 15)
+            ZStack(alignment: .topLeading) {
+                if contentText.isEmpty {
+                    Text("메모")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 14, weight: .regular))
+                        .padding(.top, 23)
+                        .padding(.leading, 15)
+                }
+                TextEditor(text: $contentText)
+                    .padding()
+                    .background(Color.clear)
+                    .foregroundColor(.black)
+                    .scrollContentBackground(.hidden) 
             }
-            TextEditor(text: $contentText)
-                .padding()
-                .background(Color.clear)
-                .foregroundColor(.white)
-                .scrollContentBackground(.hidden)
-        }
-        .background(Color.clear)
-        
-        .padding()
-        
-        .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
-        
+            .background(Color.clear)
+            .padding()
+            .navigationTitle("2024.09.22")
+            .navigationBarTitleDisplayMode(.inline)
     }
     
 }

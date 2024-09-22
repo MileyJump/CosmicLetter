@@ -51,7 +51,8 @@ struct PricaticContentView: View {
             }
         }
 //        .gradientBackground(startColor: Diary.color.timeTravelPurpleColor, endColor: Diary.color.timeTravelNavyColor, starCount: 120)
-        .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 120)
+//        GradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 120)
+//        GradientBackgroundView(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
     }
 }
 

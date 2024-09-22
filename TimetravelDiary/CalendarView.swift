@@ -69,7 +69,7 @@ struct CalendarView: View {
                     .fontWeight(.bold)
                     .padding(.bottom, 90)
                     .padding(.trailing, 60)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
             }
             
             Button {
@@ -85,7 +85,7 @@ struct CalendarView: View {
                     Text(symbol)
                         .font(.system(size: 20))
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(.white) // 요일 텍스트의 색상을 흰색으로 설정
+                        .foregroundColor(.black) // 요일 텍스트의 색상을 흰색으로 설정
                 }
             }
             .padding(.bottom, 10)
@@ -136,6 +136,14 @@ private struct CellView: View {
                     .frame(width: 35, height: 35)
             }
             
+            // 오늘 날짜 배경
+            if isToday {
+                Circle()
+                    .foregroundColor(.yellow) // 오늘 날짜 배경 색상
+                    .opacity(0.3)
+                    .frame(width: 35, height: 35)
+            }
+            
             // 날짜 텍스트
             Text(String(day))
                 .font(.system(size: 20))
@@ -155,7 +163,7 @@ private struct CellView: View {
         } else if publicHolidays.contains(cellDate) {
             return .red // 공휴일은 빨간색
         } else {
-            return isToday ? .red : .white // 오늘 날짜는 빨간색
+            return isToday ? .red : .black // 오늘 날짜는 빨간색
         }
     }
 }

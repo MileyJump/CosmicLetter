@@ -23,7 +23,8 @@ struct HomeCalendarView: View {
                         .padding(.bottom, 100)
                         .padding(.leading, 260)
                 }
-                .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 200)
+//                .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 200)
+//            GradientBackgroundView(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
 //            }
         }
     }

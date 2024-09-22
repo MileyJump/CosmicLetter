@@ -49,25 +49,17 @@ struct FloatingMenu: View {
         
     }
     
-    func showMenu(){
-        withAnimation{
-            showMenuItem3.toggle()
+    
+    func showMenu() {
+        withAnimation {
+            self.showMenuItem3.toggle()
         }
-        
-        withAnimation{
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
-                self.showMemoMenu.toggle()
-            }
-            
+        withAnimation(.easeInOut.delay(0.1)) {
+            self.showMemoMenu.toggle()
         }
-        withAnimation{
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
-                self.showDiaryMenu.toggle()
-            }
-            
-            
+        withAnimation(.easeInOut.delay(0.2)) {
+            self.showDiaryMenu.toggle()
         }
-        
     }
 }
 
