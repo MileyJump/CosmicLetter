@@ -23,11 +23,6 @@ class AudioRecorderManager: NSObject, ObservableObject {
     // 녹음 상태 표시를 위한 프로퍼티
     @Published var isRecording: Bool = false
     
-    // 재생 관련 프로퍼티
-    private var playbackTimer: Timer?
-    @Published var currentTime: Double = 0.0 // 재생 시간을 추적
-    @Published var totalTime: Double = 0.0 // 전체 재생 시간
-    
     // 녹음 파일 목록
     @Published var recordingsList: [Recording] = [] // Recording 모델 정의 필요
 
@@ -35,6 +30,7 @@ class AudioRecorderManager: NSObject, ObservableObject {
         // AVAudioSession의 싱글턴 인스턴스를 가져옴
         let session = AVAudioSession.sharedInstance()
         do {
+            
             try session.setCategory(.playAndRecord, mode: .default)
             // 오디오 세션을 활성화
             try session.setActive(true)
@@ -97,48 +93,6 @@ class AudioRecorderManager: NSObject, ObservableObject {
         countTimer?.invalidate() // 타이머 중지
     }
     
-    func startPlaying(url: URL) {
-          let playSession = AVAudioSession.sharedInstance()
-          do {
-              try playSession.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
-          } catch {
-              print("Playing failed in Device")
-          }
-          
-          do {
-              audioPlayer = try AVAudioPlayer(contentsOf: url)
-              audioPlayer.prepareToPlay()
-              audioPlayer.play()
-              
-              // 전체 재생 시간을 업데이트
-              totalTime = audioPlayer.duration
-              
-              // 타이머 시작하여 `currentTime`을 주기적으로 업데이트
-              playbackTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
-                  guard let self = self else { return }
-                  self.currentTime = self.audioPlayer.currentTime
-                  if self.audioPlayer.currentTime >= self.audioPlayer.duration {
-                      self.stopPlayback()
-                  }
-              }
-              
-              // 재생 중인 파일을 목록에서 찾고 상태를 업데이트
-              for i in 0..<recordingsList.count {
-                  if recordingsList[i].fileURL == url {
-                      recordingsList[i].isPlaying = true
-                  }
-              }
-          } catch {
-              print("Playing Failed")
-          }
-      }
-    
-    func stopPlayback() {
-          audioPlayer?.stop()
-          playbackTimer?.invalidate()
-          currentTime = 0.0 // 재생이 끝났을 때 초기화
-      }
-    
     func updateAudioLevels() {
         audioRecorder?.updateMeters()
         
@@ -159,30 +113,30 @@ class AudioRecorderManager: NSObject, ObservableObject {
         return String(format: "%02d:%02d:%02d", hours, minutes % 60, seconds % 60)
     }
     
-//    func startPlaying(url: URL) {
-//        let playSession = AVAudioSession.sharedInstance()
-//        
-//        do {
-//            try playSession.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
-//        } catch {
-//            print("Playing failed in Device")
-//        }
-//        
-//        do {
-//            audioPlayer = try AVAudioPlayer(contentsOf: url)
-//            audioPlayer.prepareToPlay()
-//            audioPlayer.play()
-//            
-//            // 재생 중인 파일을 레코딩 목록에서 찾아 상태를 업데이트합니다.
-//            for i in 0..<recordingsList.count {
-//                if recordingsList[i].fileURL == url {
-//                    recordingsList[i].isPlaying = true
-//                }
-//            }
-//        } catch {
-//            print("Playing Failed")
-//        }
-//    }
+    func startPlaying(url: URL) {
+        let playSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try playSession.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
+        } catch {
+            print("Playing failed in Device")
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            
+            // 재생 중인 파일을 레코딩 목록에서 찾아 상태를 업데이트합니다.
+            for i in 0..<recordingsList.count {
+                if recordingsList[i].fileURL == url {
+                    recordingsList[i].isPlaying = true
+                }
+            }
+        } catch {
+            print("Playing Failed")
+        }
+    }
 }
 
 // Recording 모델 정의
