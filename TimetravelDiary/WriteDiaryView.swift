@@ -16,72 +16,92 @@ struct WriteDiaryView: View {
     @State private var images: [UIImage] = []
     @State private var errorMessage: String?
     @State private var showImagePicker = false
+    @State private var showRecordingModal = false // 모달을 보여줄지 여부
     
     @StateObject private var audioRecorderManager = AudioRecorderManager()
     
     var body: some View {
-        ZStack {
-            VStack {
-                if let errorMessage = errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .padding()
-                }
-                
-                // Title TextField
-                TextField("", text: $titleText)
-                    .placeholder(when: titleText.isEmpty) {
-                        Text("제목을 입력해주세요")
-                            .foregroundColor(.gray)
-                            .font(.system(size: 18))
+        
+        NavigationView {
+            ZStack {
+                VStack {
+                    if let errorMessage = errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding()
                     }
-                    .padding()
-                    .background(Color.clear)
-                    .foregroundColor(.black)
-                
-                // 선택된 이미지가 있을 때 이미지 그리드 섹션을 표시
-                if !images.isEmpty {
-                    imagesGridSection
-                }
-                
-                ZStack(alignment: .topLeading) {
-                    if contentText.isEmpty {
-                        Text("하고 싶은 말이 있나요?")
-                            .foregroundColor(.gray)
-                            .font(.system(size: 14, weight: .regular))
-                            .padding(.top, 23)
-                            .padding(.leading, 15)
-                    }
-                    TextEditor(text: $contentText)
+                    
+                    // Title TextField
+                    TextField("", text: $titleText)
+                        .placeholder(when: titleText.isEmpty) {
+                            Text("제목을 입력해주세요")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 18))
+                        }
                         .padding()
                         .background(Color.clear)
                         .foregroundColor(.black)
-                        .scrollContentBackground(.hidden)
-                }
-                .background(Color.clear)
-                
-                // RecordingView 통합
-                RecordingView(audioRecorderManager: audioRecorderManager)
-                
-            }
-            .padding()
-            .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button(action: {
-                        showImagePicker = true
-                    }) {
-                        Image(systemName: "photo")
-                            .foregroundColor(.black)
+                    
+                    // 선택된 이미지가 있을 때 이미지 그리드 섹션을 표시
+                    if !images.isEmpty {
+                        imagesGridSection
                     }
-                    Spacer()
+                    
+                    ZStack(alignment: .topLeading) {
+                        if contentText.isEmpty {
+                            Text("하고 싶은 말이 있나요?")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 14, weight: .regular))
+                                .padding(.top, 23)
+                                .padding(.leading, 15)
+                        }
+                        TextEditor(text: $contentText)
+                            .padding()
+                            .background(Color.clear)
+                            .foregroundColor(.black)
+                            .scrollContentBackground(.hidden)
+                    }
+                    .background(Color.clear)
+                    
+                   
+                    
                 }
+                .padding()
+                .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button(action: {
+                            
+                        }) {
+                            Image(systemName: "heart")
+                                .foregroundColor(.black)
+                        }
+                        Button(action: {
+                            showImagePicker = true
+                        }) {
+                            Image(systemName: "photo")
+                                .foregroundColor(.black)
+                        }
+                        Button(action: {
+                            showRecordingModal = true
+                        }) {
+                            Image(systemName: "mic")
+                                .foregroundColor(.black)
+                        }
+                        Spacer()
+                    }
+                }
+                .navigationTitle("2024.09.22")
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationTitle("2024.09.22")
-            .navigationBarTitleDisplayMode(.inline)
-        }
-        .photosPicker(isPresented: $showImagePicker, selection: $selectedPhotos, maxSelectionCount: 3, matching: .images)
-        .onChange(of: selectedPhotos) { _ in
-            loadSelectedPhotos()
+            .photosPicker(isPresented: $showImagePicker, selection: $selectedPhotos, maxSelectionCount: 3, matching: .images)
+            .onChange(of: selectedPhotos) { _ in
+                loadSelectedPhotos()
+            }
+            .sheet(isPresented: $showRecordingModal, content: {
+                RecordingView(audioRecorderManager: audioRecorderManager)
+                    .presentationDetents([.fraction(0.5)])
+                    .presentationDragIndicator(.visible)
+        })
         }
     }
     
@@ -155,48 +175,80 @@ struct RecordingView: View {
     
     @ObservedObject var audioRecorderManager: AudioRecorderManager
     @State private var audioLevels: [CGFloat] = [0, 0, 0] // 초기 오디오 레벨
+    @State private var currentTime: Double = 0.0
+    @State private var totalTime: Double = 0.0
     
     var body: some View {
         VStack {
+            Text("오늘 하루 녹음하기")
+                .font(.headline)
+                .padding(.top, 16)
+            
+            // 오디오 그래프 표시
+            AudioLevelGraph(audioLevels: audioLevels)
+                .frame(height: 100) // 그래프 높이 조절
+            
+            // 오디오 시간
+            HStack {
+                Text(formatTime(currentTime))
+                    .frame(height: 100)
+                Slider(value: $currentTime, in: 0...totalTime)
+                    .accentColor(.black)
+                Text(formatTime(totalTime))
+                    .frame(height: 100)
+                    
+            }
+            
             Text(audioRecorderManager.timerString)
                 .font(.largeTitle)
                 .padding()
-
-            Button(action: {
-                if audioRecorderManager.isRecording {
-                    audioRecorderManager.stopRecording()
-                } else {
-                    audioRecorderManager.startRecording()
-                    updateAudioLevels() // 녹음 시작 시 오디오 레벨 업데이트 시작
+            
+            HStack {
+                Button("리셋하기") {
+                    // 리셋
                 }
-            }) {
-                Text(audioRecorderManager.isRecording ? "Stop Recording" : "Start Recording")
-                    .font(.title)
-                    .padding()
-                    .background(audioRecorderManager.isRecording ? Color.red : Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                .disabled(!audioRecorderManager.isRecording)
+                .padding(5) // 상하 여백 추가
+                .background(Diary.color.timeTravelgray)
+                .cornerRadius(5)
+                .foregroundStyle(audioRecorderManager.isRecording ? .black : .gray)
+                .padding()
+                Button(action: {
+                    if audioRecorderManager.isRecording {
+                        audioRecorderManager.stopRecording()
+                    } else {
+                        audioRecorderManager.startRecording()
+                        updateAudioLevels() // 녹음 시작 시 오디오 레벨 업데이트 시작
+                    }
+                }) {
+                    Image(systemName: audioRecorderManager.isRecording ? "stop.circle.fill" : "play.circle.fill" )
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .foregroundColor(.red)
+                }
+                
+                Button("저장하기") {
+                    
+                }
+                .disabled(!audioRecorderManager.isRecording)
+                .padding(5) // 상하 여백 추가
+                .background(Diary.color.timeTravelgray)
+                .cornerRadius(5)
+                .foregroundStyle(audioRecorderManager.isRecording ? .black : .gray)
+                .padding()
             }
-
-            // 녹음 중일 때 상태 표시
-            if audioRecorderManager.isRecording {
-                Text("녹음 중...")
-                    .foregroundColor(.red)
-                    .font(.headline)
-
-                // 오디오 레벨 그래프 표시
-                AudioLevelGraph(audioLevels: audioLevels)
-                    .frame(height: 100) // 그래프 높이 조절
-            }
+            .padding(.horizontal)
+       
         }
         .padding()
+        // 녹음이 끝나면 화면에 표시되는 오디오 레벨 그래프를 리셋 역할
         .onChange(of: audioRecorderManager.isRecording) { isRecording in
             if !isRecording {
                 audioLevels = [0, 0, 0] // 녹음 중지 시 오디오 레벨 초기화
             }
         }
     }
-    
+     
     private func updateAudioLevels() {
         // 타이머를 설정하여 주기적으로 오디오 레벨 업데이트
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
@@ -208,6 +260,12 @@ struct RecordingView: View {
             }
         }
     }
+            
+    private func formatTime(_ time: Double) -> String {
+            let minutes = Int(time) / 60
+            let seconds = Int(time) % 60
+            return String(format: "%d:%02d", minutes, seconds)
+        }
 }
 
 struct AudioLevelGraph: View {
@@ -217,8 +275,8 @@ struct AudioLevelGraph: View {
         HStack(spacing: 4) {
             ForEach(audioLevels, id: \.self) { level in
                 Rectangle()
-                    .fill(Color.green)
-                    .frame(width: 5, height: CGFloat(level) * 200) // 높이를 오디오 레벨에 따라 조절
+                    .fill(Color.red) // 색상을 빨간색으로 변경
+                    .frame(width: 5, height: CGFloat(level) * 200)
             }
         }
         .padding(.horizontal)

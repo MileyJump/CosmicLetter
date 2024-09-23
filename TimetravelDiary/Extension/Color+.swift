@@ -28,6 +28,7 @@ extension Diary {
 //        static let timeTravelPurpleColor = Color(UIColor(hexCode: "624E88"))
 //        static let timeTravelPurpleColor = Color(UIColor(hexCode: "4F1787"))
         static let timeTravelPurpleColor = Color(UIColor(hexCode: "2E073F"))
+        static let timeTravelgray = Color(UIColor(hexCode: "E6DAD1"))
         
     }
 }

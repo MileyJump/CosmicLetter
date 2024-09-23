@@ -24,27 +24,29 @@ struct ContentView: View {
     
     
     var body: some View {
-        TabView {
-              HomeCalendarView()
-                  .tabItem {
-                      Image(systemName: "calendar")
-                      Text("캘린더")
-                  }
-              
-              InfoView()
-                  .tabItem {
-                      Image(systemName: "note.text")
-                      Text("메모")
-                  }
-              
-              WriteMemoView()
-                  .tabItem {
-                      Image(systemName: "gearshape")
-                      Text("설정")
-                  }
-          }
-          .accentColor(.white)  // Change tab bar selected item color
-      }
+        NavigationView {
+            TabView {
+                HomeCalendarView()
+                    .tabItem {
+                        Image(systemName: "calendar")
+                        Text("캘린더")
+                    }
+                
+                InfoView()
+                    .tabItem {
+                        Image(systemName: "note.text")
+                        Text("메모")
+                    }
+                
+                WriteMemoView()
+                    .tabItem {
+                        Image(systemName: "gearshape")
+                        Text("설정")
+                    }
+            }
+            .accentColor(.black)
+        }
+    }
 //            .font(.headline)   //탭 바 텍스트 스타일
 //            .accentColor(.white)
 //    }
