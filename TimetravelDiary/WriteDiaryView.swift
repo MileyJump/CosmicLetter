@@ -176,7 +176,7 @@ struct RecordingView: View {
     @ObservedObject var audioRecorderManager: AudioRecorderManager
     @State private var audioLevels: [CGFloat] = [0, 0, 0] // 초기 오디오 레벨
     @State private var currentTime: Double = 0.0
-    @State private var totalTime: Double = 0.0
+    @State private var totalTime: Double = 112
     
     var body: some View {
         VStack {
@@ -205,7 +205,7 @@ struct RecordingView: View {
             
             HStack {
                 Button("리셋하기") {
-                    // 리셋
+                    resetRecording()
                 }
                 .disabled(!audioRecorderManager.isRecording)
                 .padding(5) // 상하 여백 추가
@@ -213,6 +213,7 @@ struct RecordingView: View {
                 .cornerRadius(5)
                 .foregroundStyle(audioRecorderManager.isRecording ? .black : .gray)
                 .padding()
+                
                 Button(action: {
                     if audioRecorderManager.isRecording {
                         audioRecorderManager.stopRecording()
@@ -248,6 +249,22 @@ struct RecordingView: View {
             }
         }
     }
+    
+    private func resetRecording() {
+        // Reset functionality
+        currentTime = 0
+        audioLevels = [0, 0, 0]
+        audioRecorderManager.stopRecording()
+    }
+    
+    private func toggleRecording() {
+        if audioRecorderManager.isRecording {
+//            audioRecorderManager.pauseRecording()
+        } else {
+            audioRecorderManager.startRecording()
+            updateAudioLevels()
+        }
+    }
      
     private func updateAudioLevels() {
         // 타이머를 설정하여 주기적으로 오디오 레벨 업데이트
@@ -255,11 +272,16 @@ struct RecordingView: View {
             if audioRecorderManager.isRecording {
                 audioRecorderManager.updateAudioLevels()
                 audioLevels = audioRecorderManager.audioLevels // 오디오 레벨 업데이트
+                currentTime = audioRecorderManager.currentTime
             } else {
                 timer.invalidate() // 녹음이 중지되면 타이머 중지
             }
         }
     }
+    
+    private func resetAudioLevels() {
+            audioLevels = [0, 0, 0] // Reset the levels after stopping recording
+        }
             
     private func formatTime(_ time: Double) -> String {
             let minutes = Int(time) / 60
