@@ -67,7 +67,8 @@ struct testView : View {
             case .album:
                 AlbumView()
 //                TestTopTapView()
-                    .frame(width: UIScreen.main.bounds.width,  height: UIScreen.main.bounds.height - 500, alignment: .center)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
+                   // .frame(width: UIScreen.main.bounds.width,  height: UIScreen.main.bounds.height - 500, alignment: .center)
                             
                 
 //                ForEach(0..<5) { _ in

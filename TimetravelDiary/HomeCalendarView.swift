@@ -13,7 +13,8 @@ struct HomeCalendarView: View {
     @Query var diaryModels: [DiaryModel]
     
     var body: some View {
-        NavigationStack { // 네비게이션 스택 추가
+        // 얘를 없애면 일기작성 화면에서 갤러리 버튼 클릭시 뒤로감 ㅠ
+        NavigationView {
             ZStack {
                     CalendarView(month: Date())
                         .frame(width: 380, height: 200)
@@ -23,9 +24,7 @@ struct HomeCalendarView: View {
                         .padding(.bottom, 100)
                         .padding(.leading, 260)
                 }
-//                .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 200)
-//            GradientBackgroundView(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
-//            }
+                .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
         }
     }
 }

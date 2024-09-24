@@ -41,7 +41,7 @@ struct FloatingMenu: View {
             }) {
                 Image(systemName: "plus.circle.fill")
                     .resizable()
-                    .frame(width:80,height:80)
+                    .frame(width:60,height:60)
                     .foregroundColor(Color(red:153/255, green:102/255, blue:255/255 ))
                     .shadow(color: .gray, radius: 0.3, x: 1, y: 1)
             }

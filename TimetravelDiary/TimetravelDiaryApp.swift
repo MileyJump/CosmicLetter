@@ -15,6 +15,8 @@ struct TimetravelDiaryApp: App {
             ContentView()
                 .modelContainer(for: DiaryModel.self)
 //            HomeCalendarView()
+            
+//            CustomTabBarView()
         }
     }
 }

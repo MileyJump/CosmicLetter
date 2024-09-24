@@ -11,10 +11,10 @@ struct DiaryCollectionView: View {
     var body: some View {
         ZStack {
             // 그라데이션 배경
-            Color.clear
+//            Color.clear
 //                .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 460)
 //            GradientBackgroundView(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 0)
-                .ignoresSafeArea()
+//                .ignoresSafeArea()
 
             List {
                 Text("안녕하세요")
@@ -23,6 +23,7 @@ struct DiaryCollectionView: View {
             }
             .scrollContentBackground(.hidden) // 기본 List 배경 숨기기
             .background(Color.clear) // List의 배경을 투명하게 설정
+            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 460)
         }
     }
 }

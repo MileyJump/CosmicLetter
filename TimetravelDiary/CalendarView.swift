@@ -69,7 +69,7 @@ struct CalendarView: View {
                     .fontWeight(.bold)
                     .padding(.bottom, 90)
                     .padding(.trailing, 60)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
             }
             
             Button {
@@ -85,7 +85,7 @@ struct CalendarView: View {
                     Text(symbol)
                         .font(.system(size: 20))
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(.black) // 요일 텍스트의 색상을 흰색으로 설정
+                        .foregroundColor(.white) // 요일 텍스트의 색상을 흰색으로 설정
                 }
             }
             .padding(.bottom, 10)
@@ -139,7 +139,7 @@ private struct CellView: View {
             // 오늘 날짜 배경
             if isToday {
                 Circle()
-                    .foregroundColor(.yellow) // 오늘 날짜 배경 색상
+                    .foregroundColor(Diary.color.timeTravelgray) // 오늘 날짜 배경 색상
                     .opacity(0.3)
                     .frame(width: 35, height: 35)
             }
@@ -163,7 +163,7 @@ private struct CellView: View {
         } else if publicHolidays.contains(cellDate) {
             return .red // 공휴일은 빨간색
         } else {
-            return isToday ? .red : .black // 오늘 날짜는 빨간색
+            return isToday ? .red : .white // 오늘 날짜는 빨간색
         }
     }
 }
@@ -208,7 +208,8 @@ private extension CalendarView {
 extension CalendarView {
     static let monthOnlyFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "M월"
+//        formatter.dateFormat = "M월"
+        formatter.dateFormat = "yy년 M월"
         formatter.locale = Locale(identifier: "ko_KR")
         return formatter
     }()

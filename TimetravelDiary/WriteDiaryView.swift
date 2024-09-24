@@ -21,7 +21,7 @@ struct WriteDiaryView: View {
     @StateObject private var audioRecorderManager = AudioRecorderManager()
     
     var body: some View {
-        
+        // 얘를 없애면 툴바가 사라짐
         NavigationView {
             ZStack {
                 VStack {
@@ -39,7 +39,14 @@ struct WriteDiaryView: View {
                                 .font(.system(size: 18))
                         }
                         .padding()
-                        .background(Color.clear)
+//                        .background(Color.clear)
+                        .background {
+                            Rectangle()
+                                .fill(Diary.color.timeTravelPinkColor.opacity(0.3))
+                                .shadow(color: .black.opacity(0.15), radius: 8, y: 2)
+                                .cornerRadius(10)
+                           
+                        }
                         .foregroundColor(.black)
                     
                     // 선택된 이미지가 있을 때 이미지 그리드 섹션을 표시
@@ -61,7 +68,13 @@ struct WriteDiaryView: View {
                             .foregroundColor(.black)
                             .scrollContentBackground(.hidden)
                     }
-                    .background(Color.clear)
+//                    .background(Color.clear)
+                    .background {
+                        Rectangle()
+                            .fill(Diary.color.timeTravelPinkColor.opacity(0.3))
+                            .shadow(color: .black.opacity(0.15), radius: 8, y: 2)
+                            .cornerRadius(10)
+                    }
                     
                    
                     
@@ -102,7 +115,9 @@ struct WriteDiaryView: View {
                     .presentationDetents([.fraction(0.5)])
                     .presentationDragIndicator(.visible)
         })
+            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
         }
+        
     }
     
     // 이미지들을 3개씩 한 행에 나란히 배치

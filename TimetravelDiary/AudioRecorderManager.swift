@@ -137,6 +137,9 @@ class AudioRecorderManager: NSObject, ObservableObject {
             print("Playing Failed")
         }
     }
+    
+    
+    
 }
 
 // Recording 모델 정의
