@@ -6,20 +6,21 @@
 //
 
 import Foundation
-import SwiftUI
 import RealmSwift
 
+// 'TimeDiary' 클래스 정의
 final class TimeDiary: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var date: String
     @Persisted var title: String
-    @Persisted var photos: String
+    @Persisted var photos: List<Photos>
     @Persisted var contents: String
     @Persisted var voice: Data
     @Persisted var favorite: Bool
     @Persisted var memo: String
     
-    convenience init(date: String, title: String, photos: String, contents: String, voice: Data, favorite: Bool, memo: String) {
+    // List<Photos>를 받는 생성자
+    convenience init(date: String, title: String, photos: List<Photos>, contents: String, voice: Data, favorite: Bool, memo: String) {
         self.init()
         self.date = date
         self.title = title
@@ -31,3 +32,13 @@ final class TimeDiary: Object, ObjectKeyIdentifiable {
     }
 }
 
+// 'Photos' 클래스 정의
+final class Photos: Object, ObjectKeyIdentifiable {
+    @Persisted var photoName: String
+    
+    // Photos의 초기화 구문
+    convenience init(photoName: String) {
+        self.init()
+        self.photoName = photoName
+    }
+}

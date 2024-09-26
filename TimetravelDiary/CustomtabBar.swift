@@ -6,6 +6,7 @@
 //
 import SwiftUI
 
+
 struct CustomTabBarView: View {
     @State private var selectedTab = 0
     
@@ -104,6 +105,7 @@ struct CustomTabBarView: View {
             }
             .edgesIgnoringSafeArea(.bottom)
         }
+      
     }
 }
 

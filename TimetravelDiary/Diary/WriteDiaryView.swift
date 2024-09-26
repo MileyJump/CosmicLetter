@@ -7,8 +7,13 @@
 
 import SwiftUI
 import PhotosUI
+import RealmSwift
 
 struct WriteDiaryView: View {
+    
+    let realm = try! Realm()
+    
+    @ObservedResults(TimeDiary.self) var diaries
     
     @State var titleText = ""
     @State var contentText: String = ""
@@ -39,7 +44,6 @@ struct WriteDiaryView: View {
                                 .font(.system(size: 18))
                         }
                         .padding()
-//                        .background(Color.clear)
                         .background {
                             Rectangle()
                                 .fill(Diary.color.timeTravelPinkColor.opacity(0.3))
@@ -47,7 +51,7 @@ struct WriteDiaryView: View {
                                 .cornerRadius(10)
                            
                         }
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                     
                     // 선택된 이미지가 있을 때 이미지 그리드 섹션을 표시
                     if !images.isEmpty {
@@ -65,10 +69,10 @@ struct WriteDiaryView: View {
                         TextEditor(text: $contentText)
                             .padding()
                             .background(Color.clear)
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                             .scrollContentBackground(.hidden)
                     }
-//                    .background(Color.clear)
+
                     .background {
                         Rectangle()
                             .fill(Diary.color.timeTravelPinkColor.opacity(0.3))
@@ -104,6 +108,14 @@ struct WriteDiaryView: View {
                     }
                 }
                 .navigationTitle("2024.09.22")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("저장") {
+                            print("Help tapped!")
+                            saveDiary()
+                        }
+                    }
+                }
                 .navigationBarTitleDisplayMode(.inline)
             }
             .photosPicker(isPresented: $showImagePicker, selection: $selectedPhotos, maxSelectionCount: 3, matching: .images)
@@ -117,7 +129,43 @@ struct WriteDiaryView: View {
         })
             .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
         }
+        .onAppear {
+            print(Realm.Configuration.defaultConfiguration.fileURL)
+        }
+    }
+    
+    private func saveDiary() {
+        print("저장 버튼 클릭")
+        guard !titleText.isEmpty && !contentText.isEmpty else {
+            //            errorMessage = "제목과 내용을 작성해주세요!"
+            return
+        }
         
+        //        let photos = images.compactMap { $0.jpegData(compressionQuality: 0.8)?.base64EncodedString() }.joined(separator: ",")
+        
+        
+        
+        for image in images {
+            //             let photos = ImageService.shared.saveImageToDocument(image: image, filename: "\(image)")
+            
+            let audioData = Data()
+            
+            ImageService.shared.saveDiaryWithImages(images: images, title: titleText, contents: contentText, voice: audioData, favorite: false)
+            
+            
+            
+            
+            
+            
+//            $diaries.append(newDiary) // Save to Realm
+//            print(newDiary)
+            
+            // Clear inputs after saving
+            titleText = ""
+            contentText = ""
+            images.removeAll()
+            //                audioRecorderManager.reset()
+        }
     }
     
     // 이미지들을 3개씩 한 행에 나란히 배치
