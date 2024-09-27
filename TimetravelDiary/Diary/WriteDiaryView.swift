@@ -11,7 +11,7 @@ import RealmSwift
 
 struct WriteDiaryView: View {
     
-    let realm = try! Realm()
+//    let realm = try! Realm()
     
     @ObservedResults(TimeDiary.self) var diaries
     
@@ -133,38 +133,23 @@ struct WriteDiaryView: View {
             print(Realm.Configuration.defaultConfiguration.fileURL)
         }
     }
+        
     
     private func saveDiary() {
         print("저장 버튼 클릭")
         guard !titleText.isEmpty && !contentText.isEmpty else {
-            //            errorMessage = "제목과 내용을 작성해주세요!"
+            // errorMessage = "제목과 내용을 작성해주세요!"
             return
         }
-        
-        //        let photos = images.compactMap { $0.jpegData(compressionQuality: 0.8)?.base64EncodedString() }.joined(separator: ",")
-        
-        
-        
+       
         for image in images {
-            //             let photos = ImageService.shared.saveImageToDocument(image: image, filename: "\(image)")
-            
             let audioData = Data()
             
             ImageService.shared.saveDiaryWithImages(images: images, title: titleText, contents: contentText, voice: audioData, favorite: false)
-            
-            
-            
-            
-            
-            
-//            $diaries.append(newDiary) // Save to Realm
-//            print(newDiary)
-            
-            // Clear inputs after saving
+
             titleText = ""
             contentText = ""
             images.removeAll()
-            //                audioRecorderManager.reset()
         }
     }
     

@@ -16,22 +16,25 @@ class ImageService {
     
     private init () { }
     
+    
     func saveImageToDocument(image: UIImage, filename: String) -> String? {
-        
         if let data = image.jpegData(compressionQuality: 1.0) {
             if let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                let fileURL = documentsURL.appendingPathComponent(filename)
+                let uniqueFileName = "\(UUID().uuidString)"
+                let fileURL = documentsURL.appendingPathComponent("\(filename)_\(uniqueFileName)")
                 
+                // 이미지 파일 저장
                 do {
                     try data.write(to: fileURL)
+                    print("Image saved at path: \(uniqueFileName)") // 경로를 출력하여 확인
                     return fileURL.path
+                    
                 } catch {
                     print("이미지 저장 에러")
                     return nil
                 }
             }
         }
-        
         return nil
     }
     
@@ -41,11 +44,12 @@ class ImageService {
         let fileManager = FileManager.default
         
         for (index, image) in images.enumerated() {
+            
             if let filePath = saveImageToDocument(image: image, filename: "image_\(index).jpg") {
                 timeDiary.photos.append(Photos(photoName: filePath))
+                print(filePath)
             }
         }
-        
         timeDiary.title = title
         timeDiary.contents = contents
         timeDiary.voice = voice
@@ -57,7 +61,36 @@ class ImageService {
         }
     }
     
+    // 저장된 이미지 경로에서 이미지를 불러오는 메서드
+        func loadImageFromDocument(filename: String) -> UIImage? {
+            if let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let fileURL = documentsURL.appendingPathComponent(filename)
+                if FileManager.default.fileExists(atPath: fileURL.path) {
+                    return UIImage(contentsOfFile: fileURL.path)
+                } else {
+                    print("파일이 존재하지 않음: \(fileURL.path)")
+                    return nil
+                }
+            }
+            return nil
+        }
     
+    func getImagesFromDiary() -> [String] {
+        let timeDiaries = realm.objects(TimeDiary.self)
+        var imagePaths: [String] = []
+        
+        for diary in timeDiaries {
+            if let firstImage = diary.photos.first {
+                imagePaths.append(firstImage.photoName)
+            }
+        }
+        return imagePaths
+    }
+    
+    func getFirstImageFromDiary() -> String? {
+        let timeDiaries = realm.objects(TimeDiary.self)
+        return timeDiaries.first?.photos.first?.photoName
+    }
     
         //    }
         //
