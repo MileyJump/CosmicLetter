@@ -145,7 +145,7 @@ struct WriteDiaryView: View {
         for image in images {
             let audioData = Data()
             
-            ImageService.shared.saveDiaryWithImages(images: images, title: titleText, contents: contentText, voice: audioData, favorite: false)
+            ImageService.shared.saveDiaryWithImages(date: "2024.09.30", images: images, title: titleText, contents: contentText, voice: audioData, favorite: false)
 
             titleText = ""
             contentText = ""

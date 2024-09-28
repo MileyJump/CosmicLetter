@@ -15,6 +15,7 @@ class WriteDiaryViewModel: ObservableObject {
     @Published var contentText: String = ""
     @Published var selectedPhotos: [PhotosPickerItem] = []
     @Published var images: [UIImage] = []
+    @Published var date: String = ""
     @Published var errorMessage: String?
     
     @Published var showImagePicker = false
@@ -34,7 +35,7 @@ class WriteDiaryViewModel: ObservableObject {
         let audioData = Data()
         
         // ImageService를 통해 Diary 저장
-        ImageService.shared.saveDiaryWithImages(images: images, title: titleText, contents: contentText, voice: audioData, favorite: false)
+        ImageService.shared.saveDiaryWithImages(date: date, images: images, title: titleText, contents: contentText, voice: audioData, favorite: false)
         
         // 저장 후 상태 초기화
         titleText = ""

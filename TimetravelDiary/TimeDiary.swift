@@ -17,10 +17,9 @@ final class TimeDiary: Object, ObjectKeyIdentifiable {
     @Persisted var contents: String
     @Persisted var voice: Data
     @Persisted var favorite: Bool
-    @Persisted var memo: String
     
     // List<Photos>를 받는 생성자
-    convenience init(date: String, title: String, photos: List<Photos>, contents: String, voice: Data, favorite: Bool, memo: String) {
+    convenience init(date: String, title: String, photos: List<Photos>, contents: String, voice: Data, favorite: Bool) {
         self.init()
         self.date = date
         self.title = title
@@ -28,7 +27,6 @@ final class TimeDiary: Object, ObjectKeyIdentifiable {
         self.contents = contents
         self.voice = voice
         self.favorite = favorite
-        self.memo = memo
     }
 }
 
@@ -40,5 +38,20 @@ final class Photos: Object, ObjectKeyIdentifiable {
     convenience init(photoName: String) {
         self.init()
         self.photoName = photoName
+    }
+}
+
+
+final class TimeDiaryMemo: Object, ObjectKeyIdentifiable {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var date: String
+    @Persisted var memo: String
+    @Persisted var favorite: Bool
+    
+    convenience init(date: String, favorite: Bool, memo: String) {
+        self.init()
+        self.date = date
+        self.favorite = favorite
+        self.memo = memo
     }
 }
