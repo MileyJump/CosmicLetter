@@ -1,14 +1,14 @@
 //
-//  DiaryCollectionView.swift
+//  MemoCollectionView.swift
 //  TimetravelDiary
 //
-//  Created by 최민경 on 9/21/24.
+//  Created by 최민경 on 9/28/24.
 //
 
 import SwiftUI
 import RealmSwift
 
-struct DiaryCollectionView: View {
+struct MemoCollectionView: View {
     
     @ObservedResults(TimeDiary.self) var diaries
     

@@ -34,20 +34,24 @@ struct AlbumView: View {
                                             .scaledToFill()
                                             .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
                                             .clipped()
-                                    } else {
-                                        Rectangle()
-                                            .fill(Color.gray)
-                                            .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
-                                    }
+                                    } 
+//                                    else {
+//                                        Rectangle()
+//                                            .fill(Color.gray)
+//                                            .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
+//                                    }
                                 }
                             }
                         }
                     }
                 }
+                 
             }
+            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
             .onAppear {
                 viewModel.fetchImageFromDiaryAlbum()
             }
+            
         }
     }
 }
