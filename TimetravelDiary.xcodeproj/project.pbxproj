@@ -24,6 +24,9 @@
 		B06176412C9EEE9D001C18D9 /* DiaryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06176402C9EEE9D001C18D9 /* DiaryCollectionView.swift */; };
 		B06176472CA00D3F001C18D9 /* AudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */; };
 		B0775D5C2CA698330013B68A /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0775D5B2CA698330013B68A /* AlbumViewModel.swift */; };
+		B0775D5E2CA7D9770013B68A /* DiaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0775D5D2CA7D9770013B68A /* DiaryDetailViewModel.swift */; };
+		B0775D602CA7DA560013B68A /* DiaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0775D5F2CA7DA550013B68A /* DiaryCollectionViewModel.swift */; };
+		B0775D622CA7DDF10013B68A /* WriteDiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0775D612CA7DDF10013B68A /* WriteDiaryViewModel.swift */; };
 		B0B069F12CA1C34900A1BCB1 /* CustomtabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B069F02CA1C34900A1BCB1 /* CustomtabBar.swift */; };
 		B0B069F32CA1C4EA00A1BCB1 /* UnreadDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B069F22CA1C4EA00A1BCB1 /* UnreadDiaryView.swift */; };
 		B0B069F52CA2A46C00A1BCB1 /* TimeDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B069F42CA2A46C00A1BCB1 /* TimeDiary.swift */; };
@@ -56,6 +59,9 @@
 		B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderManager.swift; sourceTree = "<group>"; };
 		B061764A2CA02902001C18D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B0775D5B2CA698330013B68A /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
+		B0775D5D2CA7D9770013B68A /* DiaryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewModel.swift; sourceTree = "<group>"; };
+		B0775D5F2CA7DA550013B68A /* DiaryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewModel.swift; sourceTree = "<group>"; };
+		B0775D612CA7DDF10013B68A /* WriteDiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDiaryViewModel.swift; sourceTree = "<group>"; };
 		B0B069F02CA1C34900A1BCB1 /* CustomtabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomtabBar.swift; sourceTree = "<group>"; };
 		B0B069F22CA1C4EA00A1BCB1 /* UnreadDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadDiaryView.swift; sourceTree = "<group>"; };
 		B0B069F42CA2A46C00A1BCB1 /* TimeDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDiary.swift; sourceTree = "<group>"; };
@@ -125,8 +131,11 @@
 			isa = PBXGroup;
 			children = (
 				B06176402C9EEE9D001C18D9 /* DiaryCollectionView.swift */,
+				B0775D5F2CA7DA550013B68A /* DiaryCollectionViewModel.swift */,
 				B060763F2CA41C9F0020662B /* DiaryDetailView.swift */,
+				B0775D5D2CA7D9770013B68A /* DiaryDetailViewModel.swift */,
 				B0535C042C96C86400C7F9CD /* WriteDiaryView.swift */,
+				B0775D612CA7DDF10013B68A /* WriteDiaryViewModel.swift */,
 			);
 			path = Diary;
 			sourceTree = "<group>";
@@ -295,6 +304,8 @@
 				B0535C002C95B51E00C7F9CD /* ContentView.swift in Sources */,
 				B0FBD52A2C940EC4009CC9FC /* GradientBackgroundView.swift in Sources */,
 				B0535C052C96C86400C7F9CD /* WriteDiaryView.swift in Sources */,
+				B0775D5E2CA7D9770013B68A /* DiaryDetailViewModel.swift in Sources */,
+				B0775D622CA7DDF10013B68A /* WriteDiaryViewModel.swift in Sources */,
 				B0535BFE2C95A3B200C7F9CD /* NetworkManager.swift in Sources */,
 				B0B069F12CA1C34900A1BCB1 /* CustomtabBar.swift in Sources */,
 				B061763C2C9EAE00001C18D9 /* AlbumView.swift in Sources */,
@@ -305,6 +316,7 @@
 				B06176412C9EEE9D001C18D9 /* DiaryCollectionView.swift in Sources */,
 				B0B4763A2CA42F7200AEDBBC /* ImageService.swift in Sources */,
 				B0FBD51C2C940DE3009CC9FC /* PricaticContentView.swift in Sources */,
+				B0775D602CA7DA560013B68A /* DiaryCollectionViewModel.swift in Sources */,
 				B05357D72C94454600FCD3A2 /* CalendarView.swift in Sources */,
 				B0535C072C96DEAE00C7F9CD /* FloatingMenu.swift in Sources */,
 				B0FBD51A2C940DE3009CC9FC /* TimetravelDiaryApp.swift in Sources */,

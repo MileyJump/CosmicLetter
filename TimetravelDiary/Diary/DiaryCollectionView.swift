@@ -12,27 +12,20 @@ struct DiaryCollectionView: View {
     
     @ObservedResults(TimeDiary.self) var diaries
     
-    let realm = try! Realm()
-    
     var body: some View {
-        
         NavigationView {
             List {
                 ForEach(diaries, id: \.id) { diary in
                     NavigationLink(destination: DiaryDetailView(diary: diary)) {
-                        Text(diary.title)  // 데이터의 title 속성 표시
+                        Text(diary.title)
                     }
                 }
-                
-                .onDelete(perform: $diaries.remove)  // 항목 삭제
+                .onDelete(perform: $diaries.remove)
             }
-            .onAppear {
-                print(realm.configuration.fileURL)
-            }
+            .navigationTitle("Diary List")
         }
     }
 }
-
 
 #Preview {
     DiaryCollectionView()

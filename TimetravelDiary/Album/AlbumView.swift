@@ -8,38 +8,50 @@
 import SwiftUI
 import RealmSwift
 
+import SwiftUI
+import RealmSwift
+
 struct AlbumView: View {
-    
     @StateObject private var viewModel = AlbumViewModel()
     
-    // 그리드 아이템 설정 (3개의 열을 고정)
     let columns = [
-        GridItem(.flexible(), spacing: 10),
-        GridItem(.flexible(), spacing: 10),
-        GridItem(.flexible(), spacing: 10)
+        GridItem(.flexible(), spacing: 0),
+        GridItem(.flexible(), spacing: 0),
+        GridItem(.flexible(), spacing: 0)
     ]
     
     var body: some View {
-        VStack {
-            if viewModel.images.isEmpty {
-                Text("No images available")
-            } else {
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(viewModel.images, id: \.self) { image in
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(1, contentMode: .fill) // 1:1 비율 맞추기
-                                .frame(width: 100, height: 100) // 고정 크기
-                                .clipped() // 이미지 크기 초과 시 자르기
+        ZStack {
+            VStack {
+                if viewModel.images.isEmpty {
+                    Text("No images available")
+                } else {
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 0) {
+                            ForEach(viewModel.images, id: \.id) { diary in
+                                NavigationLink(destination: DiaryDetailView(diary: diary)) {
+                                    if let firstPhotoName = diary.photos.first?.photoName,
+                                       let firstImage = viewModel.loadImageFromDocument(filename: firstPhotoName) {
+                                        Image(uiImage: firstImage)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
+                                            .clipped()
+                                    } else {
+                                        Rectangle()
+                                            .fill(Color.gray)
+                                            .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
+//                                        Text("이미지가 없어요")
+                                    }
+                                }
+                            }
                         }
                     }
-                    .padding()
                 }
             }
-        }
-        .onAppear {
-            viewModel.fetchImageFromDiaryAlbum() // 뷰가 나타날 때 이미지 데이터 불러오기
+            .onAppear {
+                viewModel.fetchImageFromDiaryAlbum()
+            }
         }
     }
 }
