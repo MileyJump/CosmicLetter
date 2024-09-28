@@ -8,9 +8,6 @@
 import SwiftUI
 import RealmSwift
 
-import SwiftUI
-import RealmSwift
-
 struct AlbumView: View {
     @StateObject private var viewModel = AlbumViewModel()
     
@@ -41,7 +38,6 @@ struct AlbumView: View {
                                         Rectangle()
                                             .fill(Color.gray)
                                             .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
-//                                        Text("이미지가 없어요")
                                     }
                                 }
                             }
