@@ -10,20 +10,19 @@ import RealmSwift
 
 struct MemoCollectionView: View {
     
-    @ObservedResults(TimeDiary.self) var diaries
+    @ObservedResults(TimeDiaryMemo.self) var memo // TimeDiaryMemo 모델에 대한 관찰
     
     var body: some View {
-//        NavigationView {
-            List {
-                ForEach(diaries, id: \.id) { diary in
-                    NavigationLink(destination: DiaryDetailView(diary: diary)) {
-                        Text(diary.title)
-                    }
+        List {
+            ForEach(memo, id: \.id) { diary in
+                NavigationLink(destination: MemoDetailView(memo: diary)) {
+                    Text(diary.memo) // 메모의 내용 표시
                 }
-                .onDelete(perform: $diaries.remove)
             }
-            
-//        }
+        }
+        .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
+        .navigationTitle("Memo Collection")
+        
     }
 }
 

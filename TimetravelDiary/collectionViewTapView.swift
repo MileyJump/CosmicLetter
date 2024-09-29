@@ -84,34 +84,8 @@ struct testView : View {
                 
 //                    .padding()
             case .memo:
-                ScrollView(.horizontal, showsIndicators: false) {
-                    ForEach(0..<10) { _ in
-                        LazyHStack {
-                            ForEach(0..<2) { _ in
-                                NavigationLink(destination: WriteMemoView()){
-                                    VStack(spacing: 5) {
-                                        Image("Star")
-                                            .resizable()
-                                            .frame(width: 160, height: 200, alignment: .center)
-                                        Text("실착용 솔직 한달 후기 입니다")
-                                            .font(.system(size: 15, weight: .bold, design: .monospaced))
-                                            .frame(width: 160, height: 20, alignment: .leading)
-                                            .foregroundColor(.black)
-                                        Text("Sky Blue")
-                                            .font(.system(size: 13, weight: .medium, design: .monospaced))
-                                            .frame(width: 160, height: 20, alignment: .leading)
-                                            .foregroundColor(.black)
-                                        Text("평발인데 너무편해요 공간도 넉넉해서 걸을때 불편하지 않아요 최고입니다 ㅋㅋ 재구매의사 100%")
-                                            .font(.system(size: 13, weight: .medium, design: .default))
-                                            .frame(width: 160, height: 50, alignment: .leading)
-                                            .foregroundColor(.black)
-                                    }
-                                    .padding(15)
-                                }
-                            }
-                        }
-                    }
-                }
+                MemoCollectionView()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
             }
         }
     }

@@ -10,9 +10,6 @@ import RealmSwift
 
 class WriteMemoViewModel: ObservableObject {
     @Published var contentText: String = ""
-    @Published var titleText: String = "" // 제목 추가
-    @Published var images: [UIImage] = [] // 이미지 배열 추가
-    var audioData: Data? // 음성 데이터 추가 (필요시)
 
     private var realm: Realm {
         return try! Realm() // Realm 인스턴스 가져오기
@@ -33,14 +30,13 @@ class WriteMemoViewModel: ObservableObject {
         do {
             try realm.write {
                 realm.add(newMemo)
+                print("memo 저장 \(newMemo)")
             }
         } catch {
             print("저장 오류: \(error)")
         }
 
         // 저장 후 필드 초기화
-        titleText = ""
         contentText = ""
-        images.removeAll()
     }
 }

@@ -13,17 +13,13 @@ struct DiaryCollectionView: View {
     @ObservedResults(TimeDiary.self) var diaries
     
     var body: some View {
-//        NavigationView {
-            List {
-                ForEach(diaries, id: \.id) { diary in
-                    NavigationLink(destination: DiaryDetailView(diary: diary)) {
-                        Text(diary.title)
-                    }
+        List {
+            ForEach(diaries, id: \.id) { diary in
+                NavigationLink(destination: DiaryDetailView(diary: diary)) {
+                    Text(diary.title)
                 }
-                .onDelete(perform: $diaries.remove)
             }
-            
-//        }
+        }
     }
 }
 

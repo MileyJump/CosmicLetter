@@ -14,6 +14,7 @@ struct WriteDiaryView: View {
 //    let realm = try! Realm()
     
     @ObservedResults(TimeDiary.self) var diaries
+    @Environment(\.dismiss) private var dismiss
     
     @State var titleText = ""
     @State var contentText: String = ""
@@ -113,6 +114,7 @@ struct WriteDiaryView: View {
                         Button("저장") {
                             print("Help tapped!")
                             saveDiary()
+                            dismiss()
                         }
                     }
                 }
