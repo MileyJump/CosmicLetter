@@ -23,6 +23,7 @@
 		B061763E2C9EB253001C18D9 /* collectionViewTapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061763D2C9EB253001C18D9 /* collectionViewTapView.swift */; };
 		B06176412C9EEE9D001C18D9 /* DiaryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06176402C9EEE9D001C18D9 /* DiaryCollectionView.swift */; };
 		B06176472CA00D3F001C18D9 /* AudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */; };
+		B07146342CAAF39400DE9E7C /* PopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07146332CAAF39400DE9E7C /* PopupViewModel.swift */; };
 		B0775D5C2CA698330013B68A /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0775D5B2CA698330013B68A /* AlbumViewModel.swift */; };
 		B0775D5E2CA7D9770013B68A /* DiaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0775D5D2CA7D9770013B68A /* DiaryDetailViewModel.swift */; };
 		B0775D602CA7DA560013B68A /* DiaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0775D5F2CA7DA550013B68A /* DiaryCollectionViewModel.swift */; };
@@ -63,6 +64,7 @@
 		B06176402C9EEE9D001C18D9 /* DiaryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionView.swift; sourceTree = "<group>"; };
 		B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderManager.swift; sourceTree = "<group>"; };
 		B061764A2CA02902001C18D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B07146332CAAF39400DE9E7C /* PopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewModel.swift; sourceTree = "<group>"; };
 		B0775D5B2CA698330013B68A /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		B0775D5D2CA7D9770013B68A /* DiaryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewModel.swift; sourceTree = "<group>"; };
 		B0775D5F2CA7DA550013B68A /* DiaryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewModel.swift; sourceTree = "<group>"; };
@@ -158,6 +160,16 @@
 			path = TestCode;
 			sourceTree = "<group>";
 		};
+		B07146322CAAF37000DE9E7C /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				B05357D62C94454600FCD3A2 /* CalendarView.swift */,
+				B05357E02C95706F00FCD3A2 /* HomeCalendarView.swift */,
+				B07146332CAAF39400DE9E7C /* PopupViewModel.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		B0775D5A2CA698290013B68A /* Album */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +217,7 @@
 		B0FBD5182C940DE3009CC9FC /* TimetravelDiary */ = {
 			isa = PBXGroup;
 			children = (
+				B07146322CAAF37000DE9E7C /* Calendar */,
 				B0775D6D2CA832FD0013B68A /* Memo */,
 				B0775D5A2CA698290013B68A /* Album */,
 				B0B476382CA42F6500AEDBBC /* Helper */,
@@ -222,11 +235,9 @@
 				B0B069F02CA1C34900A1BCB1 /* CustomtabBar.swift */,
 				B061763D2C9EB253001C18D9 /* collectionViewTapView.swift */,
 				B0B069F22CA1C4EA00A1BCB1 /* UnreadDiaryView.swift */,
-				B05357E02C95706F00FCD3A2 /* HomeCalendarView.swift */,
 				B0535C062C96DEAE00C7F9CD /* FloatingMenu.swift */,
 				B0FBD51D2C940DE4009CC9FC /* Assets.xcassets */,
 				B0FBD51F2C940DE4009CC9FC /* Preview Content */,
-				B05357D62C94454600FCD3A2 /* CalendarView.swift */,
 				B05357DA2C945A2700FCD3A2 /* BubbleView.swift */,
 				B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */,
 			);
@@ -336,6 +347,7 @@
 				B0B069F12CA1C34900A1BCB1 /* CustomtabBar.swift in Sources */,
 				B061763C2C9EAE00001C18D9 /* AlbumView.swift in Sources */,
 				B0535C092C970EEA00C7F9CD /* WriteMemoView.swift in Sources */,
+				B07146342CAAF39400DE9E7C /* PopupViewModel.swift in Sources */,
 				B05357D52C9412DD00FCD3A2 /* Color+.swift in Sources */,
 				B061763E2C9EB253001C18D9 /* collectionViewTapView.swift in Sources */,
 				B06076402CA41C9F0020662B /* DiaryDetailView.swift in Sources */,

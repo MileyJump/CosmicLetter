@@ -15,7 +15,7 @@ struct WriteDiaryView: View {
     
 //    @ObservedResults(TimeDiary.self) var diaries
     @Environment(\.dismiss) private var dismiss
-    var seletedDate: Date?
+    var seletedDate: String
     
     @State var titleText = ""
     @State var contentText: String = ""
@@ -109,11 +109,14 @@ struct WriteDiaryView: View {
                         Spacer()
                     }
                 }
-                .navigationTitle(seletedDate.map { CalendarView.dateFormatter.string(from: $0)} ?? "Date"
-                )
-                .navigationBarTitleDisplayMode(.inline)
-                .foregroundColor(.white)
+//                .navigationTitle(seletedDate)
+//                .navigationBarTitleDisplayMode(.inline)
+//                .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(seletedDate)
+                            .foregroundColor(.white)
+                    }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("저장") {
                             print("저장 tapped!")
@@ -137,6 +140,7 @@ struct WriteDiaryView: View {
             .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
         }
         .onAppear {
+            
             print(Realm.Configuration.defaultConfiguration.fileURL)
         }
     }
@@ -152,7 +156,7 @@ struct WriteDiaryView: View {
         for image in images {
             let audioData = Data()
             
-            ImageService.shared.saveDiaryWithImages(date: "2024.09.30", images: images, title: titleText, contents: contentText, voice: audioData, favorite: false)
+            ImageService.shared.saveDiaryWithImages(date: seletedDate, images: images, title: titleText, contents: contentText, voice: audioData, favorite: false)
 
             titleText = ""
             contentText = ""
@@ -208,9 +212,9 @@ struct WriteDiaryView: View {
     }
 }
 
-#Preview {
-    WriteDiaryView()
-}
+//#Preview {
+//    WriteDiaryView()
+//}
 
 extension View {
     func placeholder<Content: View>(

@@ -11,14 +11,14 @@ struct FloatingMenu: View {
     
     @State var showDiaryMenu = false
     @State var showMemoMenu = false
-    @State var showMenuItem3 = false
+//    @State var showMenuItem3 = false
     
     var body: some View {
         VStack {
             Spacer()
             if showDiaryMenu {
                 NavigationLink(destination: {
-                    WriteDiaryView()
+                    WriteDiaryView(seletedDate: CalendarView.dateFormatter.string(from: Date()))
                 }, label: {
                     MenuItem(icon:"book.fill")
                 })
@@ -31,9 +31,9 @@ struct FloatingMenu: View {
                 })
                 
             }
-            if showMenuItem3 {
-                MenuItem(icon:"square.and.arrow.up.fill")
-            }
+//            if showMenuItem3 {
+//                MenuItem(icon:"square.and.arrow.up.fill")
+//            }
             
             
             Button(action: {
@@ -71,9 +71,9 @@ struct FloatingMenu: View {
     
     
     func showMenu() {
-        withAnimation {
-            self.showMenuItem3.toggle()
-        }
+//        withAnimation {
+////            self.showMenuItem3.toggle()
+//        }
         withAnimation(.easeInOut.delay(0.1)) {
             self.showMemoMenu.toggle()
         }

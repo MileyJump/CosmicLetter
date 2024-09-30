@@ -12,6 +12,7 @@ struct HomeCalendarView: View {
     
     @Query var diaryModels: [DiaryModel]
     
+    
     var body: some View {
         // 얘를 없애면 일기작성 화면에서 갤러리 버튼 클릭시 뒤로감 ㅠ
         NavigationView {

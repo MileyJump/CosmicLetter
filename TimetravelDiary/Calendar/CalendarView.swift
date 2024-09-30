@@ -11,14 +11,14 @@ import Combine
 struct CalendarView: View {
     @State var month: Date // 현재 표시 되는 달
     @State var offset: CGSize = CGSize() // 제스처 인식을 위한 변수, 뷰 이동 상태를 저장
-    @State var selectedDate: Date? = nil // 선택한 날짜를 저장하는 변수
+    @State var selectedDate: Date? = Date() // 선택한 날짜를 저장하는 변수
     @State var publicHolidays: Set<Date> = Set() // 공휴일을 담을 변수
     @State var isPopupVisible: Bool = false
     @State var isShowingAlert: Bool = false // Alert 표시 여부
     @State var navigateToDiary: Bool = false // 일기 화면으로 전환
     @State var navigateToMemo: Bool = false // 메모 화면으로 전환
     
-    @State private var cancellables: Set<AnyCancellable> = []
+    @StateObject var viewModel = PopupViewModel()
     
     var holidayService = NetworkManager()
     
@@ -35,6 +35,7 @@ struct CalendarView: View {
         )
         .task {
             fetchHolidays()
+            
         }
         .gesture( // 스와이프 인식
             DragGesture()
@@ -52,9 +53,8 @@ struct CalendarView: View {
         )
         .navigationDestination(isPresented: $navigateToDiary) {
             if let selectedDate = selectedDate {
-                WriteDiaryView(seletedDate: selectedDate)
+                WriteDiaryView(seletedDate: CalendarView.dateFormatter.string(from: selectedDate))
             }
-            
         }
         .navigationDestination(isPresented: $navigateToMemo) {
             WriteMemoView()
@@ -73,47 +73,70 @@ struct CalendarView: View {
             if isPopupVisible {
                 VStack {
                     if let selectedDate = selectedDate {
+                        let dateString = CalendarView.dateFormatter.string(from: selectedDate)
+                        
                         VStack(spacing: 10) {
                             // 날짜
-                            Text(selectedDate, formatter: Self.dateFormatter)
-                                .font(.system(size: 24))
-                                .fontWeight(.bold)
+                            Text(selectedDate, formatter: Self.popupFormatter)
+                                .font(.system(size: 20))
+                                .fontWeight(.regular)
                                 .padding(.top, 10)
+                                .padding(.leading, 10)
+                                .padding(.bottom, 20)
+                                .frame(maxWidth: .infinity, alignment: .leading) // 왼쪽 정렬 추가
                             
                             // 샘플 메모 내용
                             VStack(alignment: .leading, spacing: 8) {
-                                HStack {
-                                    Circle()
-                                        .fill(Color.purple)
-                                        .frame(width: 8, height: 8)
-                                    Text("일기")
+//                                VStack {
+                                    HStack {
+                                        Circle()
+                                            .fill(Color.purple)
+                                            .frame(width: 8, height: 8)
+                                        Text("일기")
+                                            .font(.system(size: 15))
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+//                                    Spacer()
+                                Text(viewModel.diaryTitle)
                                         .font(.system(size: 18))
-                                    Spacer()
-                                    Text("약과가 먹고 싶은 날")
-                                        .font(.system(size: 18))
-                                }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.leading, 14)
+//                                }
+                                .padding(.bottom, 10)
                                 
-                                HStack {
-                                    Circle()
-                                        .fill(Color.purple)
-                                        .frame(width: 8, height: 8)
-                                    Text("메모")
+//                                VStack {
+                                    HStack {
+                                        Circle()
+                                            .fill(Color.purple)
+                                            .frame(width: 8, height: 8)
+                                        Text("메모")
+                                            .font(.system(size: 15))
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+//                                    Spacer()
+                                    Text(viewModel.memoText)
                                         .font(.system(size: 18))
-                                    Spacer()
-                                    Text("치과 4:30")
-                                        .font(.system(size: 18))
-                                }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.leading, 14)
+//                                }
+                                .padding(.bottom, 10)
                                 
-                                HStack {
-                                    Circle()
-                                        .fill(Color.red)
-                                        .frame(width: 8, height: 8)
-                                    Text("일기")
+//                                VStack {
+                                    HStack {
+                                        Circle()
+                                            .fill(Color.red)
+                                            .frame(width: 8, height: 8)
+                                        Text("일기")
+                                            .font(.system(size: 15))
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+//                                    Spacer()
+                                Text(viewModel.memoText)
                                         .font(.system(size: 18))
-                                    Spacer()
-                                    Text("수박이 먹고 싶은 날")
-                                        .font(.system(size: 18))
-                                }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.leading, 14)
+//                                }
+                                .padding(.bottom, 30)
                             }
                             .padding(.horizontal, 16)
                             
@@ -123,14 +146,17 @@ struct CalendarView: View {
                             }) {
                                 Image(systemName: "plus.circle")
                                     .resizable()
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: 40, height: 40)
                                     .padding(.bottom, 10)
                             }
                         }
                         .padding()
-                        .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
                         .shadow(radius: 10)
-                        .frame(width: UIScreen.main.bounds.width * 0.8, height: 600)
+                        .frame(width: UIScreen.main.bounds.width * 0.7, height: 600)
+                        .onAppear {
+                            viewModel.fetchDiaryAndMemo(for: dateString)
+                        }
                         .onTapGesture {
                             // 팝업창 닫는 기능을 원하지 않는 경우 이 부분을 주석처리
                         }
@@ -151,6 +177,17 @@ struct CalendarView: View {
             }
         }
     }
+    
+    private func fetchDiaryAndMemo(for dateString: String) {
+        viewModel.fetchDiaryAndMemo(for: dateString)
+        // 만약 일기와 메모가 없으면 팝업을 숨김
+        if !viewModel.hasDiary && !viewModel.hasMemo {
+            isPopupVisible = false
+        } else {
+            isPopupVisible = true
+        }
+    }
+
     
     private func fetchHolidays() {
         let currentYear = Calendar.current.component(.year, from: month)
@@ -173,21 +210,26 @@ struct CalendarView: View {
                 } label: {
                     Image(systemName: "chevron.left")
                         .padding()
+                        .foregroundColor(.white) // 버튼 색상 설정
                 }
+                
                 Text(month, formatter: Self.monthOnlyFormatter)
-                    .font(.system(size: 40))
+                    .font(.system(size: 35))
                     .fontWeight(.bold)
-                    .padding(.bottom, 90)
-                    .padding(.trailing, 60)
                     .foregroundColor(.white)
+                
+                Button {
+                    changeMonth(by: 1)
+                } label: {
+                    Image(systemName: "chevron.right")
+                        .padding()
+                        .foregroundColor(.white) // 버튼 색상 설정
+                }
             }
+            .padding(.bottom, 60)
+            .padding(.horizontal, 20) // 양쪽에 여백 추가
             
-            Button {
-                changeMonth(by: 1)
-            } label: {
-                Image(systemName: "chevron.right")
-                    .padding()
-            }
+            
             HStack {
                 ForEach(Self.weekdaySymbols, id: \.self) { symbol in
                     Text(symbol)
@@ -196,7 +238,7 @@ struct CalendarView: View {
                         .foregroundColor(.white) // 요일 텍스트의 색상을 흰색으로 설정
                 }
             }
-            .padding(.bottom, 10)
+            .padding(.bottom, 20)
         }
     }
     
@@ -206,7 +248,7 @@ struct CalendarView: View {
         let firstWeekday: Int = firstWeekdayOfMonth(in: month) - 1
         
         return VStack {
-            LazyVGrid(columns: Array(repeating: GridItem(), count: 7), spacing: 20) { // 셀 간격 조정
+            LazyVGrid(columns: Array(repeating: GridItem(), count: 7), spacing: 35) { // 셀 간격 조정
                 ForEach(0 ..< daysInMonth + firstWeekday, id: \.self) { index in
                     if index < firstWeekday {
                         RoundedRectangle(cornerRadius: 5)
@@ -215,11 +257,22 @@ struct CalendarView: View {
                         let date = getDate(for: index - firstWeekday)
                         let day = index - firstWeekday + 1
                         
-                        CellView(day: day, cellDate: date, isSelected: date == selectedDate, isToday: date.isSameDate(date: Date()), publicHolidays: publicHolidays)
+//                        let hasDiary = viewModel.diaryTitle.isEmpty == false
+                        let hasDiary = viewModel.hasDiary
+                        let hasMemo = viewModel.hasMemo
+                        
+                        CellView(day: day, cellDate: date, isSelected: date == selectedDate, isToday: date.isSameDate(date: Date()), publicHolidays: publicHolidays, hasDiary: viewModel.hasDiary, hasMemo: viewModel.hasMemo)
                             .onTapGesture {
-                                selectedDate = date // 새로운 날짜 선택
-                                isPopupVisible = true // 팝업창 열기
+                                selectedDate = date
+                                fetchDiaryAndMemo(for: CalendarView.dateFormatter.string(from: date))
                             }
+                        
+                        
+//                        CellView(day: day, cellDate: date, isSelected: date == selectedDate, isToday: date.isSameDate(date: Date()), publicHolidays: publicHolidays, hasDiary: hasDiary, hasMemo: hasMemo)
+//                            .onTapGesture {
+//                                selectedDate = date // 새로운 날짜 선택
+//                                isPopupVisible = true // 팝업창 열기
+//                            }
                     }
                 }
             }
@@ -234,6 +287,9 @@ private struct CellView: View {
     var isSelected: Bool
     var isToday: Bool
     var publicHolidays: Set<Date>
+    var hasDiary: Bool
+    var hasMemo: Bool
+    
     
     var body: some View {
         ZStack {
@@ -257,6 +313,13 @@ private struct CellView: View {
             Text(String(day))
                 .font(.system(size: 20))
                 .foregroundColor(textColor)
+            
+            if hasDiary || hasMemo {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+                    .font(.system(size: 12))
+                    .offset(x: 15, y: 15)
+            }
         }
         .frame(width: 40, height: 40)
         //        .scaledToFit()
@@ -324,10 +387,19 @@ extension CalendarView {
     static let monthOnlyFormatter: DateFormatter = {
         let formatter = DateFormatter()
         //        formatter.dateFormat = "M월"
-        formatter.dateFormat = "yy년 M월"
+        formatter.dateFormat = "yyyy.MM"
         formatter.locale = Locale(identifier: "ko_KR")
         return formatter
     }()
+    
+    
+    static let popupFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM.dd(E)" // 요일 이름을 짧게 표시
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter
+    }()
+    
     
     static let weekdaySymbols: [String] = ["일", "월", "화", "수", "목", "금", "토"]
 }
