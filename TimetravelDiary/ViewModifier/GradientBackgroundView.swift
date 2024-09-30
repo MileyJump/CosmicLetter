@@ -10,6 +10,8 @@ import SwiftUI
 struct GradientBackgroundView: ViewModifier {
     
     var startColor: Color
+    var mediumColor: Color
+    var optionColor: Color?
     var endColor: Color
     var starCount: Int
     let starSizeRange: ClosedRange<CGFloat> = 1...2
@@ -17,7 +19,10 @@ struct GradientBackgroundView: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             LinearGradient(
-                gradient: Gradient(colors: [.black, startColor, Diary.color.timeTravelNavyColor, endColor]), startPoint: .top, endPoint: .bottom )
+                gradient: Gradient(colors: optionColor != nil ? [.black, startColor, mediumColor, optionColor!, endColor] : [.black, startColor, mediumColor, endColor]),
+                                startPoint: .top,
+                                endPoint: .bottom)
+//                gradient: Gradient(colors: [.black, startColor, mediumColor, endColor]), startPoint: .top, endPoint: .bottom )
                    .ignoresSafeArea() // 안전 영역 무시하여 전체 화면에 적용
             
             ForEach(0..<starCount, id: \.self) { _ in
@@ -36,11 +41,8 @@ struct GradientBackgroundView: ViewModifier {
 
 
 extension View {
-    
-    func gradientBackground(startColor: Color, endColor: Color, starCount: Int) -> some View {
-        self.modifier(GradientBackgroundView(startColor: startColor, endColor: endColor, starCount: starCount))
+    func gradientBackground(startColor: Color, mediumColor: Color,  optionColor: Color? = nil, endColor: Color, starCount: Int) -> some View {
+        self.modifier(GradientBackgroundView(startColor: startColor, mediumColor: mediumColor, optionColor: optionColor, endColor: endColor, starCount: starCount))
     }
-    
 }
-
 

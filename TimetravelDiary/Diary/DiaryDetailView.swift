@@ -48,7 +48,7 @@ struct DiaryDetailView: View {
                         .padding(.horizontal)
                         .foregroundColor(.white)
                 }
-//                .navigationBarTitleDisplayMode(.inline)
+
                 .background(Color.clear) // 기본 배경색을 투명으로 설정
             }
             .onAppear {
@@ -63,10 +63,10 @@ struct DiaryDetailView: View {
                 UINavigationBar.appearance().standardAppearance = appearance
                 UINavigationBar.appearance().scrollEdgeAppearance = appearance
             }
-            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
+
+            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
+            
         }
-        //            .padding(.top, 10) // VStack의 상단 패딩 제거
-        //            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
     }
 }
 

@@ -22,13 +22,16 @@ extension Diary {
         static let timeTravelNavyColor = Color(UIColor(hexCode: "17153B"))
         
         static let timeTravelDarkNavyColor = Color(UIColor(hexCode: "0E0C23"))
-        
+        static let timeTravelMediumCNavyClor = Color(UIColor(hexCode: "03346E"))
         
         
 //        static let timeTravelPurpleColor = Color(UIColor(hexCode: "624E88"))
 //        static let timeTravelPurpleColor = Color(UIColor(hexCode: "4F1787"))
         static let timeTravelPurpleColor = Color(UIColor(hexCode: "2E073F"))
+        static let timeTravelBlueColor = Color(UIColor(hexCode: "3795BD"))
+        
         static let timeTravelgray = Color(UIColor(hexCode: "E6DAD1"))
+        static let timeTravelpeachColor = Color(UIColor(hexCode: "FF8A8A"))
         
     }
 }

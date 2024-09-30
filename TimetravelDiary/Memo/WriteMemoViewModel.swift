@@ -22,9 +22,7 @@ class WriteMemoViewModel: ObservableObject {
         }
 
         // 메모 객체 생성
-        let newMemo = TimeDiaryMemo(date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none),
-                                     favorite: false,
-                                     memo: contentText)
+        let newMemo = TimeDiaryMemo(date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none), favorite: false, memo: contentText)
 
         // Realm에 저장
         do {

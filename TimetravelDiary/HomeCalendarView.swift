@@ -24,7 +24,7 @@ struct HomeCalendarView: View {
                         .padding(.bottom, 100)
                         .padding(.leading, 260)
                 }
-                .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
+            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
         }
     }
 }

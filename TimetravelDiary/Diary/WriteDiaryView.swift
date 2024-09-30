@@ -13,8 +13,9 @@ struct WriteDiaryView: View {
     
 //    let realm = try! Realm()
     
-    @ObservedResults(TimeDiary.self) var diaries
+//    @ObservedResults(TimeDiary.self) var diaries
     @Environment(\.dismiss) private var dismiss
+    var seletedDate: Date?
     
     @State var titleText = ""
     @State var contentText: String = ""
@@ -108,14 +109,18 @@ struct WriteDiaryView: View {
                         Spacer()
                     }
                 }
-                .navigationTitle("2024.09.22")
+                .navigationTitle(seletedDate.map { CalendarView.dateFormatter.string(from: $0)} ?? "Date"
+                )
+                .navigationBarTitleDisplayMode(.inline)
+                .foregroundColor(.white)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("저장") {
-                            print("Help tapped!")
+                            print("저장 tapped!")
                             saveDiary()
                             dismiss()
                         }
+                        .foregroundColor(.white)
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)
@@ -129,7 +134,7 @@ struct WriteDiaryView: View {
                     .presentationDetents([.fraction(0.5)])
                     .presentationDragIndicator(.visible)
         })
-            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
+            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
         }
         .onAppear {
             print(Realm.Configuration.defaultConfiguration.fileURL)

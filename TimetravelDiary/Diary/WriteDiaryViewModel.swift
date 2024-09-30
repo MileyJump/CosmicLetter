@@ -22,6 +22,8 @@ class WriteDiaryViewModel: ObservableObject {
     @Published var showRecordingModal = false
     @Published var isRecording = false
     
+    
+    
     private let audioRecorderManager = AudioRecorderManager()
     
     // 저장을 위한 메서드
