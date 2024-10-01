@@ -20,6 +20,8 @@ struct CalendarView: View {
     @State var navigateToDiary: Bool = false // 일기 화면으로 전환
     @State var navigateToMemo: Bool = false // 메모 화면으로 전환
     
+    
+    
     @State var savedDates: Set<Date> = Set()
     
     @StateObject var viewModel = PopupViewModel()
@@ -89,7 +91,6 @@ struct CalendarView: View {
                             // 샘플 메모 내용
                             ScrollView {
                                 VStack(alignment: .leading, spacing: 8) {
-                                    //                                    if viewModel.hasDiary {
                                     
                                     if !viewModel.diaries.isEmpty {
                                         ForEach(viewModel.diaries, id: \.self) { diary in
@@ -100,8 +101,10 @@ struct CalendarView: View {
                                                         .frame(width: 8, height: 8)
                                                     Text("일기")
                                                         .font(.system(size: 15))
+                                                        .padding(.leading, 5)
+                                                    
+                                                    Spacer()
                                                 }
-                                                //                                            .frame(maxWidth: .infinity, alignment: .leading)
                                                 
                                                 Text(diary)
                                                     .font(.system(size: 15))
@@ -120,6 +123,9 @@ struct CalendarView: View {
                                                         .frame(width: 8, height: 8)
                                                     Text("메모")
                                                         .font(.system(size: 15))
+                                                        .padding(.leading, 5)
+                                                    
+                                                    Spacer()
                                                 }
                                                 Text(memo)
                                                     .font(.system(size: 18))
@@ -133,6 +139,7 @@ struct CalendarView: View {
                         
                                 .padding(.horizontal, 16)
                             }
+                            
                             
                             // + 버튼
                             Button(action: {

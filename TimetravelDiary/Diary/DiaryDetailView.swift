@@ -16,6 +16,8 @@ struct DiaryDetailView: View {
     
     @State var currentPage: Int = 0
     
+    
+    
     var body: some View {
         ZStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 20) {
