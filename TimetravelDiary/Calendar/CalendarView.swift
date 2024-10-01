@@ -11,7 +11,8 @@ import Combine
 struct CalendarView: View {
     @State var month: Date // 현재 표시 되는 달
     @State var offset: CGSize = CGSize() // 제스처 인식을 위한 변수, 뷰 이동 상태를 저장
-    @State var selectedDate: Date? = Date() // 선택한 날짜를 저장하는 변수
+//    @State var selectedDate: Date? = Date() // 선택한 날짜를 저장하는 변수
+    @Binding var selectedDate: Date?
     @State var publicHolidays: Set<Date> = Set() // 공휴일을 담을 변수
     @State var isPopupVisible: Bool = false
     @State var isShowingAlert: Bool = false // Alert 표시 여부

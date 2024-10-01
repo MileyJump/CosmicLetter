@@ -13,12 +13,14 @@ struct FloatingMenu: View {
     @State var showMemoMenu = false
 //    @State var showMenuItem3 = false
     
+    @Binding var selectedDate: Date?
+    
     var body: some View {
         VStack {
             Spacer()
-            if showDiaryMenu {
+            if showDiaryMenu, let selectedDate {
                 NavigationLink(destination: {
-                    WriteDiaryView(seletedDate: CalendarView.dateFormatter.string(from: Date()))
+                    WriteDiaryView(seletedDate: CalendarView.dateFormatter.string(from: selectedDate))
                 }, label: {
                     MenuItem(icon:"book.fill")
                 })
@@ -82,12 +84,12 @@ struct FloatingMenu: View {
         }
     }
 }
-
-struct FloatingMenu_Previews: PreviewProvider {
-    static var previews: some View {
-        FloatingMenu()
-    }
-}
+//
+//struct FloatingMenu_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FloatingMenu()
+//    }
+//}
 
 struct MenuItem: View {
     
