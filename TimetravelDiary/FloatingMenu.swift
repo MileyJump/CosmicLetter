@@ -25,9 +25,9 @@ struct FloatingMenu: View {
                     MenuItem(icon:"book.fill")
                 })
             }
-            if showMemoMenu {
+            if showMemoMenu, let selectedDate {
                 NavigationLink(destination: {
-                    WriteMemoView()
+                    WriteMemoView(selectedDate: CalendarView.dateFormatter.string(from: selectedDate))
                 }, label: {
                     MenuItem(icon:"pencil.line")
                 })

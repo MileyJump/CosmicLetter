@@ -9,7 +9,9 @@ import SwiftUI
 
 struct WriteMemoView: View {
     @StateObject private var viewModel = WriteMemoViewModel() // ViewModel 생성
-
+    var selectedDate: String
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
         ZStack(alignment: .topLeading) {
             if viewModel.contentText.isEmpty {
@@ -22,23 +24,36 @@ struct WriteMemoView: View {
             TextEditor(text: $viewModel.contentText) // ViewModel의 contentText를 바인딩
                 .padding()
                 .background(Color.clear)
-                .foregroundColor(.black)
+                .foregroundColor(.white)
                 .scrollContentBackground(.hidden)
         }
         .background(Color.clear)
         .padding()
-        .navigationTitle("2024.09.22")
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(selectedDate)
+                    .foregroundColor(.white)
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("저장") {
-                    viewModel.saveDiary() // ViewModel의 saveDiary 호출
+                    viewModel.saveDiary(selectedDate: selectedDate) // ViewModel의 saveDiary 호출
+                    dismiss()
                 }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .gradientBackground(
+            startColor: Diary.color.timeTravelDarkNavyColor,
+            mediumColor: Diary.color.timeTravelDarkNavyColor,
+            optionColor: Diary.color.timeTravelNavyColor,
+            endColor: Diary.color.timeTravelBlueColor,
+            starCount: 100
+        )
     }
 }
 
-#Preview {
-    WriteMemoView()
-}
+//#Preview {
+//    WriteMemoView()
+//}

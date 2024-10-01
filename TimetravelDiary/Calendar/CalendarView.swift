@@ -64,7 +64,9 @@ struct CalendarView: View {
             }
         }
         .navigationDestination(isPresented: $navigateToMemo) {
-            WriteMemoView()
+            if let selectedDate = selectedDate {
+                WriteMemoView(selectedDate: CalendarView.dateFormatter.string(from: selectedDate))
+            }
         }
     }
     
@@ -154,7 +156,7 @@ struct CalendarView: View {
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
                         .shadow(radius: 10)
-                        .frame(width: UIScreen.main.bounds.width * 0.7, height: 400)
+                        .frame(width: UIScreen.main.bounds.width * 0.7, height: 300)
                         .onAppear {
                             
                             viewModel.fetchDiaryAndMemo(for: dateString)

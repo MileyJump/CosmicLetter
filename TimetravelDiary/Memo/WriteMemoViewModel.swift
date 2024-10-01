@@ -10,19 +10,22 @@ import RealmSwift
 
 class WriteMemoViewModel: ObservableObject {
     @Published var contentText: String = ""
+    
 
     private var realm: Realm {
         return try! Realm() // Realm 인스턴스 가져오기
     }
 
-    func saveDiary() {
+    func saveDiary(selectedDate: String) {
         guard !contentText.isEmpty else {
             // 제목이나 내용이 비어 있을 경우의 처리
             return
         }
 
         // 메모 객체 생성
-        let newMemo = TimeDiaryMemo(date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none), favorite: false, memo: contentText)
+//        let newMemo = TimeDiaryMemo(date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none), favorite: false, memo: contentText)
+        
+        let newMemo = TimeDiaryMemo(date: selectedDate, favorite: false, memo: contentText)
 
         // Realm에 저장
         do {
