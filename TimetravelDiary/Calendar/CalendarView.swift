@@ -7,17 +7,21 @@
 
 import SwiftUI
 import Combine
+import RealmSwift
+
 
 struct CalendarView: View {
     @State var month: Date // 현재 표시 되는 달
     @State var offset: CGSize = CGSize() // 제스처 인식을 위한 변수, 뷰 이동 상태를 저장
-//    @State var selectedDate: Date? = Date() // 선택한 날짜를 저장하는 변수
     @Binding var selectedDate: Date?
     @State var publicHolidays: Set<Date> = Set() // 공휴일을 담을 변수
-    @State var isPopupVisible: Bool = false
+//    @State var isPopupVisible: Bool = false
+    @Binding var isPopupVisible: Bool
     @State var isShowingAlert: Bool = false // Alert 표시 여부
     @State var navigateToDiary: Bool = false // 일기 화면으로 전환
     @State var navigateToMemo: Bool = false // 메모 화면으로 전환
+    
+    @State var savedDates: Set<Date> = Set()
     
     @StateObject var viewModel = PopupViewModel()
     
@@ -36,6 +40,7 @@ struct CalendarView: View {
         )
         .task {
             fetchHolidays()
+            fetchSavedDates()
             
         }
         .gesture( // 스와이프 인식
@@ -62,14 +67,16 @@ struct CalendarView: View {
         }
     }
     
+    
+    
     private var popupView: some View {
         ZStack {
             // 팝업창 바깥을 탭했을 때 팝업 닫기
-            Color.black.opacity(isPopupVisible ? 0.4 : 0) // 어두운 배경
-                .edgesIgnoringSafeArea(.all) // 전체 화면을 덮음
-                .onTapGesture {
-                    isPopupVisible = false // 팝업창 닫기
-                }
+//            Color.black.opacity(isPopupVisible ? 0.4 : 0) // 어두운 배경
+//                .edgesIgnoringSafeArea(.all) // 전체 화면을 덮음
+//                .onTapGesture {
+//                    isPopupVisible = false // 팝업창 닫기
+//                }
             
             if isPopupVisible {
                 VStack {
@@ -78,7 +85,8 @@ struct CalendarView: View {
                         
                         VStack(spacing: 10) {
                             // 날짜
-                            Text(selectedDate, formatter: Self.popupFormatter)
+//                            Text(selectedDate, formatter: Self.popupFormatter)
+                            Text(Self.popupFormatter(selectedDate))
                                 .font(.system(size: 20))
                                 .fontWeight(.regular)
                                 .padding(.top, 10)
@@ -179,6 +187,19 @@ struct CalendarView: View {
         }
     }
     
+    private func fetchSavedDates() {
+        // Realm에서 저장된 TimeDiary와 TimeDiaryMemo 객체들의 날짜를 불러와 savedDates에 저장
+        let realm = try! Realm()
+        let diaries = realm.objects(TimeDiary.self)
+        let memos = realm.objects(TimeDiaryMemo.self)
+        
+        // 날짜를 Set에 저장하여 중복 방지
+        savedDates = Set(diaries.compactMap { CalendarView.dateFormatter.date(from: $0.date) })
+        savedDates.formUnion(memos.compactMap { CalendarView.dateFormatter.date(from: $0.date) })
+        
+        print("저장된 날짜 \(savedDates)")
+    }
+    
     private func fetchDiaryAndMemo(for dateString: String) {
         viewModel.fetchDiaryAndMemo(for: dateString)
         // 만약 일기와 메모가 없으면 팝업을 숨김
@@ -188,6 +209,8 @@ struct CalendarView: View {
             isPopupVisible = true
         }
     }
+    
+  
 
     
     private func fetchHolidays() {
@@ -259,10 +282,12 @@ struct CalendarView: View {
                         let day = index - firstWeekday + 1
                         
 //                        let hasDiary = viewModel.diaryTitle.isEmpty == false
-                        let hasDiary = viewModel.hasDiary
-                        let hasMemo = viewModel.hasMemo
+//                        let hasDiary = viewModel.hasDiary
+//                        let hasMemo = viewModel.hasMemo
+                        let hasSavedData = savedDates.contains(date)
                         
-                        CellView(day: day, cellDate: date, isSelected: date == selectedDate, isToday: date.isSameDate(date: Date()), publicHolidays: publicHolidays, hasDiary: viewModel.hasDiary, hasMemo: viewModel.hasMemo)
+                        CellView(day: day, cellDate: date, isSelected: date == selectedDate, isToday: date.isSameDate(date: Date()), publicHolidays: publicHolidays, hasSavedData: hasSavedData)
+//                    hasDiary: viewModel.hasDiary, hasMemo: viewModel.hasMemo)
                             .onTapGesture {
                                 selectedDate = date
                                 fetchDiaryAndMemo(for: CalendarView.dateFormatter.string(from: date))
@@ -288,8 +313,10 @@ private struct CellView: View {
     var isSelected: Bool
     var isToday: Bool
     var publicHolidays: Set<Date>
-    var hasDiary: Bool
-    var hasMemo: Bool
+//    var hasDiary: Bool
+//    var hasMemo: Bool
+    
+    var hasSavedData: Bool
     
     
     var body: some View {
@@ -315,11 +342,15 @@ private struct CellView: View {
                 .font(.system(size: 20))
                 .foregroundColor(textColor)
             
-            if hasDiary || hasMemo {
+                
+            
+//            if hasDiary || hasMemo {
+            if hasSavedData {
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)
                     .font(.system(size: 12))
-                    .offset(x: 15, y: 15)
+                    .offset(x: 0, y: 15)
+                    .padding(.top, 25)
             }
         }
         .frame(width: 40, height: 40)
@@ -393,13 +424,22 @@ extension CalendarView {
         return formatter
     }()
     
-    
-    static let popupFormatter: DateFormatter = {
+    static func popupFormatter(_ target: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM.dd(E)" // 요일 이름을 짧게 표시
         formatter.locale = Locale(identifier: "ko_KR")
-        return formatter
-    }()
+        formatter.dateFormat = "MM.dd(E)"
+        
+        let converted = formatter.string(from: target)
+        return converted
+    }
+//    static let popupFormatter: DateFormatter = {
+//        let formatter = DateFormatter()
+//        
+//        formatter.locale = Locale(identifier: "ko_KR")
+//        formatter.dateFormat = "MM.dd(E)" // 요일 이름을 짧게 표시
+//        
+//        return formatter
+//    }()
     
     
     static let weekdaySymbols: [String] = ["일", "월", "화", "수", "목", "금", "토"]
