@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 import RealmSwift
 
-
 struct CalendarView: View {
     @State var month: Date // 현재 표시 되는 달
     @State var offset: CGSize = CGSize() // 제스처 인식을 위한 변수, 뷰 이동 상태를 저장
@@ -71,13 +70,6 @@ struct CalendarView: View {
     
     private var popupView: some View {
         ZStack {
-            // 팝업창 바깥을 탭했을 때 팝업 닫기
-//            Color.black.opacity(isPopupVisible ? 0.4 : 0) // 어두운 배경
-//                .edgesIgnoringSafeArea(.all) // 전체 화면을 덮음
-//                .onTapGesture {
-//                    isPopupVisible = false // 팝업창 닫기
-//                }
-            
             if isPopupVisible {
                 VStack {
                     if let selectedDate = selectedDate {
@@ -95,59 +87,52 @@ struct CalendarView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading) // 왼쪽 정렬 추가
                             
                             // 샘플 메모 내용
-                            VStack(alignment: .leading, spacing: 8) {
-//                                VStack {
-                                    HStack {
-                                        Circle()
-                                            .fill(Color.purple)
-                                            .frame(width: 8, height: 8)
-                                        Text("일기")
-                                            .font(.system(size: 15))
+                            ScrollView {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    //                                    if viewModel.hasDiary {
+                                    
+                                    if !viewModel.diaries.isEmpty {
+                                        ForEach(viewModel.diaries, id: \.self) { diary in
+                                            VStack(alignment: .leading) {
+                                                HStack {
+                                                    Circle()
+                                                        .fill(Color.purple)
+                                                        .frame(width: 8, height: 8)
+                                                    Text("일기")
+                                                        .font(.system(size: 15))
+                                                }
+                                                //                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                                
+                                                Text(diary)
+                                                    .font(.system(size: 15))
+                                                    .padding(.leading, 14)
+                                            }
+                                            .padding(.bottom, 10)
+                                        }
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-//                                    Spacer()
-                                Text(viewModel.diaryTitle)
-                                        .font(.system(size: 18))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .padding(.leading, 14)
-//                                }
-                                .padding(.bottom, 10)
-                                
-//                                VStack {
-                                    HStack {
-                                        Circle()
-                                            .fill(Color.purple)
-                                            .frame(width: 8, height: 8)
-                                        Text("메모")
-                                            .font(.system(size: 15))
+                                    
+                                    if !viewModel.memos.isEmpty {
+                                        ForEach(viewModel.memos, id: \.self) { memo in
+                                            VStack(alignment: .leading) {
+                                                HStack {
+                                                    Circle()
+                                                        .fill(Color.purple)
+                                                        .frame(width: 8, height: 8)
+                                                    Text("메모")
+                                                        .font(.system(size: 15))
+                                                }
+                                                Text(memo)
+                                                    .font(.system(size: 18))
+                                                    .padding(.leading, 14)
+                                            }
+                                            .padding(.bottom, 10)
+                                        }
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-//                                    Spacer()
-                                    Text(viewModel.memoText)
-                                        .font(.system(size: 18))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .padding(.leading, 14)
-//                                }
-                                .padding(.bottom, 10)
-                                
-//                                VStack {
-                                    HStack {
-                                        Circle()
-                                            .fill(Color.red)
-                                            .frame(width: 8, height: 8)
-                                        Text("일기")
-                                            .font(.system(size: 15))
-                                    }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-//                                    Spacer()
-                                Text(viewModel.memoText)
-                                        .font(.system(size: 18))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .padding(.leading, 14)
-//                                }
-                                .padding(.bottom, 30)
+                                }
+                        
+                        
+                                .padding(.horizontal, 16)
                             }
-                            .padding(.horizontal, 16)
                             
                             // + 버튼
                             Button(action: {
@@ -162,8 +147,9 @@ struct CalendarView: View {
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
                         .shadow(radius: 10)
-                        .frame(width: UIScreen.main.bounds.width * 0.7, height: 600)
+                        .frame(width: UIScreen.main.bounds.width * 0.7, height: 400)
                         .onAppear {
+                            
                             viewModel.fetchDiaryAndMemo(for: dateString)
                         }
                         .onTapGesture {
