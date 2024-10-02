@@ -12,6 +12,8 @@ import ShuffleDeck
 
 struct DiaryDetailView: View {
     let diary: TimeDiary // 전달받은 다이어리 데이터
+    //    let diaryId: String?
+    
     @StateObject private var viewModel = DiaryDetailViewModel()
     
     @State var currentPage: Int = 0
@@ -21,7 +23,7 @@ struct DiaryDetailView: View {
     var body: some View {
         ZStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 20) {
-                // 사진 슬라이드 뷰 (ShuffleDeck)
+                //                if let diary =  diary {
                 if !diary.photos.isEmpty {
                     ShuffleDeck(Array(diary.photos.enumerated()), initialIndex: 0) { index, photo in
                         if let image = viewModel.loadImageFromDocument(filename: photo.photoName) {
@@ -50,8 +52,12 @@ struct DiaryDetailView: View {
                         .padding(.horizontal)
                         .foregroundColor(.white)
                 }
-
+                
                 .background(Color.clear) // 기본 배경색을 투명으로 설정
+                //                } else {
+                //                    Text("일기 데이터를 불러오는 중...")
+                //                        .foregroundColor(.white)
+                //                }
             }
             .onAppear {
                 print("되고 있냐")
@@ -65,10 +71,18 @@ struct DiaryDetailView: View {
                 UINavigationBar.appearance().standardAppearance = appearance
                 UINavigationBar.appearance().scrollEdgeAppearance = appearance
             }
-
+            
             .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
             
         }
     }
 }
+
+//    private func loadDiaryFromRealm(diaryId: String) {
+//        let realm = try! Realm()
+//        if let fetchedDiary = realm.object(ofType: TimeDiary.self, forPrimaryKey: diaryId) {
+//            self.load
+//        }
+//    }
+//}
 

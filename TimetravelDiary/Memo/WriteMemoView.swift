@@ -53,7 +53,3 @@ struct WriteMemoView: View {
         )
     }
 }
-
-//#Preview {
-//    WriteMemoView()
-//}

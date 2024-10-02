@@ -20,6 +20,8 @@ struct CalendarView: View {
     @State var navigateToDiary: Bool = false // 일기 화면으로 전환
     @State var navigateToMemo: Bool = false // 메모 화면으로 전환
     
+    @State var selectedDiary: TimeDiary?
+    @State var isShowingDiaryDetail: Bool = false
     
     
     @State var savedDates: Set<Date> = Set()
@@ -58,6 +60,20 @@ struct CalendarView: View {
                     self.offset = CGSize()
                 }
         )
+//        NavigationLink(
+//            destination: DiaryDetailView(diary: selectedDiary),
+//            isActive: $isShowingDiaryDetail,
+//            label: {
+//                EmptyView()
+//            }
+//        )
+        
+        .navigationDestination(isPresented: $isShowingDiaryDetail) {
+            if let diary = selectedDiary {
+                let _ = print("---\(diary)")
+                DiaryDetailView(diary: diary)
+            }
+        }
         .navigationDestination(isPresented: $navigateToDiary) {
             if let selectedDate = selectedDate {
                 WriteDiaryView(seletedDate: CalendarView.dateFormatter.string(from: selectedDate))
@@ -95,24 +111,42 @@ struct CalendarView: View {
                                 VStack(alignment: .leading, spacing: 8) {
                                     
                                     if !viewModel.diaries.isEmpty {
-                                        ForEach(viewModel.diaries, id: \.self) { diary in
-                                            VStack(alignment: .leading) {
-                                                HStack {
-                                                    Circle()
-                                                        .fill(Color.purple)
-                                                        .frame(width: 8, height: 8)
-                                                    Text("일기")
-                                                        .font(.system(size: 15))
-                                                        .padding(.leading, 5)
-                                                    
-                                                    Spacer()
-                                                }
+                                        ForEach(viewModel.diaries, id: \.self) { diaryTitle in
+                                            if let diary = fetchDiary(for: diaryTitle) {
                                                 
-                                                Text(diary)
-                                                    .font(.system(size: 15))
-                                                    .padding(.leading, 14)
+//                                                NavigationLink(destination: DiaryDetailView(diary: diary)) {
+                                                    VStack(alignment: .leading) {
+                                                        HStack {
+                                                            Circle()
+                                                                .fill(Color.purple)
+                                                                .frame(width: 8, height: 8)
+                                                            Text("일기")
+                                                                .font(.system(size: 15))
+                                                                .padding(.leading, 5)
+                                                            
+                                                            Spacer()
+                                                        }
+                                                        
+                                                        Text(diaryTitle)
+                                                            .font(.system(size: 15))
+                                                            .padding(.leading, 14)
+                                                    
+                                                            .onTapGesture {
+                                                                print("==")
+                                                                DispatchQueue.main.async {
+                                                                    if let diary = fetchDiary(for: diaryTitle) {
+                                                                        selectedDiary = diary
+                                                                        print("Selected diary: \(diary)")
+                                                                        isPopupVisible = false
+                                                                        isShowingDiaryDetail = true
+                                                                        print("isShowingDiaryDetail: \(isShowingDiaryDetail)")
+                                                                    }
+                                                                }
+                                                            }
+                                                    }
+                                                    .padding(.bottom, 10)
+//                                                }
                                             }
-                                            .padding(.bottom, 10)
                                         }
                                     }
                                     
@@ -132,6 +166,8 @@ struct CalendarView: View {
                                                 Text(memo)
                                                     .font(.system(size: 18))
                                                     .padding(.leading, 14)
+                                                
+                                                
                                             }
                                             .padding(.bottom, 10)
                                         }
@@ -180,6 +216,11 @@ struct CalendarView: View {
                 .padding()
             }
         }
+    }
+    
+    private func fetchDiary(for tittle: String) -> TimeDiary? {
+        let realm = try! Realm()
+        return realm.objects(TimeDiary.self).filter("title == %@", tittle).first
     }
     
     private func fetchSavedDates() {
@@ -276,24 +317,15 @@ struct CalendarView: View {
                         let date = getDate(for: index - firstWeekday)
                         let day = index - firstWeekday + 1
                         
-//                        let hasDiary = viewModel.diaryTitle.isEmpty == false
-//                        let hasDiary = viewModel.hasDiary
-//                        let hasMemo = viewModel.hasMemo
                         let hasSavedData = savedDates.contains(date)
                         
                         CellView(day: day, cellDate: date, isSelected: date == selectedDate, isToday: date.isSameDate(date: Date()), publicHolidays: publicHolidays, hasSavedData: hasSavedData)
-//                    hasDiary: viewModel.hasDiary, hasMemo: viewModel.hasMemo)
+
                             .onTapGesture {
                                 selectedDate = date
                                 fetchDiaryAndMemo(for: CalendarView.dateFormatter.string(from: date))
                             }
                         
-                        
-//                        CellView(day: day, cellDate: date, isSelected: date == selectedDate, isToday: date.isSameDate(date: Date()), publicHolidays: publicHolidays, hasDiary: hasDiary, hasMemo: hasMemo)
-//                            .onTapGesture {
-//                                selectedDate = date // 새로운 날짜 선택
-//                                isPopupVisible = true // 팝업창 열기
-//                            }
                     }
                 }
             }
