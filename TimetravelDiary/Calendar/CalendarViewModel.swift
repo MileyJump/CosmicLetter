@@ -6,3 +6,14 @@
 //
 
 import Foundation
+import RealmSwift
+
+class CalendarViewModel: ObservableObject {
+    
+    
+     func fetchMemo(for memo: String) -> TimeDiaryMemo? {
+        let realm = try! Realm()
+        return realm.objects(TimeDiaryMemo.self).filter("memo == %@", memo).first
+    }
+    
+}

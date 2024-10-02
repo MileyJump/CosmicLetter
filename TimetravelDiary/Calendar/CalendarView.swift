@@ -21,12 +21,16 @@ struct CalendarView: View {
     @State var navigateToMemo: Bool = false // 메모 화면으로 전환
     
     @State var selectedDiary: TimeDiary?
+    @State var selectedMemo: TimeDiaryMemo?
+    
     @State var isShowingDiaryDetail: Bool = false
+    @State var isShowingMemoDetail: Bool = false
     
     
     @State var savedDates: Set<Date> = Set()
     
     @StateObject var viewModel = PopupViewModel()
+    @StateObject var calendarViewModel = CalendarViewModel()
     
     var holidayService = NetworkManager()
     
@@ -60,13 +64,7 @@ struct CalendarView: View {
                     self.offset = CGSize()
                 }
         )
-//        NavigationLink(
-//            destination: DiaryDetailView(diary: selectedDiary),
-//            isActive: $isShowingDiaryDetail,
-//            label: {
-//                EmptyView()
-//            }
-//        )
+
         
         .navigationDestination(isPresented: $isShowingDiaryDetail) {
             if let diary = selectedDiary {
@@ -74,6 +72,14 @@ struct CalendarView: View {
                 DiaryDetailView(diary: diary)
             }
         }
+        
+        .navigationDestination(isPresented: $isShowingMemoDetail) {
+            if let memo = selectedMemo {
+                let _ = print("---\(memo)")
+                MemoDetailView(memo: memo)
+            }
+        }
+        
         .navigationDestination(isPresented: $navigateToDiary) {
             if let selectedDate = selectedDate {
                 WriteDiaryView(seletedDate: CalendarView.dateFormatter.string(from: selectedDate))
@@ -86,8 +92,6 @@ struct CalendarView: View {
         }
     }
     
-    
-    
     private var popupView: some View {
         ZStack {
             if isPopupVisible {
@@ -96,110 +100,22 @@ struct CalendarView: View {
                         let dateString = CalendarView.dateFormatter.string(from: selectedDate)
                         
                         VStack(spacing: 10) {
-                            // 날짜
-//                            Text(selectedDate, formatter: Self.popupFormatter)
-                            Text(Self.popupFormatter(selectedDate))
-                                .font(.system(size: 20))
-                                .fontWeight(.regular)
-                                .padding(.top, 10)
-                                .padding(.leading, 10)
-                                .padding(.bottom, 20)
-                                .frame(maxWidth: .infinity, alignment: .leading) // 왼쪽 정렬 추가
+                            popupHeader(for: selectedDate)
                             
-                            // 샘플 메모 내용
                             ScrollView {
-                                VStack(alignment: .leading, spacing: 8) {
-                                    
-                                    if !viewModel.diaries.isEmpty {
-                                        ForEach(viewModel.diaries, id: \.self) { diaryTitle in
-                                            if let diary = fetchDiary(for: diaryTitle) {
-                                                
-//                                                NavigationLink(destination: DiaryDetailView(diary: diary)) {
-                                                    VStack(alignment: .leading) {
-                                                        HStack {
-                                                            Circle()
-                                                                .fill(Color.purple)
-                                                                .frame(width: 8, height: 8)
-                                                            Text("일기")
-                                                                .font(.system(size: 15))
-                                                                .padding(.leading, 5)
-                                                            
-                                                            Spacer()
-                                                        }
-                                                        
-                                                        Text(diaryTitle)
-                                                            .font(.system(size: 15))
-                                                            .padding(.leading, 14)
-                                                    
-                                                            .onTapGesture {
-                                                                print("==")
-                                                                DispatchQueue.main.async {
-                                                                    if let diary = fetchDiary(for: diaryTitle) {
-                                                                        selectedDiary = diary
-                                                                        print("Selected diary: \(diary)")
-                                                                        isPopupVisible = false
-                                                                        isShowingDiaryDetail = true
-                                                                        print("isShowingDiaryDetail: \(isShowingDiaryDetail)")
-                                                                    }
-                                                                }
-                                                            }
-                                                    }
-                                                    .padding(.bottom, 10)
-//                                                }
-                                            }
-                                        }
-                                    }
-                                    
-                                    if !viewModel.memos.isEmpty {
-                                        ForEach(viewModel.memos, id: \.self) { memo in
-                                            VStack(alignment: .leading) {
-                                                HStack {
-                                                    Circle()
-                                                        .fill(Color.purple)
-                                                        .frame(width: 8, height: 8)
-                                                    Text("메모")
-                                                        .font(.system(size: 15))
-                                                        .padding(.leading, 5)
-                                                    
-                                                    Spacer()
-                                                }
-                                                Text(memo)
-                                                    .font(.system(size: 18))
-                                                    .padding(.leading, 14)
-                                                
-                                                
-                                            }
-                                            .padding(.bottom, 10)
-                                        }
-                                    }
-                                }
-                        
-                        
-                                .padding(.horizontal, 16)
+                                popupContent(for: dateString)
                             }
                             
-                            
-                            // + 버튼
-                            Button(action: {
-                                isShowingAlert = true
-                            }) {
-                                Image(systemName: "plus.circle")
-                                    .resizable()
-                                    .frame(width: 40, height: 40)
-                                    .padding(.bottom, 10)
-                            }
+                            popupFooter
                         }
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
                         .shadow(radius: 10)
                         .frame(width: UIScreen.main.bounds.width * 0.7, height: 300)
                         .onAppear {
-                            
                             viewModel.fetchDiaryAndMemo(for: dateString)
                         }
-                        .onTapGesture {
-                            // 팝업창 닫는 기능을 원하지 않는 경우 이 부분을 주석처리
-                        }
+                        .onTapGesture {}
                         .actionSheet(isPresented: $isShowingAlert) {
                             ActionSheet(title: Text(""), buttons: [
                                 .default(Text("일기")) {
@@ -217,11 +133,238 @@ struct CalendarView: View {
             }
         }
     }
+
+    private func popupHeader(for selectedDate: Date) -> some View {
+        Text(Self.popupFormatter(selectedDate))
+            .font(.system(size: 20))
+            .fontWeight(.regular)
+            .padding(.top, 10)
+            .padding(.leading, 10)
+            .padding(.bottom, 20)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func popupContent(for dateString: String) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if !viewModel.diaries.isEmpty {
+                ForEach(viewModel.diaries, id: \.self) { diaryTitle in
+                    if let diary = fetchDiary(for: diaryTitle) {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Circle()
+                                    .fill(Color.purple)
+                                    .frame(width: 8, height: 8)
+                                Text("일기")
+                                    .font(.system(size: 15))
+                                    .padding(.leading, 5)
+                                Spacer()
+                            }
+                            
+                            Text(diaryTitle)
+                                .font(.system(size: 15))
+                                .padding(.leading, 14)
+                                .onTapGesture {
+                                    DispatchQueue.main.async {
+                                        selectedDiary = diary
+                                        isPopupVisible = false
+                                        isShowingDiaryDetail = true
+                                    }
+                                }
+                        }
+                        .padding(.bottom, 10)
+                    }
+                }
+            }
+            
+            if !viewModel.memos.isEmpty {
+                ForEach(viewModel.memos, id: \.self) { memoContents in
+                    if let memo = calendarViewModel.fetchMemo(for: memoContents) {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Circle()
+                                    .fill(Color.purple)
+                                    .frame(width: 8, height: 8)
+                                Text("메모")
+                                    .font(.system(size: 15))
+                                    .padding(.leading, 5)
+                                Spacer()
+                            }
+                            
+                            Text(memoContents)
+                                .font(.system(size: 18))
+                                .padding(.leading, 14)
+                                .onTapGesture {
+                                    selectedMemo = memo
+                                    isPopupVisible = false
+                                    isShowingMemoDetail = true
+                                }
+                        }
+                        .padding(.bottom, 10)
+                    }
+                }
+            }
+        }
+        .padding(.horizontal, 16)
+    }
+
+    private var popupFooter: some View {
+        Button(action: {
+            isShowingAlert = true
+        }) {
+            Image(systemName: "plus.circle")
+                .resizable()
+                .frame(width: 40, height: 40)
+                .padding(.bottom, 10)
+        }
+    }
+    
+    
+//    private var popupView: some View {
+//        ZStack {
+//            if isPopupVisible {
+//                VStack {
+//                    if let selectedDate = selectedDate {
+//                        let dateString = CalendarView.dateFormatter.string(from: selectedDate)
+//                        
+//                        VStack(spacing: 10) {
+//                            // 날짜
+////                            Text(selectedDate, formatter: Self.popupFormatter)
+//                            Text(Self.popupFormatter(selectedDate))
+//                                .font(.system(size: 20))
+//                                .fontWeight(.regular)
+//                                .padding(.top, 10)
+//                                .padding(.leading, 10)
+//                                .padding(.bottom, 20)
+//                                .frame(maxWidth: .infinity, alignment: .leading) // 왼쪽 정렬 추가
+//                            
+//                            // 샘플 메모 내용
+//                            ScrollView {
+//                                VStack(alignment: .leading, spacing: 8) {
+//                                    if !viewModel.diaries.isEmpty {
+//                                        ForEach(viewModel.diaries, id: \.self) { diaryTitle in
+//                                            if let diary = fetchDiary(for: diaryTitle) {
+//                                                
+////                                                NavigationLink(destination: DiaryDetailView(diary: diary)) {
+//                                                    VStack(alignment: .leading) {
+//                                                        HStack {
+//                                                            Circle()
+//                                                                .fill(Color.purple)
+//                                                                .frame(width: 8, height: 8)
+//                                                            Text("일기")
+//                                                                .font(.system(size: 15))
+//                                                                .padding(.leading, 5)
+//                                                            
+//                                                            Spacer()
+//                                                        }
+//                                                        
+//                                                        Text(diaryTitle)
+//                                                            .font(.system(size: 15))
+//                                                            .padding(.leading, 14)
+//                                                    
+//                                                            .onTapGesture {
+//                                                                print("==")
+//                                                                DispatchQueue.main.async {
+//                                                                    if let diary = fetchDiary(for: diaryTitle) {
+//                                                                        selectedDiary = diary
+//                                                                        print("Selected diary: \(diary)")
+//                                                                        isPopupVisible = false
+//                                                                        isShowingDiaryDetail = true
+//                                                                        print("isShowingDiaryDetail: \(isShowingDiaryDetail)")
+//                                                                    }
+//                                                                }
+//                                                            }
+//                                                    }
+//                                                    .padding(.bottom, 10)
+////                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                    
+//                                    if !viewModel.memos.isEmpty {
+//                                        ForEach(viewModel.memos, id: \.self) { memoContents in
+//                                            if let memo = calendarViewModel.fetchMemo(for: memoContents) {
+//                                                
+//                                                VStack(alignment: .leading) {
+//                                                    HStack {
+//                                                        Circle()
+//                                                            .fill(Color.purple)
+//                                                            .frame(width: 8, height: 8)
+//                                                        Text("메모")
+//                                                            .font(.system(size: 15))
+//                                                            .padding(.leading, 5)
+//                                                        
+//                                                        Spacer()
+//                                                    }
+//                                                    Text(memoContents)
+//                                                        .font(.system(size: 18))
+//                                                        .padding(.leading, 14)
+//                                                    
+//                                                        .onTapGesture {
+//                                                            if let memo = calendarViewModel.fetchMemo(for: memoContents) {
+//                                                                selectedMemo = memo
+//                                                                isPopupVisible = false
+//                                                                isShowingMemoDetail = true
+//                                                            }
+//                                                        }
+//                                                }
+//                                                
+//                                                
+//                                            }
+//                                            .padding(.bottom, 10)
+//                                        }
+//                                    }
+//                                }
+//                        
+//                        
+//                                .padding(.horizontal, 16)
+//                            }
+//                            
+//                            
+//                            // + 버튼
+//                            Button(action: {
+//                                isShowingAlert = true
+//                            }) {
+//                                Image(systemName: "plus.circle")
+//                                    .resizable()
+//                                    .frame(width: 40, height: 40)
+//                                    .padding(.bottom, 10)
+//                            }
+//                        }
+//                        .padding()
+//                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
+//                        .shadow(radius: 10)
+//                        .frame(width: UIScreen.main.bounds.width * 0.7, height: 300)
+//                        .onAppear {
+//                            
+//                            viewModel.fetchDiaryAndMemo(for: dateString)
+//                        }
+//                        .onTapGesture {
+//                            // 팝업창 닫는 기능을 원하지 않는 경우 이 부분을 주석처리
+//                        }
+//                        .actionSheet(isPresented: $isShowingAlert) {
+//                            ActionSheet(title: Text(""), buttons: [
+//                                .default(Text("일기")) {
+//                                    navigateToDiary = true
+//                                },
+//                                .default(Text("메모")) {
+//                                    navigateToMemo = true
+//                                },
+//                                .cancel(Text("취소"))
+//                            ])
+//                        }
+//                    }
+//                }
+//                .padding()
+//            }
+//        }
+//    }
     
     private func fetchDiary(for tittle: String) -> TimeDiary? {
         let realm = try! Realm()
         return realm.objects(TimeDiary.self).filter("title == %@", tittle).first
     }
+    
+    
     
     private func fetchSavedDates() {
         // Realm에서 저장된 TimeDiary와 TimeDiaryMemo 객체들의 날짜를 불러와 savedDates에 저장

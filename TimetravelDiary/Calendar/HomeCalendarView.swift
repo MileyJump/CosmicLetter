@@ -20,7 +20,6 @@ struct HomeCalendarView: View {
         NavigationView {
             ZStack {
 
-                // 이 부분 우너래 없었어
                 if isPopupVisible {
                     Color.black.opacity(0.4)
                         .edgesIgnoringSafeArea(.all)
