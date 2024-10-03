@@ -7,13 +7,13 @@
 import SwiftUI
 
 enum TapInfo: String, CaseIterable {
-    case album = "사진 앨범"
     case diary = "일기"
     case memo = "메모"
+    case album = "사진 앨범"
 }
 
 struct InfoView: View {
-    @State private var selectedPicker: TapInfo = .album // 기본 선택된 버튼
+    @State private var selectedPicker: TapInfo = .diary // 기본 선택된 버튼
 
     var body: some View {
         VStack {

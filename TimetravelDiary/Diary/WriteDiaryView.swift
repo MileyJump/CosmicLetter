@@ -25,6 +25,8 @@ struct WriteDiaryView: View {
     @State private var showImagePicker = false
     @State private var showRecordingModal = false // 모달을 보여줄지 여부
     
+    @State private var isFavorite: Bool = false // favorite 상태 추가
+    
     @StateObject private var audioRecorderManager = AudioRecorderManager()
     
     var body: some View {
@@ -88,30 +90,27 @@ struct WriteDiaryView: View {
                 .padding()
                 .toolbar {
                     ToolbarItemGroup(placement: .bottomBar) {
-                        Button(action: {
-                            
-                        }) {
-                            Image(systemName: "heart")
-                                .foregroundColor(.black)
-                        }
+//                        Button(action: {
+//                            toggleFavorite()
+//                        }) {
+//                            Image(systemName: "heart")
+//                                .foregroundColor(.white)
+//                        }
                         Button(action: {
                             showImagePicker = true
                         }) {
                             Image(systemName: "photo")
-                                .foregroundColor(.black)
+                                .foregroundColor(.white)
                         }
                         Button(action: {
                             showRecordingModal = true
                         }) {
                             Image(systemName: "mic")
-                                .foregroundColor(.black)
+                                .foregroundColor(.white)
                         }
                         Spacer()
                     }
                 }
-//                .navigationTitle(seletedDate)
-//                .navigationBarTitleDisplayMode(.inline)
-//                .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         Text(seletedDate)
@@ -163,6 +162,18 @@ struct WriteDiaryView: View {
             images.removeAll()
         }
     }
+    
+//    private func toggleFavorite() {
+//        isFavorite.toggle()
+//        
+//        // Realm에 저장
+//        let realm = try! Realm()
+//        if let diary = realm.objects(TimeDiary.self).filter("date == %@", seletedDate).first {
+//            try! realm.write {
+//                diary.favorite = isFavorite
+//            }
+//        }
+//    }
     
     // 이미지들을 3개씩 한 행에 나란히 배치
     private var imagesGridSection: some View {

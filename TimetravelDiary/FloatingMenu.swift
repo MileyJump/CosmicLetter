@@ -14,6 +14,8 @@ struct FloatingMenu: View {
     
     @Binding var selectedDate: Date?
     
+//    @Binding var showFloatingMenu: Bool // showFloatingMenu 바인딩 추가
+    
     var body: some View {
         VStack {
             Spacer()
@@ -51,7 +53,6 @@ struct FloatingMenu: View {
                 }
             }
         }
-        
     }
     
     
@@ -61,10 +62,10 @@ struct FloatingMenu: View {
         }
         withAnimation(.easeInOut.delay(0.2)) {
             self.showDiaryMenu.toggle()
+//            showFloatingMenu = false // 메뉴가 열릴 때 플로팅 버튼 숨기기
         }
     }
 }
-
 
 struct MenuItem: View {
     
@@ -86,4 +87,3 @@ struct MenuItem: View {
         .transition(.move(edge: .trailing))
     }
 }
-
