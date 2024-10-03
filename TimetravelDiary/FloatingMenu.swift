@@ -11,7 +11,6 @@ struct FloatingMenu: View {
     
     @State var showDiaryMenu = false
     @State var showMemoMenu = false
-//    @State var showMenuItem3 = false
     
     @Binding var selectedDate: Date?
     
@@ -33,9 +32,6 @@ struct FloatingMenu: View {
                 })
                 
             }
-//            if showMenuItem3 {
-//                MenuItem(icon:"square.and.arrow.up.fill")
-//            }
             
             
             Button(action: {
@@ -52,19 +48,6 @@ struct FloatingMenu: View {
                     Image(systemName: "star.fill")
                         .imageScale(.large)
                         .foregroundColor(.white)
-                    
-                    
-//                    Circle()
-//                        .foregroundColor(Color(red:153/255, green:102/255, blue:255/255 ))
-//                        .frame(width:55,height:55)
-//                    Image(systemName: "plus.circle.fill")
-//                        .resizable()
-//                        .frame(width:60,height:60)
-//                        .foregroundColor(.white)
-//                        .foregroundColor(Color(red:153/255, green:102/255, blue:255/255 ))
-//                        .shadow(color: .gray, radius: 0.3, x: 1, y: 1)
-////                        .background(Color.black) // 배경을 어둡게 설정해 대비
-//                        .cornerRadius(10)
                 }
             }
         }
@@ -73,9 +56,6 @@ struct FloatingMenu: View {
     
     
     func showMenu() {
-//        withAnimation {
-////            self.showMenuItem3.toggle()
-//        }
         withAnimation(.easeInOut.delay(0.1)) {
             self.showMemoMenu.toggle()
         }
@@ -84,12 +64,7 @@ struct FloatingMenu: View {
         }
     }
 }
-//
-//struct FloatingMenu_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FloatingMenu()
-//    }
-//}
+
 
 struct MenuItem: View {
     
