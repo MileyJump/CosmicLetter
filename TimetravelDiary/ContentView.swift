@@ -84,12 +84,12 @@ struct ContentView: View {
                         .tag(Tab.b)
                         
                         NavigationStack {
-                            CView()
+                            SettingView()
                         }
                         .tag(Tab.c)
                         
                         NavigationStack {
-                            CView()
+                            SettingView()
                         }
                         .tag(Tab.setting)
                     }
@@ -201,11 +201,7 @@ struct BView: View {
     }
 }
 
-struct CView: View {
-    var body: some View {
-        Text("View C")
-    }
-}
+
 
 #Preview {
     ContentView()

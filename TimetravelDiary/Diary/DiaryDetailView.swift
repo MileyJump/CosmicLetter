@@ -12,59 +12,57 @@ import ShuffleDeck
 
 struct DiaryDetailView: View {
     let diary: TimeDiary // 전달받은 다이어리 데이터
-    //    let diaryId: String?
     
     @StateObject private var viewModel = DiaryDetailViewModel()
     
     @State var currentPage: Int = 0
     
-    
-    
     var body: some View {
         ZStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 20) {
-                //                if let diary =  diary {
-                if !diary.photos.isEmpty {
-                    ShuffleDeck(Array(diary.photos.enumerated()), initialIndex: 0) { index, photo in
-                        if let image = viewModel.loadImageFromDocument(filename: photo.photoName) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFill() // 이미지 비율 유지
-                                .frame(width: UIScreen.main.bounds.width * 0.8, height: 300)
-                                .cornerRadius(16)
-                                .padding(.horizontal) // 양쪽에 패딩 추가하여 중앙에 배치
+
+                VStack(alignment: .leading, spacing: 20) {
+                    if !diary.photos.isEmpty {
+                        ShuffleDeck(Array(diary.photos.enumerated()), initialIndex: 0) { index, photo in
+                            if let image = viewModel.loadImageFromDocument(filename: photo.photoName) {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill() // 이미지 비율 유지
+                                    .frame(width: UIScreen.main.bounds.width * 0.8, height: 300)
+                                    .cornerRadius(16)
+                                    .clipped()
+
+                            }
                         }
+                        .frame(width: UIScreen.main.bounds.width * 0.8, height: 300)
+                        //                    .padding(.horizontal, 20) // 슬라이드 카드의 간격 조정
+                        .padding(.bottom)
                     }
-                    .frame(width: UIScreen.main.bounds.width * 0.8, height: 300)
-                    .padding(.horizontal, 20) // 슬라이드 카드의 간격 조정
+                    
+                    // 제목과 내용
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(diary.title)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding(.horizontal)
+                            .foregroundColor(.white)
+                            .padding(.bottom, 10) // 제목과 내용 간격 조정
+                        
+                        Text(diary.contents)
+                            .font(.body)
+                            .padding(.horizontal)
+                            .foregroundColor(.white)
+                    }
+                    Spacer()
                 }
-                
-                // 제목과 내용
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(diary.title)
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding(.horizontal)
-                        .foregroundColor(.white)
-                        .padding(.bottom, 10) // 제목과 내용 간격 조정
-                    Text(diary.contents)
-                        .font(.body)
-                        .padding(.horizontal)
-                        .foregroundColor(.white)
-                }
-                
-                .background(Color.clear) // 기본 배경색을 투명으로 설정
-                //                } else {
-                //                    Text("일기 데이터를 불러오는 중...")
-                //                        .foregroundColor(.white)
-                //                }
-            }
+
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+//            .background(.red)
+            
             .onAppear {
                 print("되고 있냐")
                 // 네비게이션 바의 배경색 설정
                 let appearance = UINavigationBarAppearance()
                 appearance.configureWithTransparentBackground() // 투명 배경으로 설정
-                appearance.backgroundColor = UIColor(Color.red) // 원하는 배경색으로 설정
                 appearance.titleTextAttributes = [.foregroundColor: UIColor.white] // 제목 텍스트 색상 설정
                 
                 // 네비게이션 바에 appearance 적용
@@ -77,12 +75,4 @@ struct DiaryDetailView: View {
         }
     }
 }
-
-//    private func loadDiaryFromRealm(diaryId: String) {
-//        let realm = try! Realm()
-//        if let fetchedDiary = realm.object(ofType: TimeDiary.self, forPrimaryKey: diaryId) {
-//            self.load
-//        }
-//    }
-//}
 

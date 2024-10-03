@@ -18,6 +18,8 @@ struct DiaryCollectionView: View {
                 NavigationLink(destination: DiaryDetailView(diary: diary)) {
                     Text(diary.title)
                 }
+//                .listRowInsets()
+//                .listRowInsets(EdgeInsets()) // 기본 리스트 인셋 제거
             }
         }
     }
