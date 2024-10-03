@@ -18,6 +18,8 @@ extension Diary {
 //        static let timeTravelPinkColor = Color(UIColor(hexCode: "D95F59"))
 //        static let timeTravelPinkColor = Color(UIColor(hexCode: "FF8A8A"))
         static let timeTravelPinkColor = Color(UIColor(hexCode: "102C57"))
+        static let timeTravelPurplePinkColor = Color(UIColor(hexCode: "640D5F"))
+        static let timeTravelbluePinkColor = Color(UIColor(hexCode: "624E88"))
         
         static let timeTravelNavyColor = Color(UIColor(hexCode: "17153B"))
         
@@ -32,6 +34,9 @@ extension Diary {
         
         static let timeTravelgray = Color(UIColor(hexCode: "E6DAD1"))
         static let timeTravelpeachColor = Color(UIColor(hexCode: "FF8A8A"))
+        static let timeTravelLightPinkColor = Color(UIColor(hexCode: "E4B1F0"))
+        
+        
         
     }
 }

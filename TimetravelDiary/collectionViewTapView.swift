@@ -4,192 +4,67 @@
 //
 //  Created by 최민경 on 9/21/24.
 //
-
 import SwiftUI
 
 enum TapInfo: String, CaseIterable {
-    case album = "앨범"
+    case album = "사진 앨범"
     case diary = "일기"
     case memo = "메모"
 }
 
-// 탭 선택과 선택된 탭에 맞는 내용을 표시하는 메인 뷰입니다.
 struct InfoView: View {
-    @State private var selectedPicker: TapInfo = .album
-    
-    // matchedGeometryEffect의 in:에 들어간 같은 @namespace들끼리 같은 애니메이션을 만든다.
-    @Namespace private var animation
-    
+    @State private var selectedPicker: TapInfo = .album // 기본 선택된 버튼
+
     var body: some View {
         VStack {
-            animate()
-                .background(Color.clear)
-            testView(tests: selectedPicker)
-        }
-    }
-    
-    @ViewBuilder
-    private func animate() -> some View {
-        HStack {
-            ForEach(TapInfo.allCases, id: \.self) { item in
-                Button(action: {
-                    withAnimation(.easeInOut) {
-                        self.selectedPicker = item
-                    }
-                }) {
-                    VStack {
-                        Text(item.rawValue)
-                            .font(.title3)
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 20)
-                            .foregroundColor(selectedPicker == item ? .black : .gray)
-                            .background(Color.clear) // 배경을 클리어로 설정
-                            .clipShape(Capsule()) // 캡슐형 버튼으로 만들기
-                            .shadow(color: selectedPicker == item ? Color.black.opacity(0.5) : Color.clear, radius: 4, x: 0, y: 2)
+            // 버튼을 가로로 배치
+            HStack(spacing: 15) { // 버튼 간의 간격을 조절
+                ForEach(TapInfo.allCases, id: \.self) { item in
+                    Button(action: {
+                        selectedPicker = item // 클릭된 버튼 업데이트
+                    }) {
+                        Text(item.rawValue) // 열거형의 rawValue 사용
+                            .padding()
+                            .frame(maxWidth: .infinity, minHeight: 40) // 버튼의 가로 크기를 최대화하고 최소 높이를 설정
+                            .background(Color.clear) // 배경 설정
+                            .foregroundColor(selectedPicker == item ? Color.white : Color.white) // 텍스트 색상 변경
+                            .cornerRadius(20) // 캡슐 모양으로 둥글게
+                            .overlay(
+                                selectedPicker == item ? // 선택된 버튼에 테두리 추가
+                                    Capsule().stroke(Diary.color.timeTravelLightPinkColor, lineWidth: 3) : nil
+                            )
+                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.8) : Color.white, radius: 10, x: 0, y: 0)
+                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.6) : Color.clear, radius: 20, x: 0, y: 0)
+                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.4) : Color.clear, radius: 30, x: 0, y: 0)
+                            .animation(.easeInOut, value: selectedPicker) // 애니메이션 추가
                     }
                 }
             }
-        }
-        .padding(.top) // 상단 여백 추가
-    }
-}
-
-struct TestView: View {
-    var tests: TapInfo
-    
-    var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            switch tests {
+            .padding(.horizontal, 25) // HStack 전체에 여백 추가하여 버튼과 화면 가장자리 간격 설정
+            .padding(.top, 20) // 상단 패딩
+            
+            // 선택된 버튼에 따라 화면 내용 변경
+            Spacer()
+            switch selectedPicker {
             case .album:
+                Spacer(minLength: 20)
                 AlbumView()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
             case .diary:
+                Spacer(minLength: 20)
                 DiaryCollectionView()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
             case .memo:
+                Spacer(minLength: 20)
                 MemoCollectionView()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
             }
+            Spacer()
         }
+        // 전체 배경에 그라데이션 적용
+        .gradientBackground(startColor: Diary.color.timeTravelNavyColor,
+                            mediumColor: Diary.color.timeTravelNavyColor,
+                            endColor: Diary.color.timeTravelbluePinkColor,
+                            starCount: 100)
     }
 }
-
-#Preview {
-    InfoView()
-}
-
-//struct TestView: View {
-//    var tests: TapInfo
-//    
-//    var body: some View {
-//        ScrollView(.vertical, showsIndicators: false) {
-//            switch tests {
-//            case .album:
-//                AlbumView()
-//                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
-//            case .diary:
-//                DiaryCollectionView()
-//                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
-//            case .memo:
-//                MemoCollectionView()
-//                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
-//            }
-//        }
-//    }
-//}
-//
-//#Preview {
-//    InfoView()
-//}
-
-
-//import SwiftUI
-//
-//enum TapInfo : String, CaseIterable {
-//    case album = "앨범"
-//    case diary = "일기"
-//    case memo = "메모"
-//}
-//
-//// 탭 선택과 선택된 탭에 맞는 내용을 표시하는 메인 뷰입니다.
-//struct InfoView: View {
-//
-//    @State private var selectedPicker: tapInfo = .album
-//    
-//    // matchedGeometryEffect의 in:에 들어간 같은 @namespace들끼리 같은 애니메이션을 만든다.
-//    @Namespace private var animation
-//    
-//    var body: some View {
-//        VStack {
-//            animate()
-//            testView(tests: selectedPicker)
-//        }
-//    }
-//    
-//    @ViewBuilder
-//    private func animate() -> some View {
-//        HStack {
-//            ForEach(tapInfo.allCases, id: \.self) { item in
-//                VStack {
-//                    Text(item.rawValue)
-//                        .font(.title3)
-//                        .frame(maxWidth: .infinity/4, minHeight: 50)
-//                        .foregroundColor(selectedPicker == item ? .black : .gray)
-//
-//                    if selectedPicker == item {
-//                        Capsule()
-//                            .foregroundColor(.black)
-//                            .frame(height: 3)
-//                            .matchedGeometryEffect(id: "info", in: animation)
-//                    }
-//                    
-//                }
-//                .onTapGesture {
-//                    withAnimation(.easeInOut) { // 이 애니메이션이 화면이 닫히는 느낌임
-//                        self.selectedPicker = item
-//                    }
-//                }
-//                
-//            }
-//        }
-//    }
-//}
-//
-struct testView : View {
-    
-    var tests: TapInfo
-    
-    var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            switch tests {
-            case .album:
-                AlbumView()
-//                TestTopTapView()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
-                   // .frame(width: UIScreen.main.bounds.width,  height: UIScreen.main.bounds.height - 500, alignment: .center)
-                            
-                
-//                ForEach(0..<5) { _ in
-//                    Text("블랙컬러")
-//                        .padding()
-//                    Image("shoes")
-//                        .resizable()
-//                        .frame(maxWidth: 350, minHeight: 500)
-//                }
-            case .diary:
-               DiaryCollectionView()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
-                
-//                    .padding()
-            case .memo:
-                MemoCollectionView()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
-            }
-        }
-    }
-}
-
-
 
 #Preview {
     InfoView()

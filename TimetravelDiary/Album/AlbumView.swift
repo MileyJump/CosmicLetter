@@ -47,7 +47,8 @@ struct AlbumView: View {
                 }
                  
             }
-            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
+            .background(.clear)
+//            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
             .onAppear {
                 viewModel.fetchImageFromDiaryAlbum()
             }
