@@ -394,7 +394,7 @@ private struct CellView: View {
         } else if publicHolidays.contains(cellDate) {
             return .red // 공휴일은 빨간색
         } else {
-            return isToday ? .red : .white // 오늘 날짜는 빨간색
+            return .white
         }
     }
 }

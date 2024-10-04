@@ -31,7 +31,7 @@ struct WriteDiaryView: View {
     
     var body: some View {
         // 얘를 없애면 툴바가 사라짐
-        NavigationView {
+//        NavigationView {
             ZStack {
                 VStack {
                     if let errorMessage = errorMessage {
@@ -137,11 +137,20 @@ struct WriteDiaryView: View {
                     .presentationDragIndicator(.visible)
         })
             .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
-        }
-        .onAppear {
-            
-            print(Realm.Configuration.defaultConfiguration.fileURL)
-        }
+//        }
+            .onAppear {
+                let appearance = UINavigationBarAppearance()
+                appearance.configureWithOpaqueBackground()
+                appearance.backgroundColor = .clear // 배경색을 투명하게
+                appearance.titleTextAttributes = [.foregroundColor: UIColor.clear] // 타이틀을 숨김
+                
+                // 백 버튼 색상을 흰색으로 변경
+                appearance.backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear] // 백 버튼 타이틀을 숨김
+                
+                UINavigationBar.appearance().tintColor = .white // 백 버튼 아이콘을 흰색으로 변경
+                UINavigationBar.appearance().standardAppearance = appearance
+                UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            }
     }
         
     
