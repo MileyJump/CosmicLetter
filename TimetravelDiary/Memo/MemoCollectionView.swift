@@ -15,8 +15,8 @@ struct MemoCollectionView: View {
     var body: some View {
         
         let groupedMemos = Dictionary(grouping: memo) { memos -> String in
-            let date = CalendarView.monthOnlyFormatter.date(from: memos.date) ?? Date()
-            return CalendarView.monthOnlyFormatter.string(from: date) // yyyy.MM 형식으로 반환
+            let date = CalendarView.calendarFormatter.date(from: memos.date) ?? Date()
+            return CalendarView.calendarFormatter.string(from: date) // yyyy.MM 형식으로 반환
         }
         
         // 정렬된 섹션 키 생성

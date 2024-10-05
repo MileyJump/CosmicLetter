@@ -273,10 +273,20 @@ struct CalendarView: View {
                         .foregroundColor(.white) // 버튼 색상 설정
                 }
                 
-                Text(month, formatter: Self.monthOnlyFormatter)
-                    .font(.system(size: 35))
+                Text(month, formatter: Self.monthformatter)
+                    .font(.system(size: 45))
                     .fontWeight(.bold)
                     .foregroundColor(.white)
+                
+                VStack {
+                    
+                    Text(month, formatter: Self.yearformatter)
+                        .font(.system(size: 20))
+                        .foregroundColor(.white)
+                    Text(month, formatter: Self.enYearformatter)
+                        .font(.system(size: 20))
+                        .foregroundColor(.white)
+                }
                 
                 Button {
                     changeMonth(by: 1)
@@ -443,11 +453,31 @@ extension CalendarView {
         return formatter
     }()
     
-    static let monthOnlyFormatter: DateFormatter = {
+    static let calendarFormatter: DateFormatter = {
         let formatter = DateFormatter()
         //        formatter.dateFormat = "M월"
         formatter.dateFormat = "yyyy.MM"
         formatter.locale = Locale(identifier: "ko_KR")
+        return formatter
+    }()
+    
+    static let monthformatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM"
+        return formatter
+    }()
+    
+    static let yearformatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter
+    }()
+    
+    static let enYearformatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        formatter.locale = Locale(identifier: "en_US")
         return formatter
     }()
     
@@ -459,14 +489,6 @@ extension CalendarView {
         let converted = formatter.string(from: target)
         return converted
     }
-//    static let popupFormatter: DateFormatter = {
-//        let formatter = DateFormatter()
-//        
-//        formatter.locale = Locale(identifier: "ko_KR")
-//        formatter.dateFormat = "MM.dd(E)" // 요일 이름을 짧게 표시
-//        
-//        return formatter
-//    }()
     
     
     static let weekdaySymbols: [String] = ["일", "월", "화", "수", "목", "금", "토"]

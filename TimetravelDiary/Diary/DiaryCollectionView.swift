@@ -43,8 +43,8 @@ struct DiaryCollectionView: View {
         
         let groupedDiaries = Dictionary(grouping: diaries) { diary -> String in
             // monthOnlyFormatter를 사용하여 날짜를 월로 변환
-            let date = CalendarView.monthOnlyFormatter.date(from: diary.date) ?? Date()
-            return CalendarView.monthOnlyFormatter.string(from: date) // yyyy.MM 형식으로 반환
+            let date = CalendarView.calendarFormatter.date(from: diary.date) ?? Date()
+            return CalendarView.calendarFormatter.string(from: date) // yyyy.MM 형식으로 반환
         }
 //        let groupedDiaries = Dictionary(grouping: diaries) { diary -> String in
 //            // DateFormatter를 사용하여 날짜를 월로 변환

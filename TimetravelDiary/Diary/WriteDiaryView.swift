@@ -12,6 +12,8 @@ import RealmSwift
 struct WriteDiaryView: View {
     
 //    let realm = try! Realm()
+
+    
     
 //    @ObservedResults(TimeDiary.self) var diaries
     @Environment(\.dismiss) private var dismiss
