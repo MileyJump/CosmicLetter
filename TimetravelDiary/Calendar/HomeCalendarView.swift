@@ -52,7 +52,8 @@ struct HomeCalendarView: View {
 //                        }
 //                    }
 //            )
-            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
+//            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 120)
+            .gradientBackground(startColor: Diary.color.timeTravelLightBlackColor, mediumColor: Diary.color.timeTravelRealDarkNavyColor, endColor: Diary.color.timeTravelNavyBlackColor, starCount: 120)
         }
     }
 }

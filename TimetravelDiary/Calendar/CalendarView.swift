@@ -68,14 +68,12 @@ struct CalendarView: View {
         
         .navigationDestination(isPresented: $isShowingDiaryDetail) {
             if let diary = selectedDiary {
-                let _ = print("---\(diary)")
                 DiaryDetailView(diary: diary)
             }
         }
         
         .navigationDestination(isPresented: $isShowingMemoDetail) {
             if let memo = selectedMemo {
-                let _ = print("---\(memo)")
                 MemoDetailView(memo: memo)
             }
         }
@@ -265,35 +263,40 @@ struct CalendarView: View {
     private var headerView: some View {
         VStack {
             HStack {
-                Button {
-                    changeMonth(by: -1)
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .padding()
-                        .foregroundColor(.white) // 버튼 색상 설정
-                }
-                
-                Text(month, formatter: Self.monthformatter)
-                    .font(.system(size: 45))
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                
-                VStack {
+                HStack {
+                    Text(month, formatter: Self.monthformatter)
+                        .font(.system(size: 80))
+                    //                    .fontWeight(.bold)
+                        .foregroundColor(.white)
                     
-                    Text(month, formatter: Self.yearformatter)
-                        .font(.system(size: 20))
-                        .foregroundColor(.white)
-                    Text(month, formatter: Self.enYearformatter)
-                        .font(.system(size: 20))
-                        .foregroundColor(.white)
+                    VStack(alignment: .leading) {
+                        Text(month, formatter: Self.yearformatter)
+                            .font(.system(size: 23))
+                            .foregroundColor(.white)
+                        Text(Self.enYearformatter(for: month))
+                            .font(.system(size: 23))
+                            .foregroundColor(.white)
+                    }
                 }
                 
-                Button {
-                    changeMonth(by: 1)
-                } label: {
-                    Image(systemName: "chevron.right")
-                        .padding()
-                        .foregroundColor(.white) // 버튼 색상 설정
+                Spacer()
+                
+                HStack {
+                    Button {
+                        changeMonth(by: -1)
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .padding()
+                            .foregroundColor(.white) // 버튼 색상 설정
+                    }
+                    
+                    Button {
+                        changeMonth(by: 1)
+                    } label: {
+                        Image(systemName: "chevron.right")
+                            .padding()
+                            .foregroundColor(.white) // 버튼 색상 설정
+                    }
                 }
             }
             .padding(.bottom, 60)
@@ -350,8 +353,6 @@ private struct CellView: View {
     var isSelected: Bool
     var isToday: Bool
     var publicHolidays: Set<Date>
-//    var hasDiary: Bool
-//    var hasMemo: Bool
     
     var hasSavedData: Bool
     
@@ -474,12 +475,19 @@ extension CalendarView {
         return formatter
     }()
     
-    static let enYearformatter: DateFormatter = {
+    static func enYearformatter(for date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy"
+        formatter.dateFormat = "MMMM"
         formatter.locale = Locale(identifier: "en_US")
-        return formatter
-    }()
+        return formatter.string(from: date)
+    }
+    
+//    static let enYearformatter: DateFormatter = {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy"
+//        formatter.locale = Locale(identifier: "en_US")
+//        return formatter
+//    }()
     
     static func popupFormatter(_ target: Date) -> String {
         let formatter = DateFormatter()

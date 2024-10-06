@@ -14,7 +14,7 @@ struct GradientBackgroundView: ViewModifier {
     var optionColor: Color?
     var endColor: Color
     var starCount: Int
-    let starSizeRange: ClosedRange<CGFloat> = 1...2
+    let starSizeRange: ClosedRange<CGFloat> = 1...3
     
     func body(content: Content) -> some View {
         ZStack {

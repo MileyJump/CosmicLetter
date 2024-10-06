@@ -13,28 +13,27 @@ enum Diary { }
 
 extension Diary {
     enum color {
-//        static let timeTravelPinkColor = Color(UIColor(hexCode: "CB80AB"))
-//        static let timeTravelPinkColor = Color(UIColor(hexCode: "E3A5C7"))
-//        static let timeTravelPinkColor = Color(UIColor(hexCode: "D95F59"))
-//        static let timeTravelPinkColor = Color(UIColor(hexCode: "FF8A8A"))
         static let timeTravelPinkColor = Color(UIColor(hexCode: "102C57"))
-        static let timeTravelPurplePinkColor = Color(UIColor(hexCode: "640D5F"))
+        
         static let timeTravelbluePinkColor = Color(UIColor(hexCode: "624E88"))
         
         static let timeTravelNavyColor = Color(UIColor(hexCode: "17153B"))
         
         static let timeTravelDarkNavyColor = Color(UIColor(hexCode: "0E0C23"))
-        static let timeTravelMediumCNavyClor = Color(UIColor(hexCode: "03346E"))
+        static let timeTravelRealDarkNavyColor = Color(UIColor(hexCode: "0B192C"))
         
-        
-//        static let timeTravelPurpleColor = Color(UIColor(hexCode: "624E88"))
-//        static let timeTravelPurpleColor = Color(UIColor(hexCode: "4F1787"))
+
         static let timeTravelPurpleColor = Color(UIColor(hexCode: "2E073F"))
         static let timeTravelBlueColor = Color(UIColor(hexCode: "3795BD"))
         
         static let timeTravelgray = Color(UIColor(hexCode: "E6DAD1"))
-        static let timeTravelpeachColor = Color(UIColor(hexCode: "FF8A8A"))
+        
         static let timeTravelLightPinkColor = Color(UIColor(hexCode: "E4B1F0"))
+        
+        static let timeTravelLightBlackColor = Color(UIColor(hexCode: "021526"))
+        static let timeTravelNavyBlackColor = Color(UIColor(hexCode: "1A2130"))
+        
+        
         
         
         
