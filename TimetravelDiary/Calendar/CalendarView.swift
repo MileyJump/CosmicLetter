@@ -26,7 +26,6 @@ struct CalendarView: View {
     @State var isShowingDiaryDetail: Bool = false
     @State var isShowingMemoDetail: Bool = false
     
-    
     @State var savedDates: Set<Date> = Set()
     
     @StateObject var viewModel = PopupViewModel()
@@ -37,7 +36,11 @@ struct CalendarView: View {
     var body: some View {
         VStack {
             headerView
+                .padding(.bottom, 20)
+            
             calendarGridView
+//                .padding(.horizontal)
+                .frame(maxHeight: 500)
         }
         .overlay(
             popupView
@@ -220,9 +223,7 @@ struct CalendarView: View {
         let realm = try! Realm()
         return realm.objects(TimeDiary.self).filter("title == %@", tittle).first
     }
-    
-    
-    
+
     private func fetchSavedDates() {
         // Realm에서 저장된 TimeDiary와 TimeDiaryMemo 객체들의 날짜를 불러와 savedDates에 저장
         let realm = try! Realm()
@@ -246,7 +247,6 @@ struct CalendarView: View {
         }
     }
 
-    
     private func fetchHolidays() {
         let currentYear = Calendar.current.component(.year, from: month)
         NetworkManager.shared.fetchHolidays(for: currentYear, countryCode: "KR") { result in
@@ -261,7 +261,7 @@ struct CalendarView: View {
     
     // MARK: - 헤더 뷰
     private var headerView: some View {
-        VStack {
+        VStack(spacing: 10) {
             HStack {
                 HStack {
                     Text(month, formatter: Self.monthformatter)
@@ -299,8 +299,8 @@ struct CalendarView: View {
                     }
                 }
             }
-            .padding(.bottom, 60)
-            .padding(.horizontal, 20) // 양쪽에 여백 추가
+            .padding(.bottom, 30)
+            .padding(.horizontal, 10) // 양쪽에 여백 추가
             
             
             HStack {
@@ -313,6 +313,7 @@ struct CalendarView: View {
             }
             .padding(.bottom, 20)
         }
+//        .padding(.top, 30
     }
     
     // MARK: - 날짜 그리드 뷰
@@ -324,8 +325,9 @@ struct CalendarView: View {
             LazyVGrid(columns: Array(repeating: GridItem(), count: 7), spacing: 35) { // 셀 간격 조정
                 ForEach(0 ..< daysInMonth + firstWeekday, id: \.self) { index in
                     if index < firstWeekday {
-                        RoundedRectangle(cornerRadius: 5)
-                            .foregroundColor(Color.clear)
+//                        RoundedRectangle(cornerRadius: 5)
+//                            .foregroundColor(Color.clear)
+                        Spacer()
                     } else {
                         let date = getDate(for: index - firstWeekday)
                         let day = index - firstWeekday + 1
