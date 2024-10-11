@@ -158,6 +158,15 @@ struct CalendarView: View {
                                 Text("일기")
                                     .font(.system(size: 15))
                                     .padding(.leading, 5)
+                                
+                                
+                                if let diaryDate = CalendarView.dateFormatter.date(from: diary.date), diaryDate <= Date() {
+                                    Image(systemName: "lock.open.fill")
+                                        .foregroundColor(.black)
+                                } else {
+                                    Image(systemName: "lock.fill")
+                                        .foregroundColor(.red)
+                                }
                                 Spacer()
                             }
                             
@@ -165,10 +174,14 @@ struct CalendarView: View {
                                 .font(.system(size: 15))
                                 .padding(.leading, 14)
                                 .onTapGesture {
-                                    DispatchQueue.main.async {
-                                        selectedDiary = diary
-                                        isPopupVisible = false
-                                        isShowingDiaryDetail = true
+                                    if let diaryDate = CalendarView.dateFormatter.date(from: diary.date), diaryDate <= Date() {
+                                        DispatchQueue.main.async {
+                                            selectedDiary = diary
+                                            isPopupVisible = false
+                                            isShowingDiaryDetail = true
+                                        }
+                                    } else {
+                                        print("지정된 날짜가 되지 않아 일기를 열 수 없습니다!!")
                                     }
                                 }
                         }
@@ -266,7 +279,7 @@ struct CalendarView: View {
                 HStack {
                     Text(month, formatter: Self.monthformatter)
                         .font(.system(size: 80))
-                    //                    .fontWeight(.bold)
+//                        .fontWeight(.bold)
                         .foregroundColor(.white)
                     
                     VStack(alignment: .leading) {
@@ -278,7 +291,6 @@ struct CalendarView: View {
                             .foregroundColor(.white)
                     }
                 }
-                
                 Spacer()
                 
                 HStack {
@@ -288,6 +300,15 @@ struct CalendarView: View {
                         Image(systemName: "chevron.left")
                             .padding()
                             .foregroundColor(.white) // 버튼 색상 설정
+                    }
+                    
+                    Button {
+                        let today = Date()
+                            month = today
+                            selectedDate = today
+                    } label: {
+                        Text("오늘")
+                            .foregroundColor(.white)
                     }
                     
                     Button {
@@ -484,13 +505,6 @@ extension CalendarView {
         return formatter.string(from: date)
     }
     
-//    static let enYearformatter: DateFormatter = {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy"
-//        formatter.locale = Locale(identifier: "en_US")
-//        return formatter
-//    }()
-    
     static func popupFormatter(_ target: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
@@ -499,7 +513,6 @@ extension CalendarView {
         let converted = formatter.string(from: target)
         return converted
     }
-    
     
     static let weekdaySymbols: [String] = ["일", "월", "화", "수", "목", "금", "토"]
 }
