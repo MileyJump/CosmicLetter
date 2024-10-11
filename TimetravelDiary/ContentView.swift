@@ -13,6 +13,7 @@ struct ContentView: View {
     }
     
     @State private var selected: Tab = .Home
+    @State private var circlePosition: CGFloat = 0 // 사이클의 x 위치
     
     var body: some View {
         NavigationStack {
@@ -43,6 +44,7 @@ struct ContentView: View {
         }
     }
     
+    
     var tabBar: some View {
         HStack {
             Spacer()
@@ -54,12 +56,12 @@ struct ContentView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 22)
-                        .shadow(color: selected == .Home ? Color.blue.opacity(0.8) : Color.clear, radius: selected == .Home ? 10 : 0, x: 0, y: 0)
-                        .shadow(color: selected == .Home ? Color.blue.opacity(0.6) : Color.clear, radius: selected == .Home ? 20 : 0, x: 0, y: 0)
-                        .shadow(color: selected == .Home ? Color.blue.opacity(0.4) : Color.clear, radius: selected == .Home ? 30 : 0, x: 0, y: 0)
+                        .shadow(color: selected == .Home ? Diary.color.timeTravelGreenColor.opacity(0.8) : Color.clear, radius: selected == .Home ? 10 : 0, x: 0, y: 0)
+                        .shadow(color: selected == .Home ? Diary.color.timeTravelGreenColor.opacity(0.6) : Color.clear, radius: selected == .Home ? 20 : 0, x: 0, y: 0)
+                        .shadow(color: selected == .Home ? Diary.color.timeTravelGreenColor.opacity(0.4) : Color.clear, radius: selected == .Home ? 30 : 0, x: 0, y: 0)
                 }
             }
-            .foregroundStyle(selected == .Home ? Color.blue : Color.white)
+            .foregroundStyle(selected == .Home ? Diary.color.timeTravelGreenColor : Color.white)
             Spacer()
             
             Button {
@@ -91,7 +93,7 @@ struct ContentView: View {
                         .shadow(color: selected == .setting ? Color.blue.opacity(0.4) : Color.clear, radius: selected == .setting ? 30 : 0, x: 0, y: 0)
                 }
             }
-            .foregroundStyle(selected == .setting ? Color.blue : Color.white) // 여기서 수정됨
+            .foregroundStyle(selected == .setting ? Color.green : Color.white) // 여기서 수정됨
             
             Spacer()
         }

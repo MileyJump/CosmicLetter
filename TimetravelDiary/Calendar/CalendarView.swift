@@ -309,6 +309,7 @@ struct CalendarView: View {
                     } label: {
                         Text("오늘")
                             .foregroundColor(.white)
+                            .fontWeight(.bold)
                     }
                     
                     Button {

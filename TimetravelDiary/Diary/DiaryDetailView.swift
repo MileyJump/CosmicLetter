@@ -56,7 +56,6 @@ struct DiaryDetailView: View {
                 }
 
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-//            .background(.red)
             
             .onAppear {
                 print("되고 있냐")

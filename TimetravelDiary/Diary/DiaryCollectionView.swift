@@ -6,31 +6,6 @@
 //
 //
 
-
-//import SwiftUI
-//import RealmSwift
-//
-//struct DiaryCollectionView: View {
-//    
-//    @ObservedResults(TimeDiary.self) var diaries
-//    
-//    var body: some View {
-//        List {
-//            ForEach(diaries, id: \.id) { diary in
-//                NavigationLink(destination: DiaryDetailView(diary: diary)) {
-//                    Text(diary.title)
-//                }
-////                .listRowInsets()
-////                .listRowInsets(EdgeInsets()) // 기본 리스트 인셋 제거
-//            }
-//        }
-//    }
-//}
-//
-//#Preview {
-//    DiaryCollectionView()
-//}
-
 import SwiftUI
 import RealmSwift
 
@@ -46,16 +21,7 @@ struct DiaryCollectionView: View {
             let date = CalendarView.calendarFormatter.date(from: diary.date) ?? Date()
             return CalendarView.calendarFormatter.string(from: date) // yyyy.MM 형식으로 반환
         }
-//        let groupedDiaries = Dictionary(grouping: diaries) { diary -> String in
-//            // DateFormatter를 사용하여 날짜를 월로 변환
-//            // 🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "yyyy-MM"
-//            let date = dateFormatter.date(from: diary.date) ?? Date()
-//            dateFormatter.dateFormat = "yyyy년 MM월"
-//            return dateFormatter.string(from: date)
-//        }
-//        
+        
         // 정렬된 섹션 키 생성
         let sortedKeys = groupedDiaries.keys.sorted(by: { $0 > $1 }) // 최신 월부터 정렬
         

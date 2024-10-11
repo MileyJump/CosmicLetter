@@ -31,17 +31,17 @@ struct InfoView: View {
                             .cornerRadius(20) // 캡슐 모양으로 둥글게
                             .overlay(
                                 selectedPicker == item ? // 선택된 버튼에 테두리 추가
-                                    Capsule().stroke(Diary.color.timeTravelLightPinkColor, lineWidth: 3) : nil
+                                    Capsule().stroke(Diary.color.timeTravelGreenColor, lineWidth: 3) : nil
                             )
-                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.8) : Color.white, radius: 10, x: 0, y: 0)
+                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelGreenColor.opacity(0.8) : Color.white, radius: 10, x: 0, y: 0)
                             .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.6) : Color.clear, radius: 20, x: 0, y: 0)
                             .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.4) : Color.clear, radius: 30, x: 0, y: 0)
                             .animation(.easeInOut, value: selectedPicker) // 애니메이션 추가
                     }
                 }
             }
-            .padding(.horizontal, 25) // HStack 전체에 여백 추가하여 버튼과 화면 가장자리 간격 설정
-            .padding(.top, 20) // 상단 패딩
+            .padding(.horizontal, 25)
+            .padding(.top, 20)
             
             // 선택된 버튼에 따라 화면 내용 변경
             Spacer()
@@ -59,10 +59,12 @@ struct InfoView: View {
             Spacer()
         }
         // 전체 배경에 그라데이션 적용
-        .gradientBackground(startColor: Diary.color.timeTravelNavyColor,
-                            mediumColor: Diary.color.timeTravelNavyColor,
-                            endColor: Diary.color.timeTravelbluePinkColor,
-                            starCount: 100)
+//        .gradientBackground(startColor: Diary.color.timeTravelNavyColor,
+//                            mediumColor: Diary.color.timeTravelNavyColor,
+//                            endColor: Diary.color.timeTravelbluePinkColor,
+//                            starCount: 100)
+        
+        .gradientBackground(startColor: Diary.color.timeTravelBlackColor, mediumColor: Diary.color.timeTravelLightBlackColor, endColor: Diary.color.timeTravelDarkNavyBlackColor, starCount: 120)
     }
 }
 

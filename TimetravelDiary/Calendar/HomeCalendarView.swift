@@ -32,8 +32,8 @@ struct HomeCalendarView: View {
                     .offset(y: -80)  // 캘린더 뷰 위치 조정
                 
                 FloatingMenu(selectedDate: $selectedDate)
-                    .padding(.bottom, 100)
-                    .padding(.leading, 260)
+                    .padding(.bottom, 87)
+                    .padding(.leading, 300)
             }
 
             .gradientBackground(startColor: Diary.color.timeTravelBlackColor, mediumColor: Diary.color.timeTravelLightBlackColor, endColor: Diary.color.timeTravelDarkNavyBlackColor, starCount: 120)

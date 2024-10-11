@@ -85,19 +85,11 @@ struct WriteDiaryView: View {
                             .shadow(color: .black.opacity(0.15), radius: 8, y: 2)
                             .cornerRadius(10)
                     }
-                    
-                   
-                    
                 }
                 .padding()
                 .toolbar {
                     ToolbarItemGroup(placement: .bottomBar) {
-//                        Button(action: {
-//                            toggleFavorite()
-//                        }) {
-//                            Image(systemName: "heart")
-//                                .foregroundColor(.white)
-//                        }
+                        
                         Button(action: {
                             showImagePicker = true
                         }) {
@@ -138,7 +130,8 @@ struct WriteDiaryView: View {
                     .presentationDetents([.fraction(0.5)])
                     .presentationDragIndicator(.visible)
         })
-            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
+//            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
+            .gradientBackground(startColor: Diary.color.timeTravelBlackColor, mediumColor: Diary.color.timeTravelLightBlackColor, endColor: Diary.color.timeTravelDarkNavyBlackColor, starCount: 120)
 //        }
             .onAppear {
                 let appearance = UINavigationBarAppearance()
@@ -162,29 +155,21 @@ struct WriteDiaryView: View {
             // errorMessage = "제목과 내용을 작성해주세요!"
             return
         }
-       
-        for image in images {
-            let audioData = Data()
+        let audioData = Data()
+        
+        let diaryImage = images.isEmpty ? [] : images
+        
+//                for image in images {
             
-            ImageService.shared.saveDiaryWithImages(date: seletedDate, images: images, title: titleText, contents: contentText, voice: audioData, favorite: false)
+            
+            ImageService.shared.saveDiaryWithImages(date: seletedDate, images: diaryImage, title: titleText, contents: contentText, voice: audioData, favorite: false)
 
             titleText = ""
             contentText = ""
             images.removeAll()
-        }
+//      
+    //        for image in images {
     }
-    
-//    private func toggleFavorite() {
-//        isFavorite.toggle()
-//        
-//        // Realm에 저장
-//        let realm = try! Realm()
-//        if let diary = realm.objects(TimeDiary.self).filter("date == %@", seletedDate).first {
-//            try! realm.write {
-//                diary.favorite = isFavorite
-//            }
-//        }
-//    }
     
     // 이미지들을 3개씩 한 행에 나란히 배치
     private var imagesGridSection: some View {
