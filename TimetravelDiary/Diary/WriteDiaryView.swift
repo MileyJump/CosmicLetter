@@ -10,12 +10,6 @@ import PhotosUI
 import RealmSwift
 
 struct WriteDiaryView: View {
-    
-//    let realm = try! Realm()
-
-    
-    
-//    @ObservedResults(TimeDiary.self) var diaries
     @Environment(\.dismiss) private var dismiss
     var seletedDate: String
     
@@ -42,7 +36,6 @@ struct WriteDiaryView: View {
                             .padding()
                     }
                     
-                    // Title TextField
                     TextField("", text: $titleText)
                         .placeholder(when: titleText.isEmpty) {
                             Text("제목을 입력해주세요")
@@ -130,9 +123,7 @@ struct WriteDiaryView: View {
                     .presentationDetents([.fraction(0.5)])
                     .presentationDragIndicator(.visible)
         })
-//            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
             .gradientBackground(startColor: Diary.color.timeTravelBlackColor, mediumColor: Diary.color.timeTravelLightBlackColor, endColor: Diary.color.timeTravelDarkNavyBlackColor, starCount: 120)
-//        }
             .onAppear {
                 let appearance = UINavigationBarAppearance()
                 appearance.configureWithOpaqueBackground()
@@ -152,23 +143,15 @@ struct WriteDiaryView: View {
     private func saveDiary() {
         print("저장 버튼 클릭")
         guard !titleText.isEmpty && !contentText.isEmpty else {
-            // errorMessage = "제목과 내용을 작성해주세요!"
             return
         }
         let audioData = Data()
-        
         let diaryImage = images.isEmpty ? [] : images
-        
-//                for image in images {
-            
-            
             ImageService.shared.saveDiaryWithImages(date: seletedDate, images: diaryImage, title: titleText, contents: contentText, voice: audioData, favorite: false)
 
             titleText = ""
             contentText = ""
             images.removeAll()
-//      
-    //        for image in images {
     }
     
     // 이미지들을 3개씩 한 행에 나란히 배치
@@ -218,10 +201,6 @@ struct WriteDiaryView: View {
         }
     }
 }
-
-//#Preview {
-//    WriteDiaryView()
-//}
 
 extension View {
     func placeholder<Content: View>(

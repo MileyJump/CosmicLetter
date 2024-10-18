@@ -13,7 +13,7 @@ struct TimetravelDiaryApp: App {
         WindowGroup {
 //            ContentView(models: sampleData)
             ContentView()
-                .modelContainer(for: DiaryModel.self)
+                
 //            HomeCalendarView()
             
 //            CustomTabBarView()

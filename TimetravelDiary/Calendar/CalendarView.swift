@@ -14,8 +14,9 @@ struct CalendarView: View {
     @State var offset: CGSize = CGSize() // 제스처 인식을 위한 변수, 뷰 이동 상태를 저장
     @Binding var selectedDate: Date?
     @State var publicHolidays: Set<Date> = Set() // 공휴일을 담을 변수
-//    @State var isPopupVisible: Bool = false
     @Binding var isPopupVisible: Bool
+    @Binding var isalertVisible: Bool
+    
     @State var isShowingAlert: Bool = false // Alert 표시 여부
     @State var navigateToDiary: Bool = false // 일기 화면으로 전환
     @State var navigateToMemo: Bool = false // 메모 화면으로 전환
@@ -106,13 +107,12 @@ struct CalendarView: View {
                             ScrollView {
                                 popupContent(for: dateString)
                             }
-                            
                             popupFooter
                         }
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
                         .shadow(radius: 10)
-                        .frame(width: UIScreen.main.bounds.width * 0.7, height: 300)
+                        .frame(width: UIScreen.main.bounds.width * 0.7, height: 350)
                         .onAppear {
                             viewModel.fetchDiaryAndMemo(for: dateString)
                         }
@@ -130,7 +130,8 @@ struct CalendarView: View {
                         }
                     }
                 }
-                .padding()
+//                .padding()
+                .offset(x: 0, y: 80)
             }
         }
     }
@@ -179,9 +180,13 @@ struct CalendarView: View {
                                             selectedDiary = diary
                                             isPopupVisible = false
                                             isShowingDiaryDetail = true
+                                            isalertVisible = false
+                                            print("여기는 언제 실행돼?")
                                         }
                                     } else {
                                         print("지정된 날짜가 되지 않아 일기를 열 수 없습니다!!")
+                                        isalertVisible = true
+                                        CustomPopupView(message: "지금은 우주를 항해하며 미래에 도착할 준비 중이에요. 지정한 날짜가 오기 전까지는 일기를 열 수 없답니다!", isVisible: $isalertVisible)
                                     }
                                 }
                         }

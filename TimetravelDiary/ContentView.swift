@@ -9,32 +9,34 @@ import SwiftUI
 
 struct ContentView: View {
     enum Tab {
-        case Home, b, setting
+        case Home, collection,  read, setting
     }
     
     @State private var selected: Tab = .Home
-    @State private var circlePosition: CGFloat = 0 // 사이클의 x 위치
     
     var body: some View {
         NavigationStack {
             ZStack {
                 TabView(selection: $selected) {
-                    Group {
-                        HomeCalendarView()
-                            .tag(Tab.Home)
-                        
-                        NavigationStack {
-                            InfoView()
-                        }
-                        .tag(Tab.b)
-                        
-                        NavigationStack {
-                            SettingView()
-                        }
-                        .tag(Tab.setting)
+                    HomeCalendarView()
+                        .tag(Tab.Home)
+                    
+                    NavigationStack {
+                        InfoView()
                     }
-                    .toolbar(.hidden, for: .tabBar)
+                    .tag(Tab.collection)
+                    
+                    NavigationStack {
+                        ReadView()
+                    }
+                    .tag(Tab.read)
+                    
+                    NavigationStack {
+                        SettingView()
+                    }
+                    .tag(Tab.setting)
                 }
+                .toolbar(.hidden, for: .tabBar)
                 
                 VStack {
                     Spacer()
@@ -44,57 +46,16 @@ struct ContentView: View {
         }
     }
     
-    
     var tabBar: some View {
         HStack {
             Spacer()
-            Button {
-                selected = .Home
-            } label: {
-                VStack(alignment: .center) {
-                    Image(systemName: "calendar")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 22)
-                        .shadow(color: selected == .Home ? Diary.color.timeTravelGreenColor.opacity(0.8) : Color.clear, radius: selected == .Home ? 10 : 0, x: 0, y: 0)
-                        .shadow(color: selected == .Home ? Diary.color.timeTravelGreenColor.opacity(0.6) : Color.clear, radius: selected == .Home ? 20 : 0, x: 0, y: 0)
-                        .shadow(color: selected == .Home ? Diary.color.timeTravelGreenColor.opacity(0.4) : Color.clear, radius: selected == .Home ? 30 : 0, x: 0, y: 0)
-                }
-            }
-            .foregroundStyle(selected == .Home ? Diary.color.timeTravelGreenColor : Color.white)
+            tabBarButton(imageName: "calendar", tab: .Home, selectedTab: $selected, shadowColor: Diary.color.timeTravelGreenColor)
             Spacer()
-            
-            Button {
-                selected = .b
-            } label: {
-                VStack(alignment: .center) {
-                    Image(systemName: "gauge.with.dots.needle.bottom.0percent")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 22)
-                        .shadow(color: selected == .b ? Color.blue.opacity(0.8) : Color.clear, radius: selected == .b ? 10 : 0, x: 0, y: 0)
-                        .shadow(color: selected == .b ? Color.blue.opacity(0.6) : Color.clear, radius: selected == .b ? 20 : 0, x: 0, y: 0)
-                        .shadow(color: selected == .b ? Color.blue.opacity(0.4) : Color.clear, radius: selected == .b ? 30 : 0, x: 0, y: 0)
-                }
-            }
-            .foregroundStyle(selected == .b ? Color.blue : Color.white)
+            tabBarButton(imageName: "gauge.with.dots.needle.bottom.0percent", tab: .collection, selectedTab: $selected, shadowColor: Color.blue)
             Spacer()
-            
-            Button {
-                selected = .setting
-            } label: {
-                VStack(alignment: .center) {
-                    Image(systemName: "gearshape")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 22)
-                        .shadow(color: selected == .setting ? Color.blue.opacity(0.8) : Color.clear, radius: selected == .setting ? 10 : 0, x: 0, y: 0)
-                        .shadow(color: selected == .setting ? Color.blue.opacity(0.6) : Color.clear, radius: selected == .setting ? 20 : 0, x: 0, y: 0)
-                        .shadow(color: selected == .setting ? Color.blue.opacity(0.4) : Color.clear, radius: selected == .setting ? 30 : 0, x: 0, y: 0)
-                }
-            }
-            .foregroundStyle(selected == .setting ? Color.green : Color.white) // 여기서 수정됨
-            
+            tabBarButton(imageName: "envelope.open.fill", tab: .read, selectedTab: $selected, shadowColor: Color.green)
+            Spacer()
+            tabBarButton(imageName: "gearshape", tab: .setting, selectedTab: $selected, shadowColor: Color.green)
             Spacer()
         }
         .padding()
@@ -105,5 +66,22 @@ struct ContentView: View {
                 .shadow(color: .black.opacity(0.15), radius: 8, y: 2)
         }
         .padding(.horizontal)
+    }
+    
+    func tabBarButton(imageName: String, tab: Tab, selectedTab: Binding<Tab>, shadowColor: Color) -> some View {
+        Button {
+            selectedTab.wrappedValue = tab
+        } label: {
+            VStack(alignment: .center) {
+                Image(systemName: imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 22)
+                    .shadow(color: selectedTab.wrappedValue == tab ? shadowColor.opacity(0.8) : Color.clear, radius: selectedTab.wrappedValue == tab ? 10 : 0)
+                    .shadow(color: selectedTab.wrappedValue == tab ? shadowColor.opacity(0.6) : Color.clear, radius: selectedTab.wrappedValue == tab ? 20 : 0)
+                    .shadow(color: selectedTab.wrappedValue == tab ? shadowColor.opacity(0.4) : Color.clear, radius: selectedTab.wrappedValue == tab ? 30 : 0)
+            }
+        }
+        .foregroundStyle(selectedTab.wrappedValue == tab ? shadowColor : Color.white)
     }
 }

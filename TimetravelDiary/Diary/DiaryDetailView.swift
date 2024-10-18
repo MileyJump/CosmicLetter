@@ -58,7 +58,6 @@ struct DiaryDetailView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
             .onAppear {
-                print("되고 있냐")
                 // 네비게이션 바의 배경색 설정
                 let appearance = UINavigationBarAppearance()
                 appearance.configureWithTransparentBackground() // 투명 배경으로 설정
@@ -70,7 +69,6 @@ struct DiaryDetailView: View {
             }
             
             .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
-            
         }
     }
 }

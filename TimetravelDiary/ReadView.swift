@@ -1,19 +1,18 @@
 //
-//  collectionViewTapView.swift
+//  ReadView.swift
 //  TimetravelDiary
 //
-//  Created by 최민경 on 9/21/24.
+//  Created by 최민경 on 10/15/24.
 //
+
 import SwiftUI
 
-enum TapInfo: String, CaseIterable {
-    case diary = "일기"
-    case memo = "메모"
-    case album = "사진 앨범"
-    
+enum ReadInfo: String, CaseIterable {
+    case lock = "미열람"
+    case unlock = "열람"
 }
 
-struct InfoView: View {
+struct ReadView: View {
     @State private var selectedPicker: TapInfo = .diary // 기본 선택된 버튼
 
     var body: some View {
@@ -69,6 +68,3 @@ struct InfoView: View {
     }
 }
 
-#Preview {
-    InfoView()
-}

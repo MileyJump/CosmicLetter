@@ -39,29 +39,6 @@ class PopupViewModel: ObservableObject {
         self.memoDates = Set(memoDates)
     }
     
-    //    func fetchDiaryAndMemo(for date: String) {
-    //        let realm = try! Realm()
-    //
-    //        // 일기 가져오기
-    //        if let diary = realm.objects(TimeDiary.self).filter("date == %@", date).first {
-    //            diaryTitle = diary.title
-    //            print(diaryTitle)
-    //            hasDiary = true
-    //        } else {
-    //            diaryTitle = "일기 없음"
-    //            hasDiary = false
-    //        }
-    //
-    //        // 메모 가져오기
-    //        if let memo = realm.objects(TimeDiaryMemo.self).filter("date == %@", date).first {
-    //            memoText = memo.memo
-    //            hasMemo = true
-    //        } else {
-    //            memoText = "메모 없음"
-    //            hasMemo = false
-    //        }
-    //    }
-
 
         
         func fetchDiaryAndMemo(for dateString: String) {
