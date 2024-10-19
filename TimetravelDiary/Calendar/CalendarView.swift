@@ -29,6 +29,10 @@ struct CalendarView: View {
     
     @State var savedDates: Set<Date> = Set()
     
+    @State private var isToastVisible: Bool = false // 토스트 메시지 표시 여부
+    @State private var toastMessage: String = "" // 토스트 메시지 내용
+
+    
     @StateObject var viewModel = PopupViewModel()
     @StateObject var calendarViewModel = CalendarViewModel()
     
@@ -40,20 +44,31 @@ struct CalendarView: View {
                 .padding(.bottom, 20)
             
             calendarGridView
-//                .padding(.horizontal)
                 .frame(maxHeight: 500)
         }
         .overlay(
+            
             popupView
                 .opacity(isPopupVisible ? 1 : 0)
                 .animation(.easeInOut, value: isPopupVisible),
             alignment: .center
-        )
-        .task {
-            fetchHolidays()
-            fetchSavedDates()
             
-        }
+            
+        )
+        
+        .overlay(
+            Group {
+                if isToastVisible {
+                    CustomToastView(message: toastMessage)
+                        .transition(.opacity)
+                        .zIndex(1)
+                        .offset(y: 50)
+                }
+            },
+            alignment: .top
+        )
+
+        
         .gesture( // 스와이프 인식
             DragGesture()
                 .onChanged { gesture in
@@ -68,14 +83,11 @@ struct CalendarView: View {
                     self.offset = CGSize()
                 }
         )
-
-        
         .navigationDestination(isPresented: $isShowingDiaryDetail) {
             if let diary = selectedDiary {
                 DiaryDetailView(diary: diary)
             }
         }
-        
         .navigationDestination(isPresented: $isShowingMemoDetail) {
             if let memo = selectedMemo {
                 MemoDetailView(memo: memo)
@@ -92,10 +104,15 @@ struct CalendarView: View {
                 WriteMemoView(selectedDate: CalendarView.dateFormatter.string(from: selectedDate))
             }
         }
+        .task {
+            fetchHolidays()
+            fetchSavedDates()
+        }
     }
     
     private var popupView: some View {
         ZStack {
+            
             if isPopupVisible {
                 VStack {
                     if let selectedDate = selectedDate {
@@ -110,13 +127,12 @@ struct CalendarView: View {
                             popupFooter
                         }
                         .padding()
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Diary.color.timeTravelDarkGrayColor))
                         .shadow(radius: 10)
                         .frame(width: UIScreen.main.bounds.width * 0.7, height: 350)
                         .onAppear {
                             viewModel.fetchDiaryAndMemo(for: dateString)
                         }
-                        .onTapGesture {}
                         .actionSheet(isPresented: $isShowingAlert) {
                             ActionSheet(title: Text(""), buttons: [
                                 .default(Text("일기")) {
@@ -128,24 +144,45 @@ struct CalendarView: View {
                                 .cancel(Text("취소"))
                             ])
                         }
+                    
+                        
                     }
                 }
-//                .padding()
                 .offset(x: 0, y: 80)
+                .zIndex(1) // 팝업 뷰는 이미지보다 앞에 위치
+                
+                // 달 이미지 추가 - 팝업 상단에 자연스럽게 겹치도록
+//                Image("달")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width: 100, height: 100) // 적절한 크기로 설정
+//                    .offset(x: 100, y: -100)
+//                    .zIndex(2) // 팝업 뷰와 달이 겹치게 이미지가 앞에 오도록 우선순위 설정
             }
+            
+//            
+//            if isalertVisible {
+//                
+//                CustomPopupView(message: "지금은 우주를 항해하며 미래에 도착할 준비 중이에요. \n 지정한 날짜가 오기 전까지는 일기를 열 수 없답니다!", isVisible: $isalertVisible)
+//                    .transition(.opacity) // 팝업을 부드럽게 표시
+//                    .zIndex(1) // 다른 뷰 위에 팝업을 표시
+//                    .offset(x: 0, y: 0)
+//            }
+            
         }
     }
-
+    
     private func popupHeader(for selectedDate: Date) -> some View {
         Text(Self.popupFormatter(selectedDate))
             .font(.system(size: 20))
-            .fontWeight(.regular)
+            .foregroundColor(.white)
+            .fontWeight(.bold)
             .padding(.top, 10)
             .padding(.leading, 10)
             .padding(.bottom, 20)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
-
+    
     private func popupContent(for dateString: String) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             if !viewModel.diaries.isEmpty {
@@ -159,7 +196,7 @@ struct CalendarView: View {
                                 Text("일기")
                                     .font(.system(size: 15))
                                     .padding(.leading, 5)
-                                
+                                    .foregroundColor(.white)
                                 
                                 if let diaryDate = CalendarView.dateFormatter.date(from: diary.date), diaryDate <= Date() {
                                     Image(systemName: "lock.open.fill")
@@ -173,7 +210,8 @@ struct CalendarView: View {
                             
                             Text(diaryTitle)
                                 .font(.system(size: 15))
-                                .padding(.leading, 14)
+                                .padding(.leading, 20)
+                                .foregroundColor(.white)
                                 .onTapGesture {
                                     if let diaryDate = CalendarView.dateFormatter.date(from: diary.date), diaryDate <= Date() {
                                         DispatchQueue.main.async {
@@ -181,12 +219,11 @@ struct CalendarView: View {
                                             isPopupVisible = false
                                             isShowingDiaryDetail = true
                                             isalertVisible = false
-                                            print("여기는 언제 실행돼?")
                                         }
                                     } else {
-                                        print("지정된 날짜가 되지 않아 일기를 열 수 없습니다!!")
                                         isalertVisible = true
-                                        CustomPopupView(message: "지금은 우주를 항해하며 미래에 도착할 준비 중이에요. 지정한 날짜가 오기 전까지는 일기를 열 수 없답니다!", isVisible: $isalertVisible)
+//                                        showToast(message: "지금은 우주를 항해하며 미래에 도착할 준비 중이에요. \n 지정한 날짜가 오기 전까지는 일기를 열 수 없답니다!")
+                                        showToast(message: "우주 항해 중! \n 지정한 날짜가 오기 전까지는 일기를 열 수 없어요!")
                                     }
                                 }
                         }
@@ -225,23 +262,34 @@ struct CalendarView: View {
         }
         .padding(.horizontal, 16)
     }
-
+    
     private var popupFooter: some View {
         Button(action: {
             isShowingAlert = true
         }) {
             Image(systemName: "plus.circle")
                 .resizable()
+                .foregroundStyle(.white)
                 .frame(width: 40, height: 40)
                 .padding(.bottom, 10)
         }
     }
     
+    private func showToast(message: String) {
+        toastMessage = message
+        isToastVisible = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            isToastVisible = false
+        }
+    }
+
+    
     private func fetchDiary(for tittle: String) -> TimeDiary? {
         let realm = try! Realm()
         return realm.objects(TimeDiary.self).filter("title == %@", tittle).first
     }
-
+    
     private func fetchSavedDates() {
         // Realm에서 저장된 TimeDiary와 TimeDiaryMemo 객체들의 날짜를 불러와 savedDates에 저장
         let realm = try! Realm()
@@ -264,7 +312,7 @@ struct CalendarView: View {
             isPopupVisible = true
         }
     }
-
+    
     private func fetchHolidays() {
         let currentYear = Calendar.current.component(.year, from: month)
         NetworkManager.shared.fetchHolidays(for: currentYear, countryCode: "KR") { result in
@@ -284,7 +332,7 @@ struct CalendarView: View {
                 HStack {
                     Text(month, formatter: Self.monthformatter)
                         .font(.system(size: 80))
-//                        .fontWeight(.bold)
+                    //                        .fontWeight(.bold)
                         .foregroundColor(.white)
                     
                     VStack(alignment: .leading) {
@@ -309,8 +357,8 @@ struct CalendarView: View {
                     
                     Button {
                         let today = Date()
-                            month = today
-                            selectedDate = today
+                        month = today
+                        selectedDate = today
                     } label: {
                         Text("오늘")
                             .foregroundColor(.white)
@@ -340,7 +388,7 @@ struct CalendarView: View {
             }
             .padding(.bottom, 20)
         }
-//        .padding(.top, 30
+        //        .padding(.top, 30
     }
     
     // MARK: - 날짜 그리드 뷰
@@ -352,8 +400,8 @@ struct CalendarView: View {
             LazyVGrid(columns: Array(repeating: GridItem(), count: 7), spacing: 35) { // 셀 간격 조정
                 ForEach(0 ..< daysInMonth + firstWeekday, id: \.self) { index in
                     if index < firstWeekday {
-//                        RoundedRectangle(cornerRadius: 5)
-//                            .foregroundColor(Color.clear)
+                        //                        RoundedRectangle(cornerRadius: 5)
+                        //                            .foregroundColor(Color.clear)
                         Spacer()
                     } else {
                         let date = getDate(for: index - firstWeekday)
@@ -362,7 +410,7 @@ struct CalendarView: View {
                         let hasSavedData = savedDates.contains(date)
                         
                         CellView(day: day, cellDate: date, isSelected: date == selectedDate, isToday: date.isSameDate(date: Date()), publicHolidays: publicHolidays, hasSavedData: hasSavedData)
-
+                        
                             .onTapGesture {
                                 selectedDate = date
                                 fetchDiaryAndMemo(for: CalendarView.dateFormatter.string(from: date))
@@ -409,9 +457,9 @@ private struct CellView: View {
                 .font(.system(size: 20))
                 .foregroundColor(textColor)
             
-                
             
-//            if hasDiary || hasMemo {
+            
+            //            if hasDiary || hasMemo {
             if hasSavedData {
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)

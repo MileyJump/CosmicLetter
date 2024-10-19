@@ -36,8 +36,9 @@ extension Diary {
         static let timeTravelDarkNavyBlackColor = Color(UIColor(hexCode: "021526"))
         
         static let timeTravelColor = Color(UIColor(hexCode: "0E46A3"))
-//        static let timeTravelGreenColor = Color(UIColor(hexCode: "73EC8B"))
         static let timeTravelGreenColor = Color(UIColor(hexCode: "15B392"))
+        static let timeTravelDarkGrayColor = Color(UIColor(hexCode: "373A40"))
+        static let timeTravelPopUpColor = Color(UIColor(hexCode: "151515"))
         
         
         

@@ -11,13 +11,6 @@ struct SettingView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // 그라데이션 배경 추가
-//                Color.clear
-//                    .gradientBackground(startColor: Diary.color.timeTravelNavyColor,
-//                                        mediumColor: Diary.color.timeTravelNavyColor,
-//                                        endColor: Diary.color.timeTravelPurpleColor,
-//                                        starCount: 100)
-
                 List {
                     Section(header: Text("정보")
                         .font(.headline)

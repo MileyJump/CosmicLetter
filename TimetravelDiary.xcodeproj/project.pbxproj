@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B005764C2CBE3EF8002FF1E7 /* ReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B005764B2CBE3EF8002FF1E7 /* ReadView.swift */; };
 		B005765B2CC280A5002FF1E7 /* CustomPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B005765A2CC280A5002FF1E7 /* CustomPopupView.swift */; };
+		B005765D2CC399CD002FF1E7 /* CustomToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B005765C2CC399CD002FF1E7 /* CustomToastMessageView.swift */; };
 		B05357D52C9412DD00FCD3A2 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357D42C9412DD00FCD3A2 /* Color+.swift */; };
 		B05357D72C94454600FCD3A2 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357D62C94454600FCD3A2 /* CalendarView.swift */; };
 		B05357DB2C945A2700FCD3A2 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357DA2C945A2700FCD3A2 /* BubbleView.swift */; };
@@ -67,6 +68,7 @@
 /* Begin PBXFileReference section */
 		B005764B2CBE3EF8002FF1E7 /* ReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadView.swift; sourceTree = "<group>"; };
 		B005765A2CC280A5002FF1E7 /* CustomPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopupView.swift; sourceTree = "<group>"; };
+		B005765C2CC399CD002FF1E7 /* CustomToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToastMessageView.swift; sourceTree = "<group>"; };
 		B05357D42C9412DD00FCD3A2 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		B05357D62C94454600FCD3A2 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		B05357DA2C945A2700FCD3A2 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */,
 				B005764B2CBE3EF8002FF1E7 /* ReadView.swift */,
 				B005765A2CC280A5002FF1E7 /* CustomPopupView.swift */,
+				B005765C2CC399CD002FF1E7 /* CustomToastMessageView.swift */,
 			);
 			path = TimetravelDiary;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				B05357E12C95706F00FCD3A2 /* HomeCalendarView.swift in Sources */,
 				B0535BFB2C95A37D00C7F9CD /* PublicHolidayModel.swift in Sources */,
 				B0775D6F2CA8330B0013B68A /* MemoCollectionView.swift in Sources */,
+				B005765D2CC399CD002FF1E7 /* CustomToastMessageView.swift in Sources */,
 				B0B069F32CA1C4EA00A1BCB1 /* UnreadDiaryView.swift in Sources */,
 				B005764C2CBE3EF8002FF1E7 /* ReadView.swift in Sources */,
 				B0775D5C2CA698330013B68A /* AlbumViewModel.swift in Sources */,

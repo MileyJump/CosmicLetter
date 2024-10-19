@@ -26,7 +26,7 @@ struct CustomPopupView: View {
                     Button(action: {
                         isVisible = false // 버튼 클릭 시 팝업 닫기
                     }) {
-                        Text("지금은 우주를 항해하며 미래에 도착할 준비 중이에요. 지정한 날짜가 오기 전까지는 일기를 열 수 없답니다!")
+                        Text("확인")
                             .fontWeight(.semibold)
                             .padding()
                             .background(Color.blue)
@@ -37,7 +37,7 @@ struct CustomPopupView: View {
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
                 .shadow(radius: 10)
-                .frame(width: 300, height: 150) // 팝업의 크기 조정
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height) // 팝업의 크기 조정
             }
         }
     }

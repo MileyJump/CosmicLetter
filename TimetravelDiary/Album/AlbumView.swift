@@ -26,33 +26,44 @@ struct AlbumView: View {
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 0) {
                             ForEach(viewModel.images, id: \.id) { diary in
-                                NavigationLink(destination: DiaryDetailView(diary: diary)) {
-                                    if let firstPhotoName = diary.photos.first?.photoName,
-                                       let firstImage = viewModel.loadImageFromDocument(filename: firstPhotoName) {
-                                        Image(uiImage: firstImage)
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
-                                            .clipped()
-                                    } 
-//                                    else {
-//                                        Rectangle()
-//                                            .fill(Color.gray)
-//                                            .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
-//                                    }
+                                if let diaryDate = CalendarView.dateFormatter.date(from: diary.date), diaryDate > Date() {
+                                    // 자물쇠 이미지 표시
+                                    Image(systemName: "lock.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 50, height: 50)
+                                        .foregroundColor(.gray)
+                                    
+                                } else {
+                                    // 네비게이션 링크
+                                    NavigationLink(destination: DiaryDetailView(diary: diary)) {
+                                        if let firstPhotoName = diary.photos.first?.photoName,
+                                           let firstImage = viewModel.loadImageFromDocument(filename: firstPhotoName) {
+                                            Image(uiImage: firstImage)
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
+                                                .clipped()
+                                        }
+                                    }
                                 }
+                                //                            } else {
+                                //                                // 날짜 변환 실패 시 기본 UI 표시 (선택 사항)
+                                //                                Image(systemName: "exclamationmark.triangle.fill")
+                                //                                    .resizable()
+                                //                                    .scaledToFit()
+                                //                                    .frame(width: 50, height: 50)
+                                //                                    .foregroundColor(.red)
+                                //                            }
                             }
                         }
                     }
                 }
-                 
             }
             .background(.clear)
-//            .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
             .onAppear {
                 viewModel.fetchImageFromDiaryAlbum()
             }
-            
         }
     }
 }

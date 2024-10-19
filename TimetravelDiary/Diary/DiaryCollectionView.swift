@@ -15,7 +15,6 @@ struct DiaryCollectionView: View {
     
     var body: some View {
         // 월별로 그룹화된 일기 데이터를 생성
-        
         let groupedDiaries = Dictionary(grouping: diaries) { diary -> String in
             // monthOnlyFormatter를 사용하여 날짜를 월로 변환
             let date = CalendarView.calendarFormatter.date(from: diary.date) ?? Date()
@@ -31,22 +30,34 @@ struct DiaryCollectionView: View {
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding() ) {
-//                    .background(Color.gray.opacity(0.1))) {
-                    ForEach(groupedDiaries[month] ?? [], id: \.id) { diary in
-                        NavigationLink(destination: DiaryDetailView(diary: diary)) {
-                            Text(diary.title)
-                                .lineLimit(1) // 줄 수를 1로 제한
-                                .truncationMode(.tail) // 줄임표 설정
-                                .padding() // 텍스트에 패딩 추가
-                                .frame(width: 300, alignment: .leading) // 고정 폭 설정
-                                .background(Color.gray.opacity(0.3)) // 배경색 설정
-                                .foregroundColor(.white)
-                                .cornerRadius(10) // 둥글게 처리
-                                .padding(.horizontal, 5) // 양쪽 여백 설정
-                                .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2) // 그림자 추가
+                        ForEach(groupedDiaries[month] ?? [], id: \.id) { diary in
+                            if let diaryDate = CalendarView.dateFormatter.date(from: diary.date), diaryDate > Date() {
+                                // 자물쇠 이미지 표시
+                                Image(systemName: "lock.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 300, height: 50)
+                                    .background(Color.gray.opacity(0.3))
+                                    .cornerRadius(10) // 둥글게 처리
+//                                    .padding(.horizontal, 5) // 양쪽 여백 설정
+                                    .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2) // 그림자 추가
+                                    .foregroundColor(.gray)
+                            } else {
+                                NavigationLink(destination: DiaryDetailView(diary: diary)) {
+                                    Text(diary.title)
+                                        .lineLimit(1) // 줄 수를 1로 제한
+                                        .truncationMode(.tail) // 줄임표 설정
+                                        .padding() // 텍스트에 패딩 추가
+                                        .frame(width: 300, alignment: .leading) // 고정 폭 설정
+                                        .background(Color.gray.opacity(0.3)) // 배경색 설정
+                                        .foregroundColor(.white)
+                                        .cornerRadius(10) // 둥글게 처리
+//                                        .padding(.horizontal, 5) // 양쪽 여백 설정
+                                        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2) // 그림자 추가
+                                }
+                            }
                         }
                     }
-                }
             }
             Spacer()
         }
