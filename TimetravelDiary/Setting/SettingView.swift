@@ -15,7 +15,7 @@ struct SettingView: View {
                     Section(header: Text("정보")
                         .font(.headline)
                         .foregroundColor(.gray))  {
-                        Link(destination: URL(string: "https://magnificent-plantain-b4f.notion.site/6189dd4b6c4649968db0f6f59892bf10?pvs=4")!) {
+                        Link(destination: URL(string: "https://www.notion.so/1254718ce39580bc8676cfc1ad3b1428?pvs=4")!) {
                             HStack {
                                 Image(systemName: "exclamationmark.circle")
                                     .foregroundStyle(.black)
@@ -24,7 +24,7 @@ struct SettingView: View {
                                     .foregroundStyle(.black)
                             }
                         }
-                        Link(destination: URL(string: "mailto:choialsrud2002@gmail.com")!) {
+                        Link(destination: URL(string: "mailto:miley.ios.dev@gmail.com")!) {
                             HStack {
                                 Image(systemName: "questionmark.circle")
                                     .foregroundStyle(.black)
@@ -40,12 +40,12 @@ struct SettingView: View {
                             Text("버전 정보")
                                 .foregroundStyle(.black)
                             Spacer()
-                            Text("1.0")
+                            Text("1.0.3")
                                 .foregroundStyle(.black)
                         }
                     }
                 }
-//                .listStyle(PlainListStyle()) // 리스트 스타일을 플레인으로 설정
+
                 .navigationTitle("Settings")
 //                .navigationBarTitleDisplayMode(.inline) // 타이틀 표시 모드 설정
                 .foregroundColor(.white) // 타이틀 색상 변경

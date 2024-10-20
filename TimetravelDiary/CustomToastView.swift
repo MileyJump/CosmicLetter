@@ -1,5 +1,5 @@
 //
-//  CustomToastMessageView.swift
+//  CustomToastView.swift
 //  TimetravelDiary
 //
 //  Created by 최민경 on 10/19/24.

@@ -32,7 +32,23 @@ struct InfoView: View {
                             .cornerRadius(20) // 캡슐 모양으로 둥글게
                             .overlay(
                                 selectedPicker == item ? // 선택된 버튼에 테두리 추가
-                                    Capsule().stroke(Diary.color.timeTravelGreenColor, lineWidth: 3) : nil
+//                                    Capsule().stroke(Diary.color.timeTravelGreenColor, lineWidth: 3) : nil
+//                                    Capsule().stroke(
+//                                        LinearGradient(
+//                                            gradient: Gradient(colors: [Color.green, Color.blue, Color.white]),
+//                                            startPoint: .topLeading,
+//                                            endPoint: .bottomTrailing
+//                                        ),
+//                                        lineWidth: 4
+//                                    ) : nil
+                                Capsule().stroke(
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [Diary.color.timeTravelBlueColor, Diary.color.timeTravelBlueColor, Color.white]),
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ),
+                                        lineWidth: 4
+                                    ) : nil
                             )
                             .shadow(color: selectedPicker == item ? Diary.color.timeTravelGreenColor.opacity(0.8) : Color.white, radius: 10, x: 0, y: 0)
                             .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.6) : Color.clear, radius: 20, x: 0, y: 0)
@@ -59,12 +75,6 @@ struct InfoView: View {
             }
             Spacer()
         }
-        // 전체 배경에 그라데이션 적용
-//        .gradientBackground(startColor: Diary.color.timeTravelNavyColor,
-//                            mediumColor: Diary.color.timeTravelNavyColor,
-//                            endColor: Diary.color.timeTravelbluePinkColor,
-//                            starCount: 100)
-        
         .gradientBackground(startColor: Diary.color.timeTravelBlackColor, mediumColor: Diary.color.timeTravelLightBlackColor, endColor: Diary.color.timeTravelDarkNavyBlackColor, starCount: 120)
     }
 }

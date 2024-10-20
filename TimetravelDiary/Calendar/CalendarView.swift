@@ -31,7 +31,7 @@ struct CalendarView: View {
     
     @State private var isToastVisible: Bool = false // 토스트 메시지 표시 여부
     @State private var toastMessage: String = "" // 토스트 메시지 내용
-
+    
     
     @StateObject var viewModel = PopupViewModel()
     @StateObject var calendarViewModel = CalendarViewModel()
@@ -67,7 +67,7 @@ struct CalendarView: View {
             },
             alignment: .top
         )
-
+        
         
         .gesture( // 스와이프 인식
             DragGesture()
@@ -144,7 +144,7 @@ struct CalendarView: View {
                                 .cancel(Text("취소"))
                             ])
                         }
-                    
+                        
                         
                     }
                 }
@@ -152,22 +152,22 @@ struct CalendarView: View {
                 .zIndex(1) // 팝업 뷰는 이미지보다 앞에 위치
                 
                 // 달 이미지 추가 - 팝업 상단에 자연스럽게 겹치도록
-//                Image("달")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(width: 100, height: 100) // 적절한 크기로 설정
-//                    .offset(x: 100, y: -100)
-//                    .zIndex(2) // 팝업 뷰와 달이 겹치게 이미지가 앞에 오도록 우선순위 설정
+                //                Image("달")
+                //                    .resizable()
+                //                    .scaledToFit()
+                //                    .frame(width: 100, height: 100) // 적절한 크기로 설정
+                //                    .offset(x: 100, y: -100)
+                //                    .zIndex(2) // 팝업 뷰와 달이 겹치게 이미지가 앞에 오도록 우선순위 설정
             }
             
-//            
-//            if isalertVisible {
-//                
-//                CustomPopupView(message: "지금은 우주를 항해하며 미래에 도착할 준비 중이에요. \n 지정한 날짜가 오기 전까지는 일기를 열 수 없답니다!", isVisible: $isalertVisible)
-//                    .transition(.opacity) // 팝업을 부드럽게 표시
-//                    .zIndex(1) // 다른 뷰 위에 팝업을 표시
-//                    .offset(x: 0, y: 0)
-//            }
+            //
+            //            if isalertVisible {
+            //
+            //                CustomPopupView(message: "지금은 우주를 항해하며 미래에 도착할 준비 중이에요. \n 지정한 날짜가 오기 전까지는 일기를 열 수 없답니다!", isVisible: $isalertVisible)
+            //                    .transition(.opacity) // 팝업을 부드럽게 표시
+            //                    .zIndex(1) // 다른 뷰 위에 팝업을 표시
+            //                    .offset(x: 0, y: 0)
+            //            }
             
         }
     }
@@ -222,7 +222,7 @@ struct CalendarView: View {
                                         }
                                     } else {
                                         isalertVisible = true
-//                                        showToast(message: "지금은 우주를 항해하며 미래에 도착할 준비 중이에요. \n 지정한 날짜가 오기 전까지는 일기를 열 수 없답니다!")
+                                        //                                        showToast(message: "지금은 우주를 항해하며 미래에 도착할 준비 중이에요. \n 지정한 날짜가 오기 전까지는 일기를 열 수 없답니다!")
                                         showToast(message: "우주 항해 중! \n 지정한 날짜가 오기 전까지는 일기를 열 수 없어요!")
                                     }
                                 }
@@ -283,7 +283,7 @@ struct CalendarView: View {
             isToastVisible = false
         }
     }
-
+    
     
     private func fetchDiary(for tittle: String) -> TimeDiary? {
         let realm = try! Realm()
@@ -332,7 +332,6 @@ struct CalendarView: View {
                 HStack {
                     Text(month, formatter: Self.monthformatter)
                         .font(.system(size: 80))
-                    //                        .fontWeight(.bold)
                         .foregroundColor(.white)
                     
                     VStack(alignment: .leading) {
@@ -388,7 +387,6 @@ struct CalendarView: View {
             }
             .padding(.bottom, 20)
         }
-        //        .padding(.top, 30
     }
     
     // MARK: - 날짜 그리드 뷰

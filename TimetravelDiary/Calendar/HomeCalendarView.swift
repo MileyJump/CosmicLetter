@@ -29,7 +29,7 @@ struct HomeCalendarView: View {
                 
                 CalendarView(month: Date(), selectedDate: $selectedDate, isPopupVisible: $isPopupVisible, isalertVisible: $isalertVisible)
                     .frame(width: 380, height: 200)
-                    .offset(y: -80)  // 캘린더 뷰 위치 조정
+                    .offset(y: -60)  // 캘린더 뷰 위치 조정
                 
                 FloatingMenu(selectedDate: $selectedDate)
                     .padding(.bottom, 50)

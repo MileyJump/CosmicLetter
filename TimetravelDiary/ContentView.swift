@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     enum Tab {
-        case Home, collection,  read, setting
+        case Home, collection, setting
     }
     
     @State private var selected: Tab = .Home
@@ -26,10 +26,10 @@ struct ContentView: View {
                     }
                     .tag(Tab.collection)
                     
-                    NavigationStack {
-                        ReadView()
-                    }
-                    .tag(Tab.read)
+//                    NavigationStack {
+//                        ReadView()
+//                    }
+//                    .tag(Tab.read)
                     
                     NavigationStack {
                         SettingView()
@@ -49,13 +49,13 @@ struct ContentView: View {
     var tabBar: some View {
         HStack {
             Spacer()
-            tabBarButton(imageName: "calendar", tab: .Home, selectedTab: $selected, shadowColor: Diary.color.timeTravelGreenColor)
+            tabBarButton(imageName: "calendar", tab: .Home, selectedTab: $selected, shadowColor: Diary.color.timeTravelBlueColor)
             Spacer()
-            tabBarButton(imageName: "gauge.with.dots.needle.bottom.0percent", tab: .collection, selectedTab: $selected, shadowColor: Color.blue)
+            tabBarButton(imageName: "gauge.with.dots.needle.bottom.0percent", tab: .collection, selectedTab: $selected, shadowColor: Diary.color.timeTravelBlueColor)
             Spacer()
-            tabBarButton(imageName: "envelope.open.fill", tab: .read, selectedTab: $selected, shadowColor: Color.green)
-            Spacer()
-            tabBarButton(imageName: "gearshape", tab: .setting, selectedTab: $selected, shadowColor: Color.green)
+//            tabBarButton(imageName: "envelope.open.fill", tab: .read, selectedTab: $selected, shadowColor: Color.green)
+//            Spacer()
+            tabBarButton(imageName: "gearshape", tab: .setting, selectedTab: $selected, shadowColor: Diary.color.timeTravelBlueColor)
             Spacer()
         }
         .padding()
@@ -83,5 +83,6 @@ struct ContentView: View {
             }
         }
         .foregroundStyle(selectedTab.wrappedValue == tab ? shadowColor : Color.white)
+        .frame(maxWidth: .infinity)
     }
 }

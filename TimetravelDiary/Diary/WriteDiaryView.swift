@@ -20,138 +20,143 @@ struct WriteDiaryView: View {
     @State private var errorMessage: String?
     @State private var showImagePicker = false
     @State private var showRecordingModal = false // 모달을 보여줄지 여부
+    @State private var isToastVisible = false // CustomPopView 상태 추가
+    @State private var toastMessage = "" // 커스텀 팝업 메시지
     
-    @State private var isFavorite: Bool = false // favorite 상태 추가
+//    @State private var isFavorite: Bool = false // favorite 상태 추가
     
     @StateObject private var audioRecorderManager = AudioRecorderManager()
     
     var body: some View {
-        // 얘를 없애면 툴바가 사라짐
-//        NavigationView {
-            ZStack {
-                VStack {
-                    if let errorMessage = errorMessage {
-                        Text(errorMessage)
-                            .foregroundColor(.red)
-                            .padding()
-                    }
-                    
-                    TextField("", text: $titleText)
-                        .placeholder(when: titleText.isEmpty) {
-                            Text("제목을 입력해주세요")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 18))
-                        }
+        ZStack {
+            VStack {
+                if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
                         .padding()
-                        .background {
-                            Rectangle()
-                                .fill(Diary.color.timeTravelPinkColor.opacity(0.3))
-                                .shadow(color: .black.opacity(0.15), radius: 8, y: 2)
-                                .cornerRadius(10)
-                           
-                        }
-                        .foregroundColor(.white)
-                    
-                    // 선택된 이미지가 있을 때 이미지 그리드 섹션을 표시
-                    if !images.isEmpty {
-                        imagesGridSection
+                }
+                
+                TextField("", text: $titleText)
+                    .placeholder(when: titleText.isEmpty) {
+                        Text("제목을 입력해주세요")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 18))
                     }
-                    
-                    ZStack(alignment: .topLeading) {
-                        if contentText.isEmpty {
-                            Text("하고 싶은 말이 있나요?")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 14, weight: .regular))
-                                .padding(.top, 23)
-                                .padding(.leading, 15)
-                        }
-                        TextEditor(text: $contentText)
-                            .padding()
-                            .background(Color.clear)
-                            .foregroundColor(.white)
-                            .scrollContentBackground(.hidden)
-                    }
-
+                    .padding()
                     .background {
                         Rectangle()
                             .fill(Diary.color.timeTravelPinkColor.opacity(0.3))
                             .shadow(color: .black.opacity(0.15), radius: 8, y: 2)
                             .cornerRadius(10)
                     }
+                    .foregroundColor(.white)
+                
+                // 선택된 이미지가 있을 때 이미지 그리드 섹션을 표시
+                if !images.isEmpty {
+                    imagesGridSection
                 }
-                .padding()
-                .toolbar {
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        
-                        Button(action: {
-                            showImagePicker = true
-                        }) {
-                            Image(systemName: "photo")
-                                .foregroundColor(.white)
-                        }
-                        Button(action: {
-                            showRecordingModal = true
-                        }) {
-                            Image(systemName: "mic")
-                                .foregroundColor(.white)
-                        }
-                        Spacer()
+                
+                ZStack(alignment: .topLeading) {
+                    if contentText.isEmpty {
+                        Text("하고 싶은 말이 있나요?")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 14, weight: .regular))
+                            .padding(.top, 23)
+                            .padding(.leading, 15)
                     }
+                    TextEditor(text: $contentText)
+                        .padding()
+                        .background(Color.clear)
+                        .foregroundColor(.white)
+                        .scrollContentBackground(.hidden)
                 }
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text(seletedDate)
+                .background {
+                    Rectangle()
+                        .fill(Diary.color.timeTravelPinkColor.opacity(0.3))
+                        .shadow(color: .black.opacity(0.15), radius: 8, y: 2)
+                        .cornerRadius(10)
+                }
+            }
+            .padding()
+            .toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button(action: {
+                        showImagePicker = true
+                    }) {
+                        Image(systemName: "photo")
                             .foregroundColor(.white)
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("저장") {
-                            print("저장 tapped!")
-                            saveDiary()
-                            dismiss()
-                        }
-                        .foregroundColor(.white)
+                    Button(action: {
+                        showRecordingModal = true
+                    }) {
+                        Image(systemName: "mic")
+                            .foregroundColor(.white)
                     }
+                    Spacer()
                 }
-                .navigationBarTitleDisplayMode(.inline)
             }
-            .photosPicker(isPresented: $showImagePicker, selection: $selectedPhotos, maxSelectionCount: 3, matching: .images)
-            .onChange(of: selectedPhotos) { _ in
-                loadSelectedPhotos()
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text(seletedDate)
+                        .foregroundColor(.white)
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("저장") {
+                        saveDiary()
+//                        dismiss()
+                    }
+                    .foregroundColor(.white)
+                }
             }
-            .sheet(isPresented: $showRecordingModal, content: {
-                RecordingView(audioRecorderManager: audioRecorderManager)
-                    .presentationDetents([.fraction(0.5)])
-                    .presentationDragIndicator(.visible)
+            .navigationBarTitleDisplayMode(.inline)
+            if isToastVisible {
+                CustomToastView(message: toastMessage)
+                    .transition(.opacity)
+                    .zIndex(1)
+                    .offset(y: 50)
+            }
+        }
+        .photosPicker(isPresented: $showImagePicker, selection: $selectedPhotos, maxSelectionCount: 3, matching: .images)
+        .onChange(of: selectedPhotos) { _ in
+            loadSelectedPhotos()
+        }
+        .sheet(isPresented: $showRecordingModal, content: {
+            RecordingView(audioRecorderManager: audioRecorderManager)
+                .presentationDetents([.fraction(0.5)])
+                .presentationDragIndicator(.visible)
         })
-            .gradientBackground(startColor: Diary.color.timeTravelBlackColor, mediumColor: Diary.color.timeTravelLightBlackColor, endColor: Diary.color.timeTravelDarkNavyBlackColor, starCount: 120)
-            .onAppear {
-                let appearance = UINavigationBarAppearance()
-                appearance.configureWithOpaqueBackground()
-                appearance.backgroundColor = .clear // 배경색을 투명하게
-                appearance.titleTextAttributes = [.foregroundColor: UIColor.clear] // 타이틀을 숨김
-                
-                // 백 버튼 색상을 흰색으로 변경
-                appearance.backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear] // 백 버튼 타이틀을 숨김
-                
-                UINavigationBar.appearance().tintColor = .white // 백 버튼 아이콘을 흰색으로 변경
-                UINavigationBar.appearance().standardAppearance = appearance
-                UINavigationBar.appearance().scrollEdgeAppearance = appearance
-            }
+        .gradientBackground(startColor: Diary.color.timeTravelBlackColor, mediumColor: Diary.color.timeTravelLightBlackColor, endColor: Diary.color.timeTravelDarkNavyBlackColor, starCount: 120)
+        .onAppear {
+            configureNavigationBar()
+        }
     }
+    
+    // 나중에 이 부분 재사용 높게 빼기 🍀🍀🍀🍀🍀🍀🍀🍀🍀
+    private func showToast(message: String) {
+        toastMessage = message
+        isToastVisible = true
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            isToastVisible = false
+        }
+    }
     
     private func saveDiary() {
         print("저장 버튼 클릭")
         guard !titleText.isEmpty && !contentText.isEmpty else {
+            showToast(message: "제목과 내용을 입력해야 합니다.")
+            
+            isToastVisible = true
             return
         }
         let audioData = Data()
         let diaryImage = images.isEmpty ? [] : images
-            ImageService.shared.saveDiaryWithImages(date: seletedDate, images: diaryImage, title: titleText, contents: contentText, voice: audioData, favorite: false)
-
-            titleText = ""
-            contentText = ""
-            images.removeAll()
+        ImageService.shared.saveDiaryWithImages(date: seletedDate, images: diaryImage, title: titleText, contents: contentText, voice: audioData, favorite: false)
+        
+        dismiss()
+        titleText = ""
+        contentText = ""
+        images.removeAll()
     }
     
     // 이미지들을 3개씩 한 행에 나란히 배치
@@ -199,6 +204,20 @@ struct WriteDiaryView: View {
                 }
             }
         }
+    }
+    
+    private func configureNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .clear // 배경색을 투명하게
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.clear] // 타이틀을 숨김
+        
+        // 백 버튼 색상을 흰색으로 변경
+        appearance.backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear] // 백 버튼 타이틀을 숨김
+        
+        UINavigationBar.appearance().tintColor = .white // 백 버튼 아이콘을 흰색으로 변경
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
 }
 
@@ -273,7 +292,7 @@ struct RecordingView: View {
                 .padding()
             }
             .padding(.horizontal)
-       
+            
         }
         .padding()
         // 녹음이 끝나면 화면에 표시되는 오디오 레벨 그래프를 리셋 역할
@@ -299,7 +318,7 @@ struct RecordingView: View {
 
 struct AudioLevelGraph: View {
     var audioLevels: [CGFloat]
-
+    
     var body: some View {
         HStack(spacing: 4) {
             ForEach(audioLevels, id: \.self) { level in

@@ -43,9 +43,7 @@ struct FloatingMenu: View {
                     Circle()
                         .stroke(
                             LinearGradient(
-//                                gradient: Gradient(colors: [Color.yellow, Color.blue, .white]),
                                 gradient: Gradient(colors: [Color.green, Color.blue, Color.white]),
-//                                gradient: Gradient(colors: [Color.purple, Color.blue]),
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
@@ -60,18 +58,6 @@ struct FloatingMenu: View {
                         .imageScale(.large)
                         .foregroundColor(.white)
                 }
-//                ZStack{
-//                    Circle()
-//                        .stroke(Color.blue, lineWidth: 4)
-//                        .shadow(color: Color.blue.opacity(0.8), radius: 10, x: 0, y: 0)
-//                        .shadow(color: Color.blue.opacity(0.6), radius: 20, x: 0, y: 0)
-//                        .shadow(color: Color.blue.opacity(0.4), radius: 30, x: 0, y: 0)
-//                        .foregroundColor(Color(red:153/255, green:102/255, blue:255/255 ))
-//                        .frame(width:55,height:55)
-//                    Image(systemName: "star.fill")
-//                        .imageScale(.large)
-//                        .foregroundColor(.white)
-//                }
             }
         }
     }
