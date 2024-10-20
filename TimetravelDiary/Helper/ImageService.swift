@@ -50,7 +50,6 @@ class ImageService {
         timeDiary.contents = contents
         timeDiary.voice = voice
         timeDiary.favorite = favorite
-        //        timeDiary.memo = memo
         
         try! realm.write {
             realm.add(timeDiary)

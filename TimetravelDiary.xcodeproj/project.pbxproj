@@ -8,11 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B005764C2CBE3EF8002FF1E7 /* ReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B005764B2CBE3EF8002FF1E7 /* ReadView.swift */; };
-		B005765B2CC280A5002FF1E7 /* CustomPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B005765A2CC280A5002FF1E7 /* CustomPopupView.swift */; };
 		B005765D2CC399CD002FF1E7 /* CustomToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B005765C2CC399CD002FF1E7 /* CustomToastView.swift */; };
 		B05357D52C9412DD00FCD3A2 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357D42C9412DD00FCD3A2 /* Color+.swift */; };
 		B05357D72C94454600FCD3A2 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357D62C94454600FCD3A2 /* CalendarView.swift */; };
-		B05357DB2C945A2700FCD3A2 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357DA2C945A2700FCD3A2 /* BubbleView.swift */; };
 		B05357E12C95706F00FCD3A2 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357E02C95706F00FCD3A2 /* HomeCalendarView.swift */; };
 		B0535BFB2C95A37D00C7F9CD /* PublicHolidayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535BFA2C95A37D00C7F9CD /* PublicHolidayModel.swift */; };
 		B0535BFE2C95A3B200C7F9CD /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535BFD2C95A3B200C7F9CD /* NetworkManager.swift */; };
@@ -37,12 +35,9 @@
 		B0775D6F2CA8330B0013B68A /* MemoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0775D6E2CA8330B0013B68A /* MemoCollectionView.swift */; };
 		B0775D712CA834330013B68A /* MemoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0775D702CA834330013B68A /* MemoDetailView.swift */; };
 		B0775D732CA839C10013B68A /* WriteMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0775D722CA839C10013B68A /* WriteMemoViewModel.swift */; };
-		B0B069F12CA1C34900A1BCB1 /* CustomtabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B069F02CA1C34900A1BCB1 /* CustomtabBar.swift */; };
-		B0B069F32CA1C4EA00A1BCB1 /* UnreadDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B069F22CA1C4EA00A1BCB1 /* UnreadDiaryView.swift */; };
 		B0B069F52CA2A46C00A1BCB1 /* TimeDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B069F42CA2A46C00A1BCB1 /* TimeDiary.swift */; };
 		B0B069FB2CA2A4EE00A1BCB1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B0B069FA2CA2A4EE00A1BCB1 /* RealmSwift */; };
 		B0B2D4732CAD7511004516D4 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B2D4722CAD7511004516D4 /* SettingView.swift */; };
-		B0B2D4752CAD76D8004516D4 /* privacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B2D4742CAD76D8004516D4 /* privacyPolicyView.swift */; };
 		B0B2D4762CAE7329004516D4 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B0B069FA2CA2A4EE00A1BCB1 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B0B4763A2CA42F7200AEDBBC /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B476392CA42F7200AEDBBC /* ImageService.swift */; };
 		B0FBD51A2C940DE3009CC9FC /* TimetravelDiaryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FBD5192C940DE3009CC9FC /* TimetravelDiaryApp.swift */; };
@@ -67,11 +62,9 @@
 
 /* Begin PBXFileReference section */
 		B005764B2CBE3EF8002FF1E7 /* ReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadView.swift; sourceTree = "<group>"; };
-		B005765A2CC280A5002FF1E7 /* CustomPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopupView.swift; sourceTree = "<group>"; };
 		B005765C2CC399CD002FF1E7 /* CustomToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToastView.swift; sourceTree = "<group>"; };
 		B05357D42C9412DD00FCD3A2 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		B05357D62C94454600FCD3A2 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		B05357DA2C945A2700FCD3A2 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 		B05357E02C95706F00FCD3A2 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
 		B0535BFA2C95A37D00C7F9CD /* PublicHolidayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicHolidayModel.swift; sourceTree = "<group>"; };
 		B0535BFD2C95A3B200C7F9CD /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -94,11 +87,8 @@
 		B0775D6E2CA8330B0013B68A /* MemoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCollectionView.swift; sourceTree = "<group>"; };
 		B0775D702CA834330013B68A /* MemoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailView.swift; sourceTree = "<group>"; };
 		B0775D722CA839C10013B68A /* WriteMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMemoViewModel.swift; sourceTree = "<group>"; };
-		B0B069F02CA1C34900A1BCB1 /* CustomtabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomtabBar.swift; sourceTree = "<group>"; };
-		B0B069F22CA1C4EA00A1BCB1 /* UnreadDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadDiaryView.swift; sourceTree = "<group>"; };
 		B0B069F42CA2A46C00A1BCB1 /* TimeDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDiary.swift; sourceTree = "<group>"; };
 		B0B2D4722CAD7511004516D4 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		B0B2D4742CAD76D8004516D4 /* privacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = privacyPolicyView.swift; sourceTree = "<group>"; };
 		B0B476392CA42F7200AEDBBC /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		B0FBD5162C940DE3009CC9FC /* TimetravelDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimetravelDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0FBD5192C940DE3009CC9FC /* TimetravelDiaryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetravelDiaryApp.swift; sourceTree = "<group>"; };
@@ -122,6 +112,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B005765E2CC4E463002FF1E7 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				B0FBD5192C940DE3009CC9FC /* TimetravelDiaryApp.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		B005765F2CC4E4C0002FF1E7 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B06076412CA41DFA0020662B /* Diary */,
+				B0775D5A2CA698290013B68A /* Album */,
+				B07146322CAAF37000DE9E7C /* Calendar */,
+				B0B2D4712CAD7493004516D4 /* Setting */,
+				B0775D6D2CA832FD0013B68A /* Memo */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B00576602CC4E624002FF1E7 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				B05357D32C9412D400FCD3A2 /* Extension */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
 		B05357D22C940FB800FCD3A2 /* ViewModifier */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,13 +170,6 @@
 				B0535BFD2C95A3B200C7F9CD /* NetworkManager.swift */,
 			);
 			path = NetwrokManater;
-			sourceTree = "<group>";
-		};
-		B0535C012C95C54F00C7F9CD /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		B06076412CA41DFA0020662B /* Diary */ = {
@@ -209,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				B0B2D4722CAD7511004516D4 /* SettingView.swift */,
-				B0B2D4742CAD76D8004516D4 /* privacyPolicyView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -241,31 +251,22 @@
 		B0FBD5182C940DE3009CC9FC /* TimetravelDiary */ = {
 			isa = PBXGroup;
 			children = (
-				B0B2D4712CAD7493004516D4 /* Setting */,
-				B07146322CAAF37000DE9E7C /* Calendar */,
-				B0775D6D2CA832FD0013B68A /* Memo */,
-				B0775D5A2CA698290013B68A /* Album */,
+				B00576602CC4E624002FF1E7 /* Global */,
+				B005765E2CC4E463002FF1E7 /* Application */,
+				B005765F2CC4E4C0002FF1E7 /* Presentation */,
 				B0B476382CA42F6500AEDBBC /* Helper */,
-				B06076412CA41DFA0020662B /* Diary */,
 				B061764A2CA02902001C18D9 /* Info.plist */,
-				B0FBD5192C940DE3009CC9FC /* TimetravelDiaryApp.swift */,
 				B0B069F42CA2A46C00A1BCB1 /* TimeDiary.swift */,
-				B0535C012C95C54F00C7F9CD /* Model */,
 				B0535BFC2C95A39F00C7F9CD /* NetwrokManater */,
 				B0535BF92C95A36400C7F9CD /* RequestModel */,
-				B05357D32C9412D400FCD3A2 /* Extension */,
 				B05357D22C940FB800FCD3A2 /* ViewModifier */,
 				B0535BFF2C95B51E00C7F9CD /* ContentView.swift */,
-				B0B069F02CA1C34900A1BCB1 /* CustomtabBar.swift */,
 				B061763D2C9EB253001C18D9 /* collectionViewTapView.swift */,
-				B0B069F22CA1C4EA00A1BCB1 /* UnreadDiaryView.swift */,
 				B0535C062C96DEAE00C7F9CD /* FloatingMenu.swift */,
 				B0FBD51D2C940DE4009CC9FC /* Assets.xcassets */,
 				B0FBD51F2C940DE4009CC9FC /* Preview Content */,
-				B05357DA2C945A2700FCD3A2 /* BubbleView.swift */,
 				B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */,
 				B005764B2CBE3EF8002FF1E7 /* ReadView.swift */,
-				B005765A2CC280A5002FF1E7 /* CustomPopupView.swift */,
 				B005765C2CC399CD002FF1E7 /* CustomToastView.swift */,
 			);
 			path = TimetravelDiary;
@@ -364,8 +365,6 @@
 			files = (
 				B06176472CA00D3F001C18D9 /* AudioRecorderManager.swift in Sources */,
 				B0B069F52CA2A46C00A1BCB1 /* TimeDiary.swift in Sources */,
-				B005765B2CC280A5002FF1E7 /* CustomPopupView.swift in Sources */,
-				B05357DB2C945A2700FCD3A2 /* BubbleView.swift in Sources */,
 				B0535C002C95B51E00C7F9CD /* ContentView.swift in Sources */,
 				B0B2D4732CAD7511004516D4 /* SettingView.swift in Sources */,
 				B0775D712CA834330013B68A /* MemoDetailView.swift in Sources */,
@@ -373,9 +372,7 @@
 				B0535C052C96C86400C7F9CD /* WriteDiaryView.swift in Sources */,
 				B0775D5E2CA7D9770013B68A /* DiaryDetailViewModel.swift in Sources */,
 				B0775D622CA7DDF10013B68A /* WriteDiaryViewModel.swift in Sources */,
-				B0B2D4752CAD76D8004516D4 /* privacyPolicyView.swift in Sources */,
 				B0535BFE2C95A3B200C7F9CD /* NetworkManager.swift in Sources */,
-				B0B069F12CA1C34900A1BCB1 /* CustomtabBar.swift in Sources */,
 				B061763C2C9EAE00001C18D9 /* AlbumView.swift in Sources */,
 				B0535C092C970EEA00C7F9CD /* WriteMemoView.swift in Sources */,
 				B07146342CAAF39400DE9E7C /* PopupViewModel.swift in Sources */,
@@ -394,7 +391,6 @@
 				B0535BFB2C95A37D00C7F9CD /* PublicHolidayModel.swift in Sources */,
 				B0775D6F2CA8330B0013B68A /* MemoCollectionView.swift in Sources */,
 				B005765D2CC399CD002FF1E7 /* CustomToastView.swift in Sources */,
-				B0B069F32CA1C4EA00A1BCB1 /* UnreadDiaryView.swift in Sources */,
 				B005764C2CBE3EF8002FF1E7 /* ReadView.swift in Sources */,
 				B0775D5C2CA698330013B68A /* AlbumViewModel.swift in Sources */,
 			);

@@ -12,8 +12,6 @@ import Combine
 class PopupViewModel: ObservableObject {
     @Published var diaryTitle: String = ""
     @Published var memoText: String = ""
-//    @Published var hasDiary: Bool = false
-//    @Published var hasMemo: Bool = false
     @Published var diaryDates: Set<String> = [] // 일기가 있는 날짜를 저장하는 Set
     @Published var memoDates:  Set<String> = [] // 메모가 있는 날짜를 저장하는 Set
     

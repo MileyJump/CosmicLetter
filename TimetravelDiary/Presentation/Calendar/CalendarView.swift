@@ -243,12 +243,14 @@ struct CalendarView: View {
                                 Text("메모")
                                     .font(.system(size: 15))
                                     .padding(.leading, 5)
+                                    .foregroundColor(.white)
                                 Spacer()
                             }
                             
                             Text(memoContents)
                                 .font(.system(size: 18))
                                 .padding(.leading, 14)
+                                .foregroundColor(.white)
                                 .onTapGesture {
                                     selectedMemo = memo
                                     isPopupVisible = false

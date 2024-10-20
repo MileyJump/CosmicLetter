@@ -32,15 +32,6 @@ struct InfoView: View {
                             .cornerRadius(20) // 캡슐 모양으로 둥글게
                             .overlay(
                                 selectedPicker == item ? // 선택된 버튼에 테두리 추가
-//                                    Capsule().stroke(Diary.color.timeTravelGreenColor, lineWidth: 3) : nil
-//                                    Capsule().stroke(
-//                                        LinearGradient(
-//                                            gradient: Gradient(colors: [Color.green, Color.blue, Color.white]),
-//                                            startPoint: .topLeading,
-//                                            endPoint: .bottomTrailing
-//                                        ),
-//                                        lineWidth: 4
-//                                    ) : nil
                                 Capsule().stroke(
                                         LinearGradient(
                                             gradient: Gradient(colors: [Diary.color.timeTravelBlueColor, Diary.color.timeTravelBlueColor, Color.white]),

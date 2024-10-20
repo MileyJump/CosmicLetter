@@ -58,12 +58,7 @@ struct ReadView: View {
             }
             Spacer()
         }
-        // 전체 배경에 그라데이션 적용
-//        .gradientBackground(startColor: Diary.color.timeTravelNavyColor,
-//                            mediumColor: Diary.color.timeTravelNavyColor,
-//                            endColor: Diary.color.timeTravelbluePinkColor,
-//                            starCount: 100)
-        
+        // 전체 배경에 그라데이션 적용        
         .gradientBackground(startColor: Diary.color.timeTravelBlackColor, mediumColor: Diary.color.timeTravelLightBlackColor, endColor: Diary.color.timeTravelDarkNavyBlackColor, starCount: 120)
     }
 }

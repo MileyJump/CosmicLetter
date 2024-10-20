@@ -11,12 +11,7 @@ import SwiftUI
 struct TimetravelDiaryApp: App {
     var body: some Scene {
         WindowGroup {
-//            ContentView(models: sampleData)
             ContentView()
-                
-//            HomeCalendarView()
-            
-//            CustomTabBarView()
         }
     }
 }
