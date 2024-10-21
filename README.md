@@ -29,7 +29,7 @@
 
 # 디렉토링 구조
 ```
-Movielity
+ComsmicLetter
 ├── Application
 │   └── TimetravelDiaryApp.swift
 ├── Base.lproj
