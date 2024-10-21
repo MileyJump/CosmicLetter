@@ -1,8 +1,14 @@
 # 프로젝트 소개
 *" 별 처럼 반짝이는 순간들을 우주에 기록하세요! 당신의 이야기가 시간과 함께 빛나기를 바랍니다"*
-
-
 > 코스믹 레터는 사용자가 미래의 특정 날짜에 일기를 작성하고, 지정한 날짜가 되어야만 열람할 수 있는 우주 테마의 다이어리 앱 입니다.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/75b2c866-8ea3-43af-ad6c-32a376291c5b" width="200"/>
+  <img src="https://github.com/user-attachments/assets/5fa8ef76-9d73-4b9d-b4b2-3b0432445139" width="200"/>
+  <img src="https://github.com/user-attachments/assets/27f20630-ce21-41fc-9075-a0b199f8625e" width="200"/>
+  <img src="https://github.com/user-attachments/assets/2d6cd91b-3247-4238-89a9-6ab4d4b5cc1b" width="200"/>
+</p> 
+
 
 # 프로젝트 개발 환경
 - 개발 인원 :
