@@ -57,7 +57,11 @@
   - **iOS**: 
 	  - SwiftUI (최소 버전 16.0)
     
--   **UI**: 
+-   **UI**:
+-   **Architecture** :
+-   **Reactive** :
+-   **DataBase**:
+-   **Utility**:
 
 
 
