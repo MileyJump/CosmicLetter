@@ -72,16 +72,22 @@
 └── Info
 ```
 # 주요 기술
-  - **iOS**: 
-	  - SwiftUI (최소 버전 16.0)
+
+-   **iOS** : Swift 5.1, Xcode 15.4, SwiftUI (Minimum version 16.0)
     
--   **UI**:
--   **Architecture** :
--   **Reactive** :
--   **DataBase**:
--   **Utility**:
+-   **UI** : Codebase UI, Shufflelt
+    
+-   **Architecture** : MVVM
+    
+-   **Reactive** : Combine
+    
+-   **Network** : Alamofire
 
-
+-   **DataBase** :  RealmSwift
+    
+-   **Utility** : FileManager, AVFoundation
+ 
+    
 
 # 트러블 슈팅
 
