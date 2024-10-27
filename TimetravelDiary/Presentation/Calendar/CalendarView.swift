@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Combine
+//import Combine
 import RealmSwift
 
 struct CalendarView: View {
@@ -52,8 +52,6 @@ struct CalendarView: View {
                 .opacity(isPopupVisible ? 1 : 0)
                 .animation(.easeInOut, value: isPopupVisible),
             alignment: .center
-            
-            
         )
         
         .overlay(
@@ -144,8 +142,6 @@ struct CalendarView: View {
                                 .cancel(Text("취소"))
                             ])
                         }
-                        
-                        
                     }
                 }
                 .offset(x: 0, y: 80)
@@ -159,15 +155,6 @@ struct CalendarView: View {
                 //                    .offset(x: 100, y: -100)
                 //                    .zIndex(2) // 팝업 뷰와 달이 겹치게 이미지가 앞에 오도록 우선순위 설정
             }
-            
-            //
-            //            if isalertVisible {
-            //
-            //                CustomPopupView(message: "지금은 우주를 항해하며 미래에 도착할 준비 중이에요. \n 지정한 날짜가 오기 전까지는 일기를 열 수 없답니다!", isVisible: $isalertVisible)
-            //                    .transition(.opacity) // 팝업을 부드럽게 표시
-            //                    .zIndex(1) // 다른 뷰 위에 팝업을 표시
-            //                    .offset(x: 0, y: 0)
-            //            }
             
         }
     }

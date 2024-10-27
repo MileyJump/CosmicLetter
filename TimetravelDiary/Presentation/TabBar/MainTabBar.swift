@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainTabBar: View {
     enum Tab {
-        case Home, collection, setting
+        case Home, collection, read, setting
     }
     
     @State private var selected: Tab = .Home
@@ -22,14 +22,14 @@ struct ContentView: View {
                         .tag(Tab.Home)
                     
                     NavigationStack {
-                        InfoView()
+                        CollectionViewTapView()
                     }
                     .tag(Tab.collection)
                     
-//                    NavigationStack {
-//                        ReadView()
-//                    }
-//                    .tag(Tab.read)
+                    NavigationStack {
+                        ReadView()
+                    }
+                    .tag(Tab.read)
                     
                     NavigationStack {
                         SettingView()
@@ -53,8 +53,8 @@ struct ContentView: View {
             Spacer()
             tabBarButton(imageName: "gauge.with.dots.needle.bottom.0percent", tab: .collection, selectedTab: $selected, shadowColor: Diary.color.timeTravelBlueColor)
             Spacer()
-//            tabBarButton(imageName: "envelope.open.fill", tab: .read, selectedTab: $selected, shadowColor: Color.green)
-//            Spacer()
+            tabBarButton(imageName: "envelope.open.fill", tab: .read, selectedTab: $selected, shadowColor: Color.green)
+            Spacer()
             tabBarButton(imageName: "gearshape", tab: .setting, selectedTab: $selected, shadowColor: Diary.color.timeTravelBlueColor)
             Spacer()
         }

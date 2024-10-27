@@ -14,13 +14,13 @@
 		B05357E12C95706F00FCD3A2 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357E02C95706F00FCD3A2 /* HomeCalendarView.swift */; };
 		B0535BFB2C95A37D00C7F9CD /* PublicHolidayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535BFA2C95A37D00C7F9CD /* PublicHolidayModel.swift */; };
 		B0535BFE2C95A3B200C7F9CD /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535BFD2C95A3B200C7F9CD /* NetworkManager.swift */; };
-		B0535C002C95B51E00C7F9CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535BFF2C95B51E00C7F9CD /* ContentView.swift */; };
+		B0535C002C95B51E00C7F9CD /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535BFF2C95B51E00C7F9CD /* MainTabBar.swift */; };
 		B0535C052C96C86400C7F9CD /* WriteDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535C042C96C86400C7F9CD /* WriteDiaryView.swift */; };
 		B0535C072C96DEAE00C7F9CD /* FloatingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535C062C96DEAE00C7F9CD /* FloatingMenu.swift */; };
 		B0535C092C970EEA00C7F9CD /* WriteMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535C082C970EEA00C7F9CD /* WriteMemoView.swift */; };
 		B06076402CA41C9F0020662B /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B060763F2CA41C9F0020662B /* DiaryDetailView.swift */; };
 		B061763C2C9EAE00001C18D9 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061763B2C9EAE00001C18D9 /* AlbumView.swift */; };
-		B061763E2C9EB253001C18D9 /* collectionViewTapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061763D2C9EB253001C18D9 /* collectionViewTapView.swift */; };
+		B061763E2C9EB253001C18D9 /* CollectionViewTapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061763D2C9EB253001C18D9 /* CollectionViewTapView.swift */; };
 		B06176412C9EEE9D001C18D9 /* DiaryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06176402C9EEE9D001C18D9 /* DiaryCollectionView.swift */; };
 		B06176472CA00D3F001C18D9 /* AudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */; };
 		B07146342CAAF39400DE9E7C /* PopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07146332CAAF39400DE9E7C /* PopupViewModel.swift */; };
@@ -68,13 +68,13 @@
 		B05357E02C95706F00FCD3A2 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
 		B0535BFA2C95A37D00C7F9CD /* PublicHolidayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicHolidayModel.swift; sourceTree = "<group>"; };
 		B0535BFD2C95A3B200C7F9CD /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		B0535BFF2C95B51E00C7F9CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B0535BFF2C95B51E00C7F9CD /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
 		B0535C042C96C86400C7F9CD /* WriteDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDiaryView.swift; sourceTree = "<group>"; };
 		B0535C062C96DEAE00C7F9CD /* FloatingMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingMenu.swift; sourceTree = "<group>"; };
 		B0535C082C970EEA00C7F9CD /* WriteMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMemoView.swift; sourceTree = "<group>"; };
 		B060763F2CA41C9F0020662B /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
 		B061763B2C9EAE00001C18D9 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
-		B061763D2C9EB253001C18D9 /* collectionViewTapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collectionViewTapView.swift; sourceTree = "<group>"; };
+		B061763D2C9EB253001C18D9 /* CollectionViewTapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTapView.swift; sourceTree = "<group>"; };
 		B06176402C9EEE9D001C18D9 /* DiaryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionView.swift; sourceTree = "<group>"; };
 		B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderManager.swift; sourceTree = "<group>"; };
 		B061764A2CA02902001C18D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -123,6 +123,8 @@
 		B005765F2CC4E4C0002FF1E7 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B00576692CC4EC58002FF1E7 /* ReadView */,
+				B00576612CC4E8D4002FF1E7 /* TabBar */,
 				B06076412CA41DFA0020662B /* Diary */,
 				B0775D5A2CA698290013B68A /* Album */,
 				B07146322CAAF37000DE9E7C /* Calendar */,
@@ -135,9 +137,89 @@
 		B00576602CC4E624002FF1E7 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				B00576662CC4EB81002FF1E7 /* Resources */,
+				B00576652CC4EB49002FF1E7 /* Realm */,
+				B00576642CC4EB41002FF1E7 /* FileManager */,
+				B00576632CC4EAC3002FF1E7 /* Components */,
 				B05357D32C9412D400FCD3A2 /* Extension */,
 			);
 			path = Global;
+			sourceTree = "<group>";
+		};
+		B00576612CC4E8D4002FF1E7 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				B061763D2C9EB253001C18D9 /* CollectionViewTapView.swift */,
+				B0535BFF2C95B51E00C7F9CD /* MainTabBar.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		B00576622CC4E8EA002FF1E7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B0535BF92C95A36400C7F9CD /* RequestModel */,
+				B0535BFC2C95A39F00C7F9CD /* NetwrokManater */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		B00576632CC4EAC3002FF1E7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B05357D22C940FB800FCD3A2 /* ViewModifier */,
+				B005765C2CC399CD002FF1E7 /* CustomToastView.swift */,
+				B0535C062C96DEAE00C7F9CD /* FloatingMenu.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B00576642CC4EB41002FF1E7 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				B0B476392CA42F7200AEDBBC /* ImageService.swift */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
+		B00576652CC4EB49002FF1E7 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				B0B069F42CA2A46C00A1BCB1 /* TimeDiary.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		B00576662CC4EB81002FF1E7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B0FBD51D2C940DE4009CC9FC /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B00576672CC4EBAE002FF1E7 /* AudioManager */ = {
+			isa = PBXGroup;
+			children = (
+				B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */,
+			);
+			path = AudioManager;
+			sourceTree = "<group>";
+		};
+		B00576682CC4EC17002FF1E7 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B00576672CC4EBAE002FF1E7 /* AudioManager */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		B00576692CC4EC58002FF1E7 /* ReadView */ = {
+			isa = PBXGroup;
+			children = (
+				B005764B2CBE3EF8002FF1E7 /* ReadView.swift */,
+			);
+			path = ReadView;
 			sourceTree = "<group>";
 		};
 		B05357D22C940FB800FCD3A2 /* ViewModifier */ = {
@@ -224,14 +306,6 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
-		B0B476382CA42F6500AEDBBC /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				B0B476392CA42F7200AEDBBC /* ImageService.swift */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
 		B0FBD50D2C940DE3009CC9FC = {
 			isa = PBXGroup;
 			children = (
@@ -251,23 +325,13 @@
 		B0FBD5182C940DE3009CC9FC /* TimetravelDiary */ = {
 			isa = PBXGroup;
 			children = (
-				B00576602CC4E624002FF1E7 /* Global */,
 				B005765E2CC4E463002FF1E7 /* Application */,
+				B00576682CC4EC17002FF1E7 /* Base */,
+				B00576602CC4E624002FF1E7 /* Global */,
+				B00576622CC4E8EA002FF1E7 /* Network */,
 				B005765F2CC4E4C0002FF1E7 /* Presentation */,
-				B0B476382CA42F6500AEDBBC /* Helper */,
 				B061764A2CA02902001C18D9 /* Info.plist */,
-				B0B069F42CA2A46C00A1BCB1 /* TimeDiary.swift */,
-				B0535BFC2C95A39F00C7F9CD /* NetwrokManater */,
-				B0535BF92C95A36400C7F9CD /* RequestModel */,
-				B05357D22C940FB800FCD3A2 /* ViewModifier */,
-				B0535BFF2C95B51E00C7F9CD /* ContentView.swift */,
-				B061763D2C9EB253001C18D9 /* collectionViewTapView.swift */,
-				B0535C062C96DEAE00C7F9CD /* FloatingMenu.swift */,
-				B0FBD51D2C940DE4009CC9FC /* Assets.xcassets */,
 				B0FBD51F2C940DE4009CC9FC /* Preview Content */,
-				B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */,
-				B005764B2CBE3EF8002FF1E7 /* ReadView.swift */,
-				B005765C2CC399CD002FF1E7 /* CustomToastView.swift */,
 			);
 			path = TimetravelDiary;
 			sourceTree = "<group>";
@@ -365,7 +429,7 @@
 			files = (
 				B06176472CA00D3F001C18D9 /* AudioRecorderManager.swift in Sources */,
 				B0B069F52CA2A46C00A1BCB1 /* TimeDiary.swift in Sources */,
-				B0535C002C95B51E00C7F9CD /* ContentView.swift in Sources */,
+				B0535C002C95B51E00C7F9CD /* MainTabBar.swift in Sources */,
 				B0B2D4732CAD7511004516D4 /* SettingView.swift in Sources */,
 				B0775D712CA834330013B68A /* MemoDetailView.swift in Sources */,
 				B0FBD52A2C940EC4009CC9FC /* GradientBackgroundView.swift in Sources */,
@@ -377,7 +441,7 @@
 				B0535C092C970EEA00C7F9CD /* WriteMemoView.swift in Sources */,
 				B07146342CAAF39400DE9E7C /* PopupViewModel.swift in Sources */,
 				B05357D52C9412DD00FCD3A2 /* Color+.swift in Sources */,
-				B061763E2C9EB253001C18D9 /* collectionViewTapView.swift in Sources */,
+				B061763E2C9EB253001C18D9 /* CollectionViewTapView.swift in Sources */,
 				B06076402CA41C9F0020662B /* DiaryDetailView.swift in Sources */,
 				B06176412C9EEE9D001C18D9 /* DiaryCollectionView.swift in Sources */,
 				B0775D732CA839C10013B68A /* WriteMemoViewModel.swift in Sources */,
@@ -451,7 +515,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -508,7 +572,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

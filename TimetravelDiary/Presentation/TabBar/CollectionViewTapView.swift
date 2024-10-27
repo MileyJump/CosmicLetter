@@ -1,5 +1,5 @@
 //
-//  collectionViewTapView.swift
+//  CollectionViewTapView.swift
 //  TimetravelDiary
 //
 //  Created by 최민경 on 9/21/24.
@@ -13,7 +13,7 @@ enum TapInfo: String, CaseIterable {
     
 }
 
-struct InfoView: View {
+struct CollectionViewTapView: View {
     @State private var selectedPicker: TapInfo = .diary // 기본 선택된 버튼
 
     var body: some View {
@@ -71,5 +71,5 @@ struct InfoView: View {
 }
 
 #Preview {
-    InfoView()
+    CollectionViewTapView()
 }

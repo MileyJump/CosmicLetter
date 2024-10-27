@@ -14,8 +14,6 @@ struct FloatingMenu: View {
     
     @Binding var selectedDate: Date?
     
-//    @Binding var showFloatingMenu: Bool // showFloatingMenu 바인딩 추가
-    
     var body: some View {
         VStack {
             Spacer()
@@ -32,9 +30,7 @@ struct FloatingMenu: View {
                 }, label: {
                     MenuItem(icon:"pencil.line")
                 })
-                
             }
-            
             
             Button(action: {
                 self.showMenu()

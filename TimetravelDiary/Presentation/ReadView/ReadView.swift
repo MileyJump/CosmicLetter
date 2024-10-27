@@ -13,13 +13,13 @@ enum ReadInfo: String, CaseIterable {
 }
 
 struct ReadView: View {
-    @State private var selectedPicker: TapInfo = .diary // 기본 선택된 버튼
+    @State private var selectedPicker: ReadInfo = .lock // 기본 선택된 버튼
 
     var body: some View {
         VStack {
             // 버튼을 가로로 배치
             HStack(spacing: 15) { // 버튼 간의 간격을 조절
-                ForEach(TapInfo.allCases, id: \.self) { item in
+                ForEach(ReadInfo.allCases, id: \.self) { item in
                     Button(action: {
                         selectedPicker = item // 클릭된 버튼 업데이트
                     }) {
@@ -31,9 +31,9 @@ struct ReadView: View {
                             .cornerRadius(20) // 캡슐 모양으로 둥글게
                             .overlay(
                                 selectedPicker == item ? // 선택된 버튼에 테두리 추가
-                                    Capsule().stroke(Diary.color.timeTravelGreenColor, lineWidth: 3) : nil
+                                    Capsule().stroke(Diary.color.timeTravelBlueColor, lineWidth: 3) : nil
                             )
-                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelGreenColor.opacity(0.8) : Color.white, radius: 10, x: 0, y: 0)
+                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.8) : Color.white, radius: 10, x: 0, y: 0)
                             .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.6) : Color.clear, radius: 20, x: 0, y: 0)
                             .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.4) : Color.clear, radius: 30, x: 0, y: 0)
                             .animation(.easeInOut, value: selectedPicker) // 애니메이션 추가
@@ -46,13 +46,10 @@ struct ReadView: View {
             // 선택된 버튼에 따라 화면 내용 변경
             Spacer()
             switch selectedPicker {
-            case .album:
-                Spacer(minLength: 20)
-                AlbumView()
-            case .diary:
+            case .lock:
                 Spacer(minLength: 20)
                 DiaryCollectionView()
-            case .memo:
+            case .unlock:
                 Spacer(minLength: 20)
                 MemoCollectionView()
             }

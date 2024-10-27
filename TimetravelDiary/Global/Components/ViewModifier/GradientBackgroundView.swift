@@ -20,23 +20,20 @@ struct GradientBackgroundView: ViewModifier {
         ZStack {
             LinearGradient(
                 gradient: Gradient(colors: optionColor != nil ? [.black, startColor, mediumColor, optionColor!, endColor] : [.black, startColor, mediumColor, endColor]),
-                                startPoint: .top,
-                                endPoint: .bottom)
-//                gradient: Gradient(colors: [.black, startColor, mediumColor, endColor]), startPoint: .top, endPoint: .bottom )
-                   .ignoresSafeArea() // 안전 영역 무시하여 전체 화면에 적용
+                startPoint: .top,
+                endPoint: .bottom)
+            .ignoresSafeArea() // 안전 영역 무시하여 전체 화면에 적용
             
             ForEach(0..<starCount, id: \.self) { _ in
-                           Circle()
-                               .fill(Color.white.opacity(Double.random(in: 0.5...1))) // 투명도 랜덤
-                               .frame(width: CGFloat.random(in: starSizeRange), height: CGFloat.random(in: starSizeRange)) // 크기 랜덤
-                               .position(x: CGFloat.random(in: 0...UIScreen.main.bounds.width),
-                                         y: CGFloat.random(in: 0...UIScreen.main.bounds.height)) // 위치 랜덤
-                       }
-                   
-                   content // 그라데이션 위에 내용 표시
-               }
-           }
-    
+                Circle()
+                    .fill(Color.white.opacity(Double.random(in: 0.5...1))) // 투명도 랜덤
+                    .frame(width: CGFloat.random(in: starSizeRange), height: CGFloat.random(in: starSizeRange)) // 크기 랜덤
+                    .position(x: CGFloat.random(in: 0...UIScreen.main.bounds.width),
+                              y: CGFloat.random(in: 0...UIScreen.main.bounds.height)) // 위치 랜덤
+            }
+            content // 그라데이션 위에 내용 표시
+        }
+    }
 }
 
 
