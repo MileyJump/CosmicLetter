@@ -33,9 +33,9 @@ struct ReadView: View {
                                 selectedPicker == item ? // 선택된 버튼에 테두리 추가
                                     Capsule().stroke(Diary.color.timeTravelBlueColor, lineWidth: 3) : nil
                             )
-                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.8) : Color.white, radius: 10, x: 0, y: 0)
-                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.6) : Color.clear, radius: 20, x: 0, y: 0)
-                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelLightPinkColor.opacity(0.4) : Color.clear, radius: 30, x: 0, y: 0)
+                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelBlueColor.opacity(0.8) : Color.white, radius: 10, x: 0, y: 0)
+                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelBlueColor.opacity(0.6) : Color.clear, radius: 20, x: 0, y: 0)
+                            .shadow(color: selectedPicker == item ? Diary.color.timeTravelBlueColor.opacity(0.4) : Color.clear, radius: 30, x: 0, y: 0)
                             .animation(.easeInOut, value: selectedPicker) // 애니메이션 추가
                     }
                 }

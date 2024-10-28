@@ -53,7 +53,7 @@ struct MainTabBar: View {
             Spacer()
             tabBarButton(imageName: "gauge.with.dots.needle.bottom.0percent", tab: .collection, selectedTab: $selected, shadowColor: Diary.color.timeTravelBlueColor)
             Spacer()
-            tabBarButton(imageName: "envelope.open.fill", tab: .read, selectedTab: $selected, shadowColor: Color.green)
+            tabBarButton(imageName: "envelope.open.fill", tab: .read, selectedTab: $selected, shadowColor: Diary.color.timeTravelBlueColor)
             Spacer()
             tabBarButton(imageName: "gearshape", tab: .setting, selectedTab: $selected, shadowColor: Diary.color.timeTravelBlueColor)
             Spacer()
