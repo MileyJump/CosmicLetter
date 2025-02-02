@@ -27,7 +27,7 @@ class WriteDiaryViewModel: ObservableObject {
     // 저장을 위한 메서드
     func saveDiary() {
         guard !titleText.isEmpty && !contentText.isEmpty else {
-            errorMessage = "제목과 내용을 작성해주세요!"
+            errorMessage = "titleAndContents"
             return
         }
        

@@ -38,7 +38,7 @@ struct WriteDiaryView: View {
                 
                 TextField("", text: $titleText)
                     .placeholder(when: titleText.isEmpty) {
-                        Text("제목을 입력해주세요")
+                        Text("title")
                             .foregroundColor(.gray)
                             .font(.system(size: 18))
                     }
@@ -58,7 +58,7 @@ struct WriteDiaryView: View {
                 
                 ZStack(alignment: .topLeading) {
                     if contentText.isEmpty {
-                        Text("하고 싶은 말이 있나요?")
+                        Text("content")
                             .foregroundColor(.gray)
                             .font(.system(size: 14, weight: .regular))
                             .padding(.top, 23)
@@ -101,7 +101,7 @@ struct WriteDiaryView: View {
                         .foregroundColor(.white)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("저장") {
+                    Button("save") {
                         saveDiary()
 //                        dismiss()
                     }
@@ -142,9 +142,9 @@ struct WriteDiaryView: View {
     }
     
     private func saveDiary() {
-        print("저장 버튼 클릭")
+        print("saveButton")
         guard !titleText.isEmpty && !contentText.isEmpty else {
-            showToast(message: "제목과 내용을 입력해야 합니다.")
+            showToast(message: "titleAndContents")
             
             isToastVisible = true
             return
@@ -281,7 +281,7 @@ struct RecordingView: View {
                         .foregroundColor(.red)
                 }
                 
-                Button("저장하기") {
+                Button("save") {
                     
                 }
                 .disabled(!audioRecorderManager.isRecording)

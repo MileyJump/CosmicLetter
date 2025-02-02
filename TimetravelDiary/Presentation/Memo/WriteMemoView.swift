@@ -15,7 +15,7 @@ struct WriteMemoView: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             if viewModel.contentText.isEmpty {
-                Text("메모")
+                Text("memo")
                     .foregroundColor(.gray)
                     .font(.system(size: 14, weight: .regular))
                     .padding(.top, 23)
@@ -37,7 +37,7 @@ struct WriteMemoView: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("저장") {
+                Button("save") {
                     viewModel.saveDiary(selectedDate: selectedDate) // ViewModel의 saveDiary 호출
                     dismiss()
                 }

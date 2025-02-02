@@ -7,10 +7,14 @@
 import SwiftUI
 
 enum TapInfo: String, CaseIterable {
-    case diary = "일기"
-    case memo = "메모"
-    case album = "사진 앨범"
+    case diary = "diary"
+    case memo = "memo"
+    case album = "album"
     
+    // 각 항목에 대해 로컬라이징된 문자열 반환
+    func localizedString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
 }
 
 struct CollectionViewTapView: View {
@@ -24,7 +28,7 @@ struct CollectionViewTapView: View {
                     Button(action: {
                         selectedPicker = item // 클릭된 버튼 업데이트
                     }) {
-                        Text(item.rawValue) // 열거형의 rawValue 사용
+                        Text(item.localizedString()) // 로컬라이즈된 값 사용
                             .padding()
                             .frame(maxWidth: .infinity, minHeight: 40) // 버튼의 가로 크기를 최대화하고 최소 높이를 설정
                             .background(Color.clear) // 배경 설정

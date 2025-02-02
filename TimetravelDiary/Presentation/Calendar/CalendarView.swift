@@ -133,13 +133,13 @@ struct CalendarView: View {
                         }
                         .actionSheet(isPresented: $isShowingAlert) {
                             ActionSheet(title: Text(""), buttons: [
-                                .default(Text("일기")) {
+                                .default(Text("diary")) {
                                     navigateToDiary = true
                                 },
-                                .default(Text("메모")) {
+                                .default(Text("memo")) {
                                     navigateToMemo = true
                                 },
-                                .cancel(Text("취소"))
+                                .cancel(Text("cancel"))
                             ])
                         }
                     }
@@ -210,7 +210,7 @@ struct CalendarView: View {
                                     } else {
                                         isalertVisible = true
                                         //                                        showToast(message: "지금은 우주를 항해하며 미래에 도착할 준비 중이에요. \n 지정한 날짜가 오기 전까지는 일기를 열 수 없답니다!")
-                                        showToast(message: "우주 항해 중! \n 지정한 날짜가 오기 전까지는 일기를 열 수 없어요!")
+                                        showToast(message: "space")
                                     }
                                 }
                         }
@@ -227,7 +227,7 @@ struct CalendarView: View {
                                 Circle()
                                     .fill(Color.purple)
                                     .frame(width: 8, height: 8)
-                                Text("메모")
+                                Text("memo")
                                     .font(.system(size: 15))
                                     .padding(.leading, 5)
                                     .foregroundColor(.white)
@@ -348,7 +348,7 @@ struct CalendarView: View {
                         month = today
                         selectedDate = today
                     } label: {
-                        Text("오늘")
+                        Text("today")
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                     }

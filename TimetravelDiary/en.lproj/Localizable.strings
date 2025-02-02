@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  TimetravelDiary
+
+  Created by 최민경 on 2/2/25.
+  
+*/
+
+"memo" = "Memo";
+"title" = "Please enter the title";
+"content" = "Do you have something you want to say?";
+"diary" = "Diary";
+"album" = "Photo Album";
+
+"cancel" = "Cancel";
+"today" = "today";
+
+"titleAndContents" = "Please enter the title and content";
+
+"space" = "Space journey in progress! \n You can’t open the diary until the specified date arrives!";
+
+"save" = "save";
+
+"reset" = "Resetting";
+
+"todayRecorder" = "Record today’s day";
+
+"saveButton" = "Click the save button";
