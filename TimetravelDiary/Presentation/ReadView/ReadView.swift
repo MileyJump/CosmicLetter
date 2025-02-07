@@ -48,7 +48,7 @@ struct ReadView: View {
             switch selectedPicker {
             case .lock:
                 Spacer(minLength: 20)
-//                DiaryCollectionView()
+                DiaryCollectionView()
             case .unlock:
                 Spacer(minLength: 20)
                 MemoCollectionView()

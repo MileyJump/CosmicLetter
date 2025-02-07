@@ -14,6 +14,20 @@ class ImageService {
     
     private init() { }
     
+    func loadImageFromDocument(filename: String) -> UIImage? {
+        if let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = documentsURL.appendingPathComponent(filename)
+            if FileManager.default.fileExists(atPath: fileURL.path) {
+                return UIImage(contentsOfFile: fileURL.path)
+            } else {
+                print("파일이 존재하지 않음: \(fileURL.path)")
+                return nil
+            }
+        }
+        return nil
+    }
+
+    
     func saveImageToDocument(image: UIImage, filename: String) -> String? {
         if let data = image.jpegData(compressionQuality: 1.0) {
             if let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
@@ -58,14 +72,14 @@ class ImageService {
     }
 
     // 저장된 전체 경로에서 이미지를 불러오는 메서드
-    func loadImageFromDocument(filename: String) -> UIImage? {
-        if FileManager.default.fileExists(atPath: filename) {
-            return UIImage(contentsOfFile: filename)
-        } else {
-            print("파일이 존재하지 않음: \(filename)")
-            return nil
-        }
-    }
+//    func loadImageFromDocument(filename: String) -> UIImage? {
+//        if FileManager.default.fileExists(atPath: filename) {
+//            return UIImage(contentsOfFile: filename)
+//        } else {
+//            print("파일이 존재하지 않음: \(filename)")
+//            return nil
+//        }
+//    }
  
     func getDocumentsDirectory() -> URL {
         // Documents 디렉토리 경로 반환

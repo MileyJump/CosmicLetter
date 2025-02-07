@@ -38,10 +38,10 @@ struct AlbumView: View {
                                 } else {
                                     // 네비게이션 링크
                                     NavigationLink(destination: DiaryDetailView(diary: diary)) {
-                                        
                                         if let firstPhotoName = diary.photos.first,
-                                           let firstImage = viewModel.loadImageFromDocument(filename: firstPhotoName) {
-                                            Image(uiImage: firstImage)
+                                           let image = ImageService.shared.loadImageFromDocument(filename: firstPhotoName) {
+                                            // 옵셔널 바인딩을 통해 image가 존재하는 경우만 사용
+                                            Image(uiImage: image)
                                                 .resizable()
                                                 .scaledToFill()
                                                 .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)

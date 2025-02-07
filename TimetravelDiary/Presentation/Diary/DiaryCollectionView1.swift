@@ -6,10 +6,10 @@
 //
 //
 
-import SwiftUI
-import RealmSwift
+//import SwiftUI
+//import RealmSwift
 //
-//struct DiaryCollectionView: View {
+//struct DiaryCollectionView1: View {
 //    
 //    @ObservedResults(TimeDiary.self) var diaries
 //    
@@ -68,5 +68,5 @@ import RealmSwift
 //}
 //
 //#Preview {
-//    DiaryCollectionView()
+//    DiaryCollectionView1()
 //}

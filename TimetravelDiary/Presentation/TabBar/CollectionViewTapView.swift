@@ -63,7 +63,7 @@ struct CollectionViewTapView: View {
                 AlbumView()
             case .diary:
                 Spacer(minLength: 20)
-//                DiaryCollectionView()
+                DiaryCollectionView()
             case .memo:
                 Spacer(minLength: 20)
                 MemoCollectionView()
