@@ -21,7 +21,7 @@
 		B06076402CA41C9F0020662B /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B060763F2CA41C9F0020662B /* DiaryDetailView.swift */; };
 		B061763C2C9EAE00001C18D9 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061763B2C9EAE00001C18D9 /* AlbumView.swift */; };
 		B061763E2C9EB253001C18D9 /* CollectionViewTapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061763D2C9EB253001C18D9 /* CollectionViewTapView.swift */; };
-		B06176412C9EEE9D001C18D9 /* DiaryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06176402C9EEE9D001C18D9 /* DiaryCollectionView.swift */; };
+		B06176412C9EEE9D001C18D9 /* DiaryCollectionView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06176402C9EEE9D001C18D9 /* DiaryCollectionView1.swift */; };
 		B06176472CA00D3F001C18D9 /* AudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */; };
 		B07146342CAAF39400DE9E7C /* PopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07146332CAAF39400DE9E7C /* PopupViewModel.swift */; };
 		B07146362CABCE8D00DE9E7C /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07146352CABCE8D00DE9E7C /* CalendarViewModel.swift */; };
@@ -45,6 +45,8 @@
 		B0FBD51E2C940DE4009CC9FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0FBD51D2C940DE4009CC9FC /* Assets.xcassets */; };
 		B0FBD5212C940DE4009CC9FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0FBD5202C940DE4009CC9FC /* Preview Assets.xcassets */; };
 		B0FBD52A2C940EC4009CC9FC /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FBD5292C940EC4009CC9FC /* GradientBackgroundView.swift */; };
+		B0FBFEFA2D55D70C00ACEFFF /* DiaryTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FBFEF92D55D70C00ACEFFF /* DiaryTableRepository.swift */; };
+		B0FBFEFC2D5602E800ACEFFF /* DiaryCollecionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FBFEFB2D5602E800ACEFFF /* DiaryCollecionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,7 +78,7 @@
 		B060763F2CA41C9F0020662B /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
 		B061763B2C9EAE00001C18D9 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 		B061763D2C9EB253001C18D9 /* CollectionViewTapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTapView.swift; sourceTree = "<group>"; };
-		B06176402C9EEE9D001C18D9 /* DiaryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionView.swift; sourceTree = "<group>"; };
+		B06176402C9EEE9D001C18D9 /* DiaryCollectionView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionView1.swift; sourceTree = "<group>"; };
 		B06176462CA00D3F001C18D9 /* AudioRecorderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderManager.swift; sourceTree = "<group>"; };
 		B061764A2CA02902001C18D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B07146332CAAF39400DE9E7C /* PopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewModel.swift; sourceTree = "<group>"; };
@@ -98,6 +100,8 @@
 		B0FBD51D2C940DE4009CC9FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0FBD5202C940DE4009CC9FC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B0FBD5292C940EC4009CC9FC /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
+		B0FBFEF92D55D70C00ACEFFF /* DiaryTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableRepository.swift; sourceTree = "<group>"; };
+		B0FBFEFB2D5602E800ACEFFF /* DiaryCollecionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollecionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				B0B069F42CA2A46C00A1BCB1 /* TimeDiary.swift */,
+				B0FBFEF92D55D70C00ACEFFF /* DiaryTableRepository.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -260,7 +265,8 @@
 		B06076412CA41DFA0020662B /* Diary */ = {
 			isa = PBXGroup;
 			children = (
-				B06176402C9EEE9D001C18D9 /* DiaryCollectionView.swift */,
+				B06176402C9EEE9D001C18D9 /* DiaryCollectionView1.swift */,
+				B0FBFEFB2D5602E800ACEFFF /* DiaryCollecionView.swift */,
 				B0775D5F2CA7DA550013B68A /* DiaryCollectionViewModel.swift */,
 				B060763F2CA41C9F0020662B /* DiaryDetailView.swift */,
 				B0775D5D2CA7D9770013B68A /* DiaryDetailViewModel.swift */,
@@ -445,10 +451,11 @@
 				B061763C2C9EAE00001C18D9 /* AlbumView.swift in Sources */,
 				B0535C092C970EEA00C7F9CD /* WriteMemoView.swift in Sources */,
 				B07146342CAAF39400DE9E7C /* PopupViewModel.swift in Sources */,
+				B0FBFEFA2D55D70C00ACEFFF /* DiaryTableRepository.swift in Sources */,
 				B05357D52C9412DD00FCD3A2 /* Color+.swift in Sources */,
 				B061763E2C9EB253001C18D9 /* CollectionViewTapView.swift in Sources */,
 				B06076402CA41C9F0020662B /* DiaryDetailView.swift in Sources */,
-				B06176412C9EEE9D001C18D9 /* DiaryCollectionView.swift in Sources */,
+				B06176412C9EEE9D001C18D9 /* DiaryCollectionView1.swift in Sources */,
 				B0775D732CA839C10013B68A /* WriteMemoViewModel.swift in Sources */,
 				B0B4763A2CA42F7200AEDBBC /* ImageService.swift in Sources */,
 				B0775D602CA7DA560013B68A /* DiaryCollectionViewModel.swift in Sources */,
@@ -462,6 +469,7 @@
 				B005765D2CC399CD002FF1E7 /* CustomToastView.swift in Sources */,
 				B005764C2CBE3EF8002FF1E7 /* ReadView.swift in Sources */,
 				B0775D5C2CA698330013B68A /* AlbumViewModel.swift in Sources */,
+				B0FBFEFC2D5602E800ACEFFF /* DiaryCollecionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

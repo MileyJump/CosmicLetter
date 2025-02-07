@@ -103,7 +103,6 @@ struct WriteDiaryView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("save") {
                         saveDiary()
-//                        dismiss()
                     }
                     .foregroundColor(.white)
                 }

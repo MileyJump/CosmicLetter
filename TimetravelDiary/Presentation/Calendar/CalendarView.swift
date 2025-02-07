@@ -21,7 +21,7 @@ struct CalendarView: View {
     @State var navigateToDiary: Bool = false // 일기 화면으로 전환
     @State var navigateToMemo: Bool = false // 메모 화면으로 전환
     
-    @State var selectedDiary: TimeDiary?
+    @State var selectedDiary: TimeDiaryModel?
     @State var selectedMemo: TimeDiaryMemo?
     
     @State var isShowingDiaryDetail: Bool = false
@@ -36,7 +36,9 @@ struct CalendarView: View {
     @StateObject var viewModel = PopupViewModel()
     @StateObject var calendarViewModel = CalendarViewModel()
     
-    var holidayService = NetworkManager()
+    let repository = DiaryTableRepository()
+    
+    
     
     var body: some View {
         VStack {
@@ -174,7 +176,7 @@ struct CalendarView: View {
         VStack(alignment: .leading, spacing: 8) {
             if !viewModel.diaries.isEmpty {
                 ForEach(viewModel.diaries, id: \.self) { diaryTitle in
-                    if let diary = fetchDiary(for: diaryTitle) {
+                    if let diary = repository.fetchTitleDiary(for: diaryTitle) {
                         VStack(alignment: .leading) {
                             HStack {
                                 Circle()
@@ -210,7 +212,7 @@ struct CalendarView: View {
                                     } else {
                                         isalertVisible = true
                                         //                                        showToast(message: "지금은 우주를 항해하며 미래에 도착할 준비 중이에요. \n 지정한 날짜가 오기 전까지는 일기를 열 수 없답니다!")
-                                        showToast(message: "space")
+                                        showToast(message: NSLocalizedString("space", comment: ""))
                                     }
                                 }
                         }
@@ -274,10 +276,10 @@ struct CalendarView: View {
     }
     
     
-    private func fetchDiary(for tittle: String) -> TimeDiary? {
-        let realm = try! Realm()
-        return realm.objects(TimeDiary.self).filter("title == %@", tittle).first
-    }
+//    private func fetchDiary(for tittle: String) -> TimeDiary? {
+//        let realm = try! Realm()
+//        return realm.objects(TimeDiary.self).filter("title == %@", tittle).first
+//    }
     
     private func fetchSavedDates() {
         // Realm에서 저장된 TimeDiary와 TimeDiaryMemo 객체들의 날짜를 불러와 savedDates에 저장

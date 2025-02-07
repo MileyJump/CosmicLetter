@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 class AlbumViewModel: ObservableObject {
-    @Published var images: [TimeDiary] = []
+    @Published var images: [TimeDiaryModel] = []
     
     init() {
         fetchImageFromDiaryAlbum()
@@ -17,7 +17,7 @@ class AlbumViewModel: ObservableObject {
     //
     func fetchImageFromDiaryAlbum() {
         let timeDiaries = ImageService.shared.realm.objects(TimeDiary.self)
-        self.images = Array(timeDiaries)
+        self.images = timeDiaries.map { $0.toTimeDiaryModel() }
     }
     
     // 파일매니저에서 이미지를 불러오는 메서드

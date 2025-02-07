@@ -55,3 +55,33 @@ final class TimeDiaryMemo: Object, ObjectKeyIdentifiable {
         self.memo = memo
     }
 }
+
+
+struct TimeDiaryModel: Codable {
+    let id: ObjectId
+    let date: String
+    let title: String
+    let photos: [String]
+    let contents: String
+    let voice: Data
+    let favorite: Bool
+}
+
+struct PhotosModel: Codable {
+    let photoName: String
+}
+
+struct TimeDiaryMemoModel: Codable {
+    let id: String
+    let date: String
+    let memo: String
+    let favorite: Bool
+}
+
+
+extension TimeDiary {
+    
+    func toTimeDiaryModel() -> TimeDiaryModel {
+        .init(id: id , date: date, title: title, photos: photos.map { $0.photoName } , contents: contents, voice: voice, favorite: favorite)
+    }
+}

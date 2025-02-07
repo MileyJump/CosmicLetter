@@ -11,26 +11,30 @@ import RealmSwift
 import ShuffleDeck
 
 struct DiaryDetailView: View {
-    let diary: TimeDiary // 전달받은 다이어리 데이터
+    @Environment(\.dismiss) private var dismiss
+    let diary: TimeDiaryModel // 전달받은 다이어리 데이터
+    let repository = DiaryTableRepository()
     
     @StateObject private var viewModel = DiaryDetailViewModel()
     
     @State var currentPage: Int = 0
+    @State private var showing = false
+    @State private var isEditLinkActive = false
     
     var body: some View {
-        ZStack(alignment: .top) {
-
+        NavigationStack {
+            ZStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 20) {
                     if !diary.photos.isEmpty {
                         ShuffleDeck(Array(diary.photos.enumerated()), initialIndex: 0) { index, photo in
-                            if let image = viewModel.loadImageFromDocument(filename: photo.photoName) {
+                            if let image = viewModel.loadImageFromDocument(filename: photo) {
                                 Image(uiImage: image)
                                     .resizable()
                                     .scaledToFill() // 이미지 비율 유지
                                     .frame(width: UIScreen.main.bounds.width * 0.8, height: 300)
                                     .cornerRadius(16)
                                     .clipped()
-
+                                
                             }
                         }
                         .frame(width: UIScreen.main.bounds.width * 0.8, height: 300)
@@ -54,20 +58,33 @@ struct DiaryDetailView: View {
                     }
                     Spacer()
                 }
-
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
-            .onAppear {
-                // 네비게이션 바의 배경색 설정
-                let appearance = UINavigationBarAppearance()
-                appearance.configureWithTransparentBackground() // 투명 배경으로 설정
-                appearance.titleTextAttributes = [.foregroundColor: UIColor.white] // 제목 텍스트 색상 설정
                 
-                // 네비게이션 바에 appearance 적용
-                UINavigationBar.appearance().standardAppearance = appearance
-                UINavigationBar.appearance().scrollEdgeAppearance = appearance
+                
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                .onAppear {
+                    let appearance = UINavigationBarAppearance()
+                    appearance.configureWithTransparentBackground()
+                    appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+                    
+                    UINavigationBar.appearance().standardAppearance = appearance
+                    UINavigationBar.appearance().scrollEdgeAppearance = appearance
+                }
+                .toolbar {
+                    Menu {
+                        Button("편집") {
+                            print("편집 버튼 클릭 됨!!😊😊")
+                        }
+                        Button("삭제", role: .destructive) {
+                            repository.deleteDiary(diary)
+                            dismiss()
+                        }
+                    } label : {
+                        Label("", systemImage: "ellipsis")
+                    }
+                }
+             
             }
-            
             .gradientBackground(startColor: Diary.color.timeTravelNavyColor, mediumColor:  Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelPurpleColor, starCount: 100)
         }
     }

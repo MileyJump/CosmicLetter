@@ -20,6 +20,9 @@ final class NetworkManager {
         return URLSession.shared.dataTaskPublisher(for: url)
             .map(\.data)
             .decode(type: [PublicHolidayModel].self, decoder: JSONDecoder())
+            .mapError { error in
+                return error
+            }
             .eraseToAnyPublisher()
     }
     
