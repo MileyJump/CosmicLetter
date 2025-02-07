@@ -33,24 +33,25 @@ struct MemoCollectionView: View {
                     let memosForMonth = groupedMemos[month] ?? []
                     ForEach(memosForMonth, id: \.id) { memo in
                         NavigationLink(destination: MemoDetailView(memo: memo)) {
-                            Text(memo.memo) // 메모의 텍스트 사용
-                                .lineLimit(1) // 줄 수를 1로 제한
+                            Text(memo.memo)
+                                .font(.callout)
+                                .lineLimit(1)
                                 .truncationMode(.tail) // 줄임표 설정
-                                .padding() // 텍스트에 패딩 추가
-                                .frame(width: 300, alignment: .leading) // 고정 폭 설정
-                                .background(Color.gray.opacity(0.3)) // 배경색 설정
+                                .padding()
+                                .frame(width: 350, alignment: .leading)
+                                .background(Color.gray.opacity(0.3))
                                 .foregroundColor(.white)
-                                .cornerRadius(10) // 둥글게 처리
-                                .padding(.horizontal, 5) // 양쪽 여백 설정
-                                .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2) // 그림자 추가
+                                .cornerRadius(10)
+                                .padding(.horizontal, 5)
+                                .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
                         }
                     }
                 }
             }
             Spacer()
         }
-        .padding(.top, 0) // VStack의 상단 여백 제거
-        .padding(.bottom) // 하단 여백 추가 (필요한 경우 조정 가능)
+        .padding(.top, 0)
+        .padding(.bottom)
         .listStyle(GroupedListStyle()) // 리스트 스타일 설정
     }
 }

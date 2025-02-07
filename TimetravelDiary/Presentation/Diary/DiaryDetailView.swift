@@ -8,7 +8,8 @@
 
 import SwiftUI
 import RealmSwift
-import ShuffleDeck
+//import ShuffleDeck
+import ShuffleIt
 
 struct DiaryDetailView: View {
     @Environment(\.dismiss) private var dismiss
@@ -25,68 +26,77 @@ struct DiaryDetailView: View {
         NavigationStack {
             ZStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 20) {
+                    Text(diary.title)
+                        .font(.title3)
+                        .padding(.horizontal)
+                        .foregroundColor(.white)
+                        .padding(.vertical, 10) // 제목과 내용 간격 조정
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    
                     if !diary.photos.isEmpty {
-                        ShuffleDeck(Array(diary.photos.enumerated()), initialIndex: 0) { index, photo in
+                        CarouselStack(Array(diary.photos.enumerated()), initialIndex: 0) { index, photo in
                             if let image = viewModel.loadImageFromDocument(filename: photo) {
                                 Image(uiImage: image)
                                     .resizable()
                                     .scaledToFill() // 이미지 비율 유지
-                                    .frame(width: UIScreen.main.bounds.width * 0.8, height: 300)
+                                
+                                    .frame(height: 200)
                                     .cornerRadius(16)
                                     .clipped()
                                 
                             }
                         }
-                        .frame(width: UIScreen.main.bounds.width * 0.8, height: 300)
-                        //                    .padding(.horizontal, 20) // 슬라이드 카드의 간격 조정
                         .padding(.bottom)
                     }
+                    Text(diary.contents)
+                        .font(.body)
+                        .padding(.horizontal)
+                        .foregroundColor(.white)
                     
-                    // 제목과 내용
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(diary.title)
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.horizontal)
-                            .foregroundColor(.white)
-                            .padding(.bottom, 10) // 제목과 내용 간격 조정
-                        
-                        Text(diary.contents)
-                            .font(.body)
-                            .padding(.horizontal)
-                            .foregroundColor(.white)
-                    }
                     Spacer()
                 }
                 
-                
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
-                .onAppear {
-                    let appearance = UINavigationBarAppearance()
-                    appearance.configureWithTransparentBackground()
-                    appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-                    
-                    UINavigationBar.appearance().standardAppearance = appearance
-                    UINavigationBar.appearance().scrollEdgeAppearance = appearance
-                }
                 .toolbar {
-                    Menu {
-                        Button("편집") {
-                            print("편집 버튼 클릭 됨!!😊😊")
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Menu {
+                            Button("편집") {
+                                print("편집 버튼 클릭 됨!!😊😊")
+                            }
+                            Button("삭제", role: .destructive) {
+                                repository.deleteDiary(diary)
+                                dismiss()
+                            }
+                        } label : {
+                            Label("", systemImage: "ellipsis")
                         }
-                        Button("삭제", role: .destructive) {
-                            repository.deleteDiary(diary)
-                            dismiss()
+                    }
+                    // 음성 아이콘 버튼 추가
+                    ToolbarItem(placement: .bottomBar) {
+                        HStack {
+//                            Spacer()
+                            Button(action: {
+                                print("음성 녹음 버튼 클릭됨")
+                            }) {
+                                Image(systemName: "mic.fill")
+                                    .font(.caption)
+                                    .foregroundColor(.white)
+                                    .padding()
+//                                    .background(Circle().fill(Color.blue))
+                            }
+                            Spacer()
                         }
-                    } label : {
-                        Label("", systemImage: "ellipsis")
                     }
                 }
-             
+                
             }
+            .navigationTitle("일기 날짜")
+            .navigationBarTitleDisplayMode(.inline)
             .gradientBackground(startColor: Diary.color.timeTravelBlackColor, mediumColor: Diary.color.timeTravelLightBlackColor, endColor: Diary.color.timeTravelDarkNavyBlackColor, starCount: 120)
         }
+        .tint(.white)
     }
 }
+
 
