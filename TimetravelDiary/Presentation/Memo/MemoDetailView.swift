@@ -29,6 +29,6 @@ struct MemoDetailView: View {
                 .navigationTitle(memo.date)
             }
         }
-        .gradientBackground(startColor: Diary.color.timeTravelDarkNavyColor, mediumColor: Diary.color.timeTravelDarkNavyColor, optionColor: Diary.color.timeTravelNavyColor, endColor: Diary.color.timeTravelBlueColor, starCount: 40)
+        .gradientBackground(startColor: Diary.color.timeTravelBlackColor, mediumColor: Diary.color.timeTravelLightBlackColor, endColor: Diary.color.timeTravelDarkNavyBlackColor, starCount: 120)
     }
 }
