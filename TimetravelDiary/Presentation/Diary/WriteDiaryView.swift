@@ -148,9 +148,15 @@ struct WriteDiaryView: View {
             isToastVisible = true
             return
         }
-        let audioData = Data()
+        
+        var audioURL: String? = nil
+        if let savedRecordingURL = audioRecorderManager.savedRecordingURL {
+            audioURL = savedRecordingURL.lastPathComponent
+        }
+        
         let diaryImage = images.isEmpty ? [] : images
-        ImageService.shared.saveDiaryWithImages(date: seletedDate, images: diaryImage, title: titleText, contents: contentText, voice: audioData, favorite: false)
+        
+        ImageService.shared.saveDiaryWithImages(date: seletedDate, images: diaryImage, title: titleText, contents: contentText, voice: audioURL, favorite: false)
         
         dismiss()
         titleText = ""

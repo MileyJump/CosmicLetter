@@ -12,7 +12,6 @@ class AudioRecorderManager: NSObject, ObservableObject {
     var audioRecorder: AVAudioRecorder!
     var audioPlayer: AVAudioPlayer!
     
-    // 타이머와 관련된 프로퍼티
     private var countTimer: Timer?
     @Published var countSec: Int = 0
     @Published var timerString: String = ""
@@ -25,6 +24,10 @@ class AudioRecorderManager: NSObject, ObservableObject {
     
     // 녹음 파일 목록
     @Published var recordingsList: [Recording] = [] // Recording 모델 정의 필요
+    
+    
+    @Published var currentRecordingURL: URL? // 현재 녹음 중인 파일의 URL
+    @Published var savedRecordingURL: URL? // 저장된 녹음 파일의 URL
 
     func startRecording() {
         // AVAudioSession의 싱글턴 인스턴스를 가져옴
@@ -40,12 +43,11 @@ class AudioRecorderManager: NSObject, ObservableObject {
             return
         }
         
-        // 녹음 파일 저장을 위한 고유한 파일 이름을 생성
         let fileName = UUID().uuidString + ".m4a"
-        // 문서 디렉터리의 경로를 가져옴
         let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         // 파일의 전체 경로를 생성
         let fileURL = documentPath.appendingPathComponent(fileName)
+        currentRecordingURL = fileURL
         
         // 녹음 설정을 정의. AAC 포맷, 샘플 레이트 12000 Hz, 단일 채널, 높은 오디오 품질로 설정
         let settings = [
@@ -91,6 +93,22 @@ class AudioRecorderManager: NSObject, ObservableObject {
         audioRecorder?.stop()
         isRecording = false // 녹음 중지 시 상태 업데이트
         countTimer?.invalidate() // 타이머 중지
+    }
+    
+    func saveRecording() -> URL? {
+        guard let currentURL = currentRecordingURL else { return nil }
+        savedRecordingURL = currentURL
+        return currentURL
+    }
+    
+    func resetRecording() {
+        stopRecording()
+        if let url = currentRecordingURL {
+            try? FileManager.default.removeItem(at: url)
+        }
+        currentRecordingURL = nil
+        countSec = 0
+        timerString = ""
     }
     
     func updateAudioLevels() {

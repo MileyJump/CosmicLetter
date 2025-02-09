@@ -10,6 +10,7 @@
 		B005764C2CBE3EF8002FF1E7 /* ReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B005764B2CBE3EF8002FF1E7 /* ReadView.swift */; };
 		B005765D2CC399CD002FF1E7 /* CustomToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B005765C2CC399CD002FF1E7 /* CustomToastView.swift */; };
 		B01BBC452D566F9B00E41AA0 /* BackButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BBC442D566F9B00E41AA0 /* BackButtonModifier.swift */; };
+		B01BBC472D57801C00E41AA0 /* VoiceRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BBC462D57801C00E41AA0 /* VoiceRecordView.swift */; };
 		B05357D52C9412DD00FCD3A2 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357D42C9412DD00FCD3A2 /* Color+.swift */; };
 		B05357D72C94454600FCD3A2 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357D62C94454600FCD3A2 /* CalendarView.swift */; };
 		B05357E12C95706F00FCD3A2 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05357E02C95706F00FCD3A2 /* HomeCalendarView.swift */; };
@@ -68,6 +69,7 @@
 		B005764B2CBE3EF8002FF1E7 /* ReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadView.swift; sourceTree = "<group>"; };
 		B005765C2CC399CD002FF1E7 /* CustomToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToastView.swift; sourceTree = "<group>"; };
 		B01BBC442D566F9B00E41AA0 /* BackButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonModifier.swift; sourceTree = "<group>"; };
+		B01BBC462D57801C00E41AA0 /* VoiceRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordView.swift; sourceTree = "<group>"; };
 		B05357D42C9412DD00FCD3A2 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		B05357D62C94454600FCD3A2 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		B05357E02C95706F00FCD3A2 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			children = (
 				B06176402C9EEE9D001C18D9 /* DiaryCollectionView1.swift */,
 				B0FBFEFB2D5602E800ACEFFF /* DiaryCollecionView.swift */,
+				B01BBC462D57801C00E41AA0 /* VoiceRecordView.swift */,
 				B0775D5F2CA7DA550013B68A /* DiaryCollectionViewModel.swift */,
 				B060763F2CA41C9F0020662B /* DiaryDetailView.swift */,
 				B0775D5D2CA7D9770013B68A /* DiaryDetailViewModel.swift */,
@@ -465,6 +468,7 @@
 				B0775D602CA7DA560013B68A /* DiaryCollectionViewModel.swift in Sources */,
 				B05357D72C94454600FCD3A2 /* CalendarView.swift in Sources */,
 				B07146362CABCE8D00DE9E7C /* CalendarViewModel.swift in Sources */,
+				B01BBC472D57801C00E41AA0 /* VoiceRecordView.swift in Sources */,
 				B0535C072C96DEAE00C7F9CD /* FloatingMenu.swift in Sources */,
 				B0FBD51A2C940DE3009CC9FC /* TimetravelDiaryApp.swift in Sources */,
 				B05357E12C95706F00FCD3A2 /* HomeCalendarView.swift in Sources */,

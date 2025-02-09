@@ -15,11 +15,11 @@ final class TimeDiary: Object, ObjectKeyIdentifiable {
     @Persisted var title: String
     @Persisted var photos: List<Photos>
     @Persisted var contents: String
-    @Persisted var voice: Data
+    @Persisted var voice: String?
     @Persisted var favorite: Bool
     
     // List<Photos>를 받는 생성자
-    convenience init(date: String, title: String, photos: List<Photos>, contents: String, voice: Data, favorite: Bool) {
+    convenience init(date: String, title: String, photos: List<Photos>, contents: String, voice: String?, favorite: Bool) {
         self.init()
         self.date = date
         self.title = title
@@ -63,7 +63,7 @@ struct TimeDiaryModel: Codable {
     let title: String
     let photos: [String]
     let contents: String
-    let voice: Data
+    let voice: String?
     let favorite: Bool
 }
 

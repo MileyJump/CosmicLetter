@@ -18,9 +18,8 @@ struct DiaryDetailView: View {
     
     @StateObject private var viewModel = DiaryDetailViewModel()
     
-    @State var currentPage: Int = 0
     @State private var showing = false
-    @State private var isEditLinkActive = false
+    
     
     var body: some View {
         NavigationStack {
@@ -75,15 +74,20 @@ struct DiaryDetailView: View {
                     // 음성 아이콘 버튼 추가
                     ToolbarItem(placement: .bottomBar) {
                         HStack {
-//                            Spacer()
                             Button(action: {
-                                print("음성 녹음 버튼 클릭됨")
+                                showing = true
                             }) {
                                 Image(systemName: "mic.fill")
                                     .font(.caption)
                                     .foregroundColor(.white)
                                     .padding()
-//                                    .background(Circle().fill(Color.blue))
+                            }
+                            
+                            .sheet(isPresented: $showing) {
+                                VoiceRecordView()
+                                    .presentationDetents([.medium])
+//                                    
+                                    .presentationDragIndicator(.visible)
                             }
                             Spacer()
                         }

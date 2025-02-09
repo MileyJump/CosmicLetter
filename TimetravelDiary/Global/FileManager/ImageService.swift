@@ -46,7 +46,7 @@ class ImageService {
     }
     
     //    // 이미지에 저장하고, 해당 경로를 Realm에 저장
-    func saveDiaryWithImages(date: String, images: [UIImage], title: String, contents: String, voice: Data, favorite: Bool) {
+    func saveDiaryWithImages(date: String, images: [UIImage], title: String, contents: String, voice: String?, favorite: Bool) {
         let timeDiary = TimeDiary()
         var photos = [Photos]()
         for (index, image) in images.enumerated() {

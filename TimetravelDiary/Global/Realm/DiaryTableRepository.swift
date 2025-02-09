@@ -42,7 +42,7 @@ final class DiaryTableRepository {
         }
     }
     
-    func updateDiary(id: ObjectId, newTitle: String, newContents: String, newPhotos: [Photos], newVoice: Data, newFavorite: Bool) {
+    func updateDiary(id: ObjectId, newTitle: String, newContents: String, newPhotos: [Photos], newVoice: String, newFavorite: Bool) {
         guard let realm = try? Realm() else { return }
         
         
