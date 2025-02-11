@@ -91,7 +91,9 @@
 -   **DataBase** :  RealmSwift
     
 -   **Utility** : FileManager, AVFoundation
- 
+
+
+다국어
     
 
 ## 트러블 슈팅
