@@ -84,7 +84,7 @@ struct DiaryDetailView: View {
                             }
                             
                             .sheet(isPresented: $showing) {
-                                VoiceRecordView()
+                                VoiceRecordView(audioFileName: diary.voice)
                                     .presentationDetents([.medium])
 //                                    
                                     .presentationDragIndicator(.visible)

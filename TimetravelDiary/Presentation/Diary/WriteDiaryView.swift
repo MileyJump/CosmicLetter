@@ -241,6 +241,7 @@ extension View {
 
 // 수정된 RecordingView
 struct RecordingView: View {
+    @Environment(\.dismiss) private var dismiss
     
     @ObservedObject var audioRecorderManager: AudioRecorderManager
     @State private var audioLevels: [CGFloat] = [0, 0, 0] // 초기 오디오 레벨
@@ -287,7 +288,10 @@ struct RecordingView: View {
                 }
                 
                 Button("save") {
-                    
+                    if let url = audioRecorderManager.saveRecording() {
+                        print("Recording saved at: \(url)")
+                        dismiss() // 저장 후 모달 닫기
+                    }
                 }
                 .disabled(!audioRecorderManager.isRecording)
                 .padding(5) // 상하 여백 추가
