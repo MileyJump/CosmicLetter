@@ -293,7 +293,8 @@ struct RecordingView: View {
                         dismiss() // 저장 후 모달 닫기
                     }
                 }
-                .disabled(!audioRecorderManager.isRecording)
+//                .disabled(!audioRecorderManager.isRecording)
+                .disabled(audioRecorderManager.savedRecordingURL == nil)
                 .padding(5) // 상하 여백 추가
                 .background(Diary.color.timeTravelgray)
                 .cornerRadius(5)
