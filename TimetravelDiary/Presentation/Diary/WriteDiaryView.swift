@@ -23,7 +23,6 @@ struct WriteDiaryView: View {
     @State private var isToastVisible = false // CustomPopView 상태 추가
     @State private var toastMessage = "" // 커스텀 팝업 메시지
     
-//    @State private var isFavorite: Bool = false // favorite 상태 추가
     
     @StateObject private var audioRecorderManager = AudioRecorderManager()
     
@@ -150,7 +149,7 @@ struct WriteDiaryView: View {
         }
         
         var audioURL: String? = nil
-        if let savedRecordingURL = audioRecorderManager.savedRecordingURL {
+        if let savedRecordingURL = audioRecorderManager.currentRecordingURL {
             audioURL = savedRecordingURL.lastPathComponent
         }
         
@@ -266,6 +265,7 @@ struct RecordingView: View {
             HStack {
                 Button("리셋하기") {
                     // 리셋
+                    print("여기")
                 }
                 .disabled(!audioRecorderManager.isRecording)
                 .padding(5) // 상하 여백 추가
@@ -288,13 +288,14 @@ struct RecordingView: View {
                 }
                 
                 Button("save") {
+                    print("일단 여기 1")
                     if let url = audioRecorderManager.saveRecording() {
                         print("Recording saved at: \(url)")
                         dismiss() // 저장 후 모달 닫기
                     }
                 }
 //                .disabled(!audioRecorderManager.isRecording)
-                .disabled(audioRecorderManager.savedRecordingURL == nil)
+//                .disabled(audioRecorderManager.savedRecordingURL == nil)
                 .padding(5) // 상하 여백 추가
                 .background(Diary.color.timeTravelgray)
                 .cornerRadius(5)

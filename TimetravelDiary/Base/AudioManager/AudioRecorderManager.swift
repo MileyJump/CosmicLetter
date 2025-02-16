@@ -22,19 +22,15 @@ class AudioRecorderManager: NSObject, ObservableObject {
     // 녹음 상태 표시를 위한 프로퍼티
     @Published var isRecording: Bool = false
     
-    // 녹음 파일 목록
-    @Published var recordingsList: [Recording] = [] // Recording 모델 정의 필요
-    
-    
     @Published var currentRecordingURL: URL? // 현재 녹음 중인 파일의 URL
-    @Published var savedRecordingURL: URL? // 저장된 녹음 파일의 URL
+//    @Published var savedRecordingURL: URL? // 저장된 녹음 파일의 URL
 
     func startRecording() {
         // AVAudioSession의 싱글턴 인스턴스를 가져옴
         let session = AVAudioSession.sharedInstance()
         do {
             
-            try session.setCategory(.playAndRecord, mode: .default)
+            try session.setCategory(.playAndRecord, mode: .default, options: .defaultToSpeaker)
             // 오디오 세션을 활성화
             try session.setActive(true)
         } catch {
@@ -43,7 +39,7 @@ class AudioRecorderManager: NSObject, ObservableObject {
             return
         }
         
-        let fileName = UUID().uuidString + ".m4a"
+        let fileName = "\(Date().timeIntervalSince1970).m4a"
         let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         // 파일의 전체 경로를 생성
         let fileURL = documentPath.appendingPathComponent(fileName)
@@ -61,9 +57,9 @@ class AudioRecorderManager: NSObject, ObservableObject {
             // AVAudioRecorder 인스턴스를 생성하고 초기화, 위에서 정의된 설정과 경로를 사용
             audioRecorder = try AVAudioRecorder(url: fileURL, settings: settings)
             // 미터링을 활성화하여 녹음 중 오디오 레벨을 측정할 수 있게 함.
-            audioRecorder.isMeteringEnabled = true
+//            audioRecorder.isMeteringEnabled = true
             // 녹음 준비
-            audioRecorder.prepareToRecord()
+//            audioRecorder.prepareToRecord()
             // 녹음 시작!
             audioRecorder.record()
             
@@ -74,17 +70,11 @@ class AudioRecorderManager: NSObject, ObservableObject {
             countTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
                 guard let self = self else { return }
                 self.countSec += 1
-                
-                // 녹음 시간을 분과 초로 변환하여 문자열로 저장
                 self.timerString = self.convertSecToMinAndHour(seconds: self.countSec)
             }
             
-            // 녹음 목록에 추가
-            let newRecording = Recording(fileURL: fileURL, isPlaying: false)
-            recordingsList.append(newRecording)
             
         } catch {
-            // 녹음 시작에 실패했을 경우 에러 메세지 출력!
             print("Recording failed to start")
         }
     }
@@ -97,7 +87,7 @@ class AudioRecorderManager: NSObject, ObservableObject {
     
     func saveRecording() -> URL? {
         guard let currentURL = currentRecordingURL else { return nil }
-        savedRecordingURL = currentURL
+        currentRecordingURL = currentURL
         return currentURL
     }
     
@@ -131,6 +121,14 @@ class AudioRecorderManager: NSObject, ObservableObject {
         return String(format: "%02d:%02d:%02d", hours, minutes % 60, seconds % 60)
     }
     
+    private func convertSecToMinAndHour(seconds: Int, showHours: Bool = false) -> String {
+        let minutes = seconds / 60
+        let hours = minutes / 60
+        return showHours ?
+            String(format: "%02d:%02d:%02d", hours, minutes % 60, seconds % 60) :
+            String(format: "%02d:%02d", minutes, seconds % 60)
+    }
+    
     func startPlaying(url: URL) {
         let playSession = AVAudioSession.sharedInstance()
         
@@ -145,23 +143,8 @@ class AudioRecorderManager: NSObject, ObservableObject {
             audioPlayer.prepareToPlay()
             audioPlayer.play()
             
-            // 재생 중인 파일을 레코딩 목록에서 찾아 상태를 업데이트합니다.
-            for i in 0..<recordingsList.count {
-                if recordingsList[i].fileURL == url {
-                    recordingsList[i].isPlaying = true
-                }
-            }
         } catch {
             print("Playing Failed")
         }
     }
-    
-    
-    
-}
-
-// Recording 모델 정의
-struct Recording {
-    var fileURL: URL
-    var isPlaying: Bool
 }
