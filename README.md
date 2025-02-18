@@ -77,24 +77,29 @@
 └── Info
 ```
 ## 주요 기술
+> ### 아키텍쳐 (Architecture)
+- MVVM 패턴을 적용해 View와 Business Logic을 분리
+- Input Output 구조체를 통해 데이터 흐름을 정의하고, transform 메서드를 사용
 
--   **iOS** : Swift 5.1, Xcode 15.4, SwiftUI (Minimum version 16.0)
-    
--   **UI** : Codebase UI, Shufflelt
-    
--   **Architecture** : MVVM
-    
--   **Reactive** : Combine
-    
--   **Network** : Alamofire
+<br/>
 
--   **DataBase** :  RealmSwift
-    
--   **Utility** : FileManager, AVFoundation
+> ### AVAudioRecoder와 AVAudioPlayer을 활용한 음성 기록 기능
+- AVAudioRecoder을 통해 음성 녹음을 기록해 FileManager와 Realm에 저장하고, AVAudioPlayer을 통해 저장된 음성 재생하는 기능 구현
+- 리소스를 절약하기 위해 동시에 여러 파일을 재생할 수 없도록 기능을 구현
 
+<br/>
 
-다국어
-    
+> ### 이미지 로딩 최적화
+- 현재 날짜와 작성된 일기 날짜를 비교해, 현재 날짜보다 이후에 작성한 일기는 이미지를 로드하지 않고, 자물쇠 아이콘으로 표시해 접근을 제한
+- 불필요한 이미지를 로드하지 않도록 구현해 메모리 리소스 소모를 최소화
+
+<br/>
+
+> ### 앱 출시 유지보수 - 다국어 지원 기능
+- 영어로 앱의 텍스트를 Localization해, 다양한 사용자 층이 앱을 원활하게 사용할 수 있도록 기능을 개선
+- 사용자 설정에 따라 언어를 동적으로 변경할 수 있도록 구현
+
+<br/>
 
 ## 트러블 슈팅
 
