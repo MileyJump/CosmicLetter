@@ -3,6 +3,10 @@
   <img src="https://github.com/user-attachments/assets/8d4ff8b4-366d-4611-93f7-58a9a5b07146" alt="Group 726" width="200"/>
 </p>
 
+
+[![App Store](https://img.shields.io/badge/App_Store-0D96F6?logo=app-store&logoColor=white)](https://apps.apple.com/kr/app/%EC%BD%94%EC%8A%A4%EB%AF%B9%EB%A0%88%ED%84%B0-cosmicletter/id6736467201)
+
+
 ## 프로젝트 소개
 *" 별 처럼 반짝이는 순간들을 우주에 기록하세요! 당신의 이야기가 시간과 함께 빛나기를 바랍니다. "*
 > 코스믹 레터는 사용자가 미래의 특정 날짜에 일기를 작성하고, 지정한 날짜가 되어야만 열람할 수 있는 우주 테마의 다이어리 앱 입니다.
