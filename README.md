@@ -4,6 +4,15 @@
 </p>
 
 <p align="center">
+	 <img src="https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=Swift&logoColor=white"/>
+  <img src="https://img.shields.io/badge/iOS-16.0-lightgrey?style=flat&color=181717" alt="iOS 16.0" />
+  <img src="https://img.shields.io/badge/Swift-5.10-F05138.svg?style=flat&color=F05138" alt="Swift 5.10" />
+  <img src="https://img.shields.io/badge/Xcode-15.4-147EFB.svg?style=flat&color=147EFB" alt="Xcode 15.4" />
+</p>
+
+
+
+<p align="center">
   <a href="https://apps.apple.com/kr/app/%EC%BD%94%EC%8A%A4%EB%AF%B9%EB%A0%88%ED%84%B0-cosmicletter/id6736467201">
     <img src="https://img.shields.io/badge/App_Store-0D96F6?logo=app-store&logoColor=white" alt="App Store">
   </a>
