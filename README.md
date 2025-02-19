@@ -3,8 +3,11 @@
   <img src="https://github.com/user-attachments/assets/8d4ff8b4-366d-4611-93f7-58a9a5b07146" alt="Group 726" width="200"/>
 </p>
 
-
-[![App Store](https://img.shields.io/badge/App_Store-0D96F6?logo=app-store&logoColor=white)](https://apps.apple.com/kr/app/%EC%BD%94%EC%8A%A4%EB%AF%B9%EB%A0%88%ED%84%B0-cosmicletter/id6736467201)
+<p align="center">
+  <a href="https://apps.apple.com/kr/app/%EC%BD%94%EC%8A%A4%EB%AF%B9%EB%A0%88%ED%84%B0-cosmicletter/id6736467201">
+    <img src="https://img.shields.io/badge/App_Store-0D96F6?logo=app-store&logoColor=white" alt="App Store">
+  </a>
+</p>
 
 
 ## 프로젝트 소개
