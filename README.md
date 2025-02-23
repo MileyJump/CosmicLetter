@@ -3,6 +3,22 @@
   <img src="https://github.com/user-attachments/assets/8d4ff8b4-366d-4611-93f7-58a9a5b07146" alt="Group 726" width="200"/>
 </p>
 
+<p align="center">
+	 <img src="https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=Swift&logoColor=white"/>
+  <img src="https://img.shields.io/badge/iOS-16.0-lightgrey?style=flat&color=181717" alt="iOS 16.0" />
+  <img src="https://img.shields.io/badge/Swift-5.10-F05138.svg?style=flat&color=F05138" alt="Swift 5.10" />
+  <img src="https://img.shields.io/badge/Xcode-15.4-147EFB.svg?style=flat&color=147EFB" alt="Xcode 15.4" />
+</p>
+
+
+
+<p align="center">
+  <a href="https://apps.apple.com/kr/app/%EC%BD%94%EC%8A%A4%EB%AF%B9%EB%A0%88%ED%84%B0-cosmicletter/id6736467201">
+    <img src="https://img.shields.io/badge/App_Store-0D96F6?logo=app-store&logoColor=white" alt="App Store">
+  </a>
+</p>
+
+
 ## 프로젝트 소개
 *" 별 처럼 반짝이는 순간들을 우주에 기록하세요! 당신의 이야기가 시간과 함께 빛나기를 바랍니다. "*
 > 코스믹 레터는 사용자가 미래의 특정 날짜에 일기를 작성하고, 지정한 날짜가 되어야만 열람할 수 있는 우주 테마의 다이어리 앱 입니다.
@@ -77,24 +93,29 @@
 └── Info
 ```
 ## 주요 기술
+> ### 아키텍쳐 (Architecture)
+- MVVM 패턴을 적용해 View와 Business Logic을 분리
+- Input Output 구조체를 통해 데이터 흐름을 정의하고, transform 메서드를 사용
 
--   **iOS** : Swift 5.1, Xcode 15.4, SwiftUI (Minimum version 16.0)
-    
--   **UI** : Codebase UI, Shufflelt
-    
--   **Architecture** : MVVM
-    
--   **Reactive** : Combine
-    
--   **Network** : Alamofire
+<br/>
 
--   **DataBase** :  RealmSwift
-    
--   **Utility** : FileManager, AVFoundation
+> ### AVAudioRecoder와 AVAudioPlayer을 활용한 음성 기록 기능
+- AVAudioRecoder을 통해 음성 녹음을 기록해 FileManager와 Realm에 저장하고, AVAudioPlayer을 통해 저장된 음성 재생하는 기능 구현
+- 리소스를 절약하기 위해 동시에 여러 파일을 재생할 수 없도록 기능을 구현
 
+<br/>
 
-다국어
-    
+> ### 이미지 로딩 최적화
+- 현재 날짜와 작성된 일기 날짜를 비교해, 현재 날짜보다 이후에 작성한 일기는 이미지를 로드하지 않고, 자물쇠 아이콘으로 표시해 접근을 제한
+- 불필요한 이미지를 로드하지 않도록 구현해 메모리 리소스 소모를 최소화
+
+<br/>
+
+> ### 앱 출시 유지보수 - 다국어 지원 기능
+- 영어로 앱의 텍스트를 Localization해, 다양한 사용자 층이 앱을 원활하게 사용할 수 있도록 기능을 개선
+- 사용자 설정에 따라 언어를 동적으로 변경할 수 있도록 구현
+
+<br/>
 
 ## 트러블 슈팅
 
