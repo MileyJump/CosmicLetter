@@ -389,7 +389,6 @@ struct CalendarView: View {
             LazyVGrid(columns: Array(repeating: GridItem(), count: 7), spacing: 35) { // 셀 간격 조정
                 ForEach(0 ..< daysInMonth + firstWeekday, id: \.self) { index in
                     if index < firstWeekday {
-                        
                         Spacer()
                     } else {
                         let date = getDate(for: index - firstWeekday)
