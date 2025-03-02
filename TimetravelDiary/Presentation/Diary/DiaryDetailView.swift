@@ -29,7 +29,7 @@ struct DiaryDetailView: View {
                         .font(.title3)
                         .padding(.horizontal)
                         .foregroundColor(.white)
-                        .padding(.vertical, 10) // 제목과 내용 간격 조정
+                        .padding(.vertical, 10)
                         .frame(maxWidth: .infinity, alignment: .center)
                     
                     if !diary.photos.isEmpty {
@@ -37,8 +37,7 @@ struct DiaryDetailView: View {
                             if let image = viewModel.loadImageFromDocument(filename: photo) {
                                 Image(uiImage: image)
                                     .resizable()
-                                    .scaledToFill() // 이미지 비율 유지
-                                
+                                    .scaledToFill()
                                     .frame(height: 200)
                                     .cornerRadius(16)
                                     .clipped()
